@@ -6,7 +6,7 @@
 #    By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/30 08:52:23 by gforns-s          #+#    #+#              #
-#    Updated: 2024/04/30 14:39:30 by gforns-s         ###   ########.fr        #
+#    Updated: 2024/04/30 14:39:26 by gforns-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ FLAGS = -Wall -Wextra -Werror -std=c++98
 
 TMP = tmp/
 
-
+INC = Include/
 
 OBJ = $(addprefix $(TMP), $(SRC:.cpp=.o))
 
@@ -45,7 +45,7 @@ tmp:
 	@mkdir -p $(TMP)
 
 $(NAME): $(OBJ) tmp
-		@c++ $(FLAGS) $(OBJ) -o $(NAME)
+		@c++ $(FLAGS) $(OBJ) -I $(INC) -o $(NAME)
 		@echo "$(GREEN)$(NAME) compiled$(RESET)"
 
 
