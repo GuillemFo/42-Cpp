@@ -6,13 +6,15 @@
 #    By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/30 08:52:23 by gforns-s          #+#    #+#              #
-#    Updated: 2024/04/30 14:39:26 by gforns-s         ###   ########.fr        #
+#    Updated: 2024/04/30 15:11:44 by gforns-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = megaphone
+NAME = PhoneBook
 
-SRC = megaphone.cpp
+SRC = PhoneBook.cpp
+
+SRC_P = SRC/
 
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
@@ -44,7 +46,7 @@ all: tmp $(NAME)
 tmp:
 	@mkdir -p $(TMP)
 
-$(NAME): $(OBJ) tmp
+$(NAME): $(OBJ) tmp $(INC)
 		@c++ $(FLAGS) $(OBJ) -I $(INC) -o $(NAME)
 		@echo "$(GREEN)$(NAME) compiled$(RESET)"
 
