@@ -6,13 +6,13 @@
 #    By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/30 08:52:23 by gforns-s          #+#    #+#              #
-#    Updated: 2024/04/30 15:11:44 by gforns-s         ###   ########.fr        #
+#    Updated: 2024/07/29 14:31:24 by gforns-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = PhoneBook
 
-SRC = PhoneBook.cpp
+SRC = main.cpp Contacts.cpp
 
 SRC_P = SRC/
 
@@ -20,7 +20,7 @@ FLAGS = -Wall -Wextra -Werror -std=c++98
 
 TMP = tmp/
 
-INC = Include/
+INC = Include/Contacts.hpp
 
 OBJ = $(addprefix $(TMP), $(SRC:.cpp=.o))
 
@@ -46,23 +46,22 @@ all: tmp $(NAME)
 tmp:
 	@mkdir -p $(TMP)
 
-$(NAME): $(OBJ) tmp $(INC)
-		@c++ $(FLAGS) $(OBJ) -I $(INC) -o $(NAME)
-		@echo "$(GREEN)$(NAME) compiled$(RESET)"
+$(NAME): $(OBJ)
+	@c++ $(FLAGS) $(OBJ) -I $(INC) -o $(NAME)
+	@echo "$(GREEN)$(NAME) compiled$(RESET)"
 
-
-$(TMP)%.o:%.cpp Makefile
-				@mkdir -p $(dir $@)
-				@c++ $(FLAGS) -c $< -o $@
+$(TMP)%.o: $(SRC_P)%.cpp
+	@mkdir -p $(dir $@)
+	@c++ $(FLAGS) -c $< -I $(INC) -o $@
 
 re: fclean all
 
 clean:
-		@rm -rf $(TMP)
-		@echo "$(CYAN)$(NAME) $(YELLOW)- $(RED)Obj deleted$(RESET)"
+	@rm -rf $(TMP)
+	@echo "$(CYAN)$(NAME) $(YELLOW)- $(RED)Obj deleted$(RESET)"
 
 fclean: clean
-			@rm -rf $(NAME)
-			@echo "$(CYAN)$(NAME) $(RED)deleted$(RESET)"
+	@rm -rf $(NAME)
+	@echo "$(CYAN)$(NAME) $(RED)deleted$(RESET)"
 
-.PHONY: all re clean fclean 
+.PHONY: all re clean fclean
