@@ -6,36 +6,37 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:52:14 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/07/30 09:46:19 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/07/30 13:07:49 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Include/Contacts.hpp"
+#include "Contacts.hpp"
 
-Contacts::Contacts(int x, std::string a, std::string b, std::string c)
+Contacts::Contacts()
 {
-	index = x;
-	name = a;
-	surname = b;
-	nick = c;
+	name = "";
+	surname = "";
+	nick = "";
+	phone = "";
+	secret = "";
 }
 
-int Contacts::getIndex()
-{
-	return (index);
-}
+std::string Contacts::getName(){return(name);}
+std::string Contacts::getSurname(){return(surname);}
+std::string Contacts::getNick(){return(nick);}
+std::string	Contacts::getPhone(){return(phone);}
+std::string	Contacts::getSecret(){return (secret);}
 
-std::string Contacts::getName()
-{
-	return (name);
-}
+std::string Contacts::setName(std::string s){return(name = s);}
+std::string Contacts::setSurname(std::string s){return(surname = s);}
+std::string Contacts::setNick(std::string s){return(nick = s);}
+std::string Contacts::setPhone(std::string s){return(phone = s);}
+std::string Contacts::setSecret(std::string s){return(secret = s);}
 
-std::string Contacts::getSurname()
+int	fillContact()
 {
-	return (surname);
-}
-
-std::string Contacts::getNick()
-{
-	return (nick);
+	std::string tmp;
+	std::cout << "Please, introduce the NAME of your contact:" << std::endl;
+	getline(std::cin, tmp);
+	while (std::string tmp )
 }

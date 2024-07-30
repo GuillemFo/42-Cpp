@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:51:15 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/07/30 09:37:39 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/07/30 12:59:29 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,22 @@
 class Contacts
 {
 	private:
-		int			index;
 		std::string name;
 		std::string surname;
 		std::string nick;
+		std::string phone;
+		std::string secret;
 	public:
-		Contacts(int x, std::string a, std::string b, std::string c);
-		int 		getIndex();
-		std::string getName();
-		std::string getSurname();
-		std::string getNick();
+		Contacts();
+		std::string	getName();
+		std::string	getSurname();
+		std::string	getNick();
+		std::string	getPhone();
+		std::string	getSecret();
+		std::string	setName(std::string s);
+		std::string	setSurname(std::string s);
+		std::string	setNick(std::string s);
+		std::string	setPhone(std::string s);
+		std::string	setSecret(std::string s);
+		int	fillContact();
 };
