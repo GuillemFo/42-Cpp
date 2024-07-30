@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:52:14 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/07/30 13:07:49 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/07/30 15:19:32 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,59 @@ std::string Contacts::getNick(){return(nick);}
 std::string	Contacts::getPhone(){return(phone);}
 std::string	Contacts::getSecret(){return (secret);}
 
-std::string Contacts::setName(std::string s){return(name = s);}
-std::string Contacts::setSurname(std::string s){return(surname = s);}
-std::string Contacts::setNick(std::string s){return(nick = s);}
-std::string Contacts::setPhone(std::string s){return(phone = s);}
-std::string Contacts::setSecret(std::string s){return(secret = s);}
+void Contacts::setName(std::string s){name = s;}
+void Contacts::setSurname(std::string s){surname = s;}
+void Contacts::setNick(std::string s){nick = s;}
+void Contacts::setPhone(std::string s){phone = s;}
+void Contacts::setSecret(std::string s){secret = s;}
 
-int	fillContact()
+int	Contacts::fillContact()
 {
+	int	i = 0;
 	std::string tmp;
 	std::cout << "Please, introduce the NAME of your contact:" << std::endl;
-	getline(std::cin, tmp);
-	while (std::string tmp )
+	do
+	{
+		getline(std::cin, tmp);
+		if (std::cin.eof())
+			exit (1);
+	}
+	while (tmp.empty());
+	name = tmp;
+	std::cout << "Please, introduce the SURNAME of your contact:" << std::endl;
+	do
+	{
+		getline(std::cin, tmp);
+		if (std::cin.eof())
+			exit (1);
+	}
+	while (tmp.empty());
+	surname = tmp;
+	std::cout << "Please, introduce the NICK of your contact:" << std::endl;
+	do
+	{
+		getline(std::cin, tmp);
+		if (std::cin.eof())
+			exit (1);
+	}
+	while (tmp.empty());
+	nick = tmp;
+	std::cout << "Please, introduce the PHONE NUMBER of your contact:" << std::endl;
+	do
+	{
+		getline(std::cin, tmp);
+		if (std::cin.eof())
+			exit (1);
+	}
+	while (tmp.empty());
+	phone = tmp;
+	std::cout << "Please, introduce the DARKEST SECRET of your contact:" << std::endl;
+	do
+	{
+		getline(std::cin, tmp);
+		if (std::cin.eof())
+			exit (1);
+	}
+	while (tmp.empty());
+	secret = tmp;
 }

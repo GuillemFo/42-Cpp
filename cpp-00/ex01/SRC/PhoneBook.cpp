@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 14:51:32 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/07/30 12:52:58 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/07/30 15:20:38 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ PhoneBook::PhoneBook()
 int	PhoneBook::addContact()
 {
 	
-	cont[index % 8].setName(tmp);
+	cont[index % 8].fillContact();
 	index++;
 	return (0);
 }

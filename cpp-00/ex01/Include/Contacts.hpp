@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:51:15 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/07/30 12:59:29 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/07/30 15:03:41 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ class Contacts
 		std::string	getNick();
 		std::string	getPhone();
 		std::string	getSecret();
-		std::string	setName(std::string s);
-		std::string	setSurname(std::string s);
-		std::string	setNick(std::string s);
-		std::string	setPhone(std::string s);
-		std::string	setSecret(std::string s);
+		void	setName(std::string s);
+		void	setSurname(std::string s);
+		void	setNick(std::string s);
+		void	setPhone(std::string s);
+		void	setSecret(std::string s);
 		int	fillContact();
 };
