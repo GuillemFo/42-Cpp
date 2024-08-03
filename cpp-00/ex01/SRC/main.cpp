@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:52:25 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/07/30 12:15:25 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/08/03 23:05:01 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	main()
 		
 		if (in == "ADD")
 			book.addContact();
-		//else if (in == "SEARCH")
-		//	PhoneBook::searchContact();
+		else if (in == "SEARCH")
+			book.searchContact();
 		else if (in == "EXIT")
 			book.exitProgram();
 		else

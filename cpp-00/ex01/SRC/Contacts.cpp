@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   Contacts.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:52:14 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/07/30 15:19:32 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/08/03 23:03:46 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Contacts.hpp"
+#include <cstdlib> 
 
 Contacts::Contacts()
 {
@@ -35,7 +36,6 @@ void Contacts::setSecret(std::string s){secret = s;}
 
 int	Contacts::fillContact()
 {
-	int	i = 0;
 	std::string tmp;
 	std::cout << "Please, introduce the NAME of your contact:" << std::endl;
 	do
@@ -82,4 +82,5 @@ int	Contacts::fillContact()
 	}
 	while (tmp.empty());
 	secret = tmp;
+	return (0);
 }
