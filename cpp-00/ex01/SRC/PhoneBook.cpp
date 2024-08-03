@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PhoneBook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 14:51:32 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/07/30 15:20:38 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/08/03 22:50:30 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ PhoneBook::PhoneBook()
 
 int	PhoneBook::addContact()
 {
-	
+
 	cont[index % 8].fillContact();
 	index++;
 	return (0);
@@ -28,6 +28,13 @@ int	PhoneBook::addContact()
 
 int	PhoneBook::searchContact()
 {
+	index = 0;
+	std::cout << "Plsease, select a contact" << std::endl;
+	while (index < 8)
+	{
+		std::cout << "Index:" << index << "|" << cont[index].getName() << "|" << cont[index].getSurname() << "|" << cont[index].getNick() << std::endl;
+		index++;
+	}
 	return (0);
 }
 
