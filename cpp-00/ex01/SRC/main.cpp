@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:52:25 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/08/06 12:05:31 by codespace        ###   ########.fr       */
+/*   Updated: 2024/08/06 12:46:28 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	main()
 	while (1)
 	{
 		std::getline(std::cin, in);
-		
 		if (in == "ADD")
 			book.addContact();
 		else if (in == "SEARCH")

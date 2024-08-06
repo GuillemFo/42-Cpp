@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 14:51:32 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/08/06 12:20:26 by codespace        ###   ########.fr       */
+/*   Updated: 2024/08/06 12:56:07 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,22 @@ int	PhoneBook::addContact()
 
 int	PhoneBook::searchContact()
 {
-	
+	int i = 0;
+	std::string str;
 	std::cout << "Plsease, type a number to expand the desired contact:" << std::endl;
-	while (1)
+	if (cont[i].getName() == "")
+		std::cout << "Plsease, add a contact before search." << std::endl;
+	while (cont[i].getName() != "" )
 	{
-		std::cout << "[" << index % 8 << "]";
-		// if (
-			cont[index % 8].printContact_small(); // == 1)
-			// break;
+		std::cout << "[" << i << "]";
+		cont[i].printContact_small();
+		i++;
 	}
+	std::getline(std::cin, str);
+	if (!number)	//missing the way to check is only number
+		std::cout << "Plsease, type a number to expand the desired contact:" << std::endl;
+	else if (number) //missing the way to check is only number
+		cont[missing number conversion from str var].printContact_big();
 	return (0);
 }
 

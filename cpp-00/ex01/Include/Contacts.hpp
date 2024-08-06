@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:51:15 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/08/06 12:07:37 by codespace        ###   ########.fr       */
+/*   Updated: 2024/08/06 12:51:00 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,5 @@ class Contacts
 		void	setSecret(std::string s);
 		int		fillContact();
 		int		printContact_small();
+		int	Contacts::printContact_big();
 };

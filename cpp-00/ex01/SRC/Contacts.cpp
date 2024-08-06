@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:52:14 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/08/06 12:25:08 by codespace        ###   ########.fr       */
+/*   Updated: 2024/08/06 12:52:57 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int	Contacts::fillContact()
 	}
 	while (tmp.empty());
 	name = tmp;
-	std::cout << name << std::endl;
 	std::cout << "Please, introduce the SURNAME of your contact:" << std::endl;
 	do
 	{
@@ -66,6 +65,7 @@ int	Contacts::fillContact()
 	while (tmp.empty());
 	nick = tmp;
 	std::cout << "Please, introduce the PHONE NUMBER of your contact:" << std::endl;
+	//missing to only be able to accept numbers and redo the loop till number var is full
 	do
 	{
 		getline(std::cin, tmp);
@@ -86,10 +86,19 @@ int	Contacts::fillContact()
 	return (0);
 }
 
+//missing to short the print max 10 chars and add.. if over 10 replacing the 10th for .
 int	Contacts::printContact_small()
 {
-	// if (getName() == "")
-	// 	return (1);
+	if (getName() == "")
+		return (1);
 	std::cout << name << " | " << surname << " | " << nick << std::endl;
+	return (0);
+}
+
+int	Contacts::printContact_big()
+{
+	if (getName() == "")
+		return (1);
+	std::cout << name << " | " << surname << " | " << nick << phone << secret << std::endl;
 	return (0);
 }
