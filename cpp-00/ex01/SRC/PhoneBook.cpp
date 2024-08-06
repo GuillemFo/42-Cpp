@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 14:51:32 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/08/03 23:06:41 by codespace        ###   ########.fr       */
+/*   Updated: 2024/08/06 12:20:26 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ PhoneBook::PhoneBook()
 
 int	PhoneBook::addContact()
 {
-
 	cont[index % 8].fillContact();
 	index++;
 	return (0);
@@ -28,12 +27,14 @@ int	PhoneBook::addContact()
 
 int	PhoneBook::searchContact()
 {
-	index = 0;
-	std::cout << "Plsease, select a contact" << std::endl;
-	while (index < 8 && (cont[index].getName() != ""))
+	
+	std::cout << "Plsease, type a number to expand the desired contact:" << std::endl;
+	while (1)
 	{
-		std::cout << "Index:" << index << "|" << cont[index].getName() << "|" << cont[index].getSurname() << "|" << cont[index].getNick() << std::endl;
-		index++;
+		std::cout << "[" << index % 8 << "]";
+		// if (
+			cont[index % 8].printContact_small(); // == 1)
+			// break;
 	}
 	return (0);
 }

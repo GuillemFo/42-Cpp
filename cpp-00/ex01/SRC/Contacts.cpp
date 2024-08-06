@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:52:14 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/08/03 23:03:46 by codespace        ###   ########.fr       */
+/*   Updated: 2024/08/06 12:25:08 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	Contacts::fillContact()
 	}
 	while (tmp.empty());
 	name = tmp;
+	std::cout << name << std::endl;
 	std::cout << "Please, introduce the SURNAME of your contact:" << std::endl;
 	do
 	{
@@ -82,5 +83,13 @@ int	Contacts::fillContact()
 	}
 	while (tmp.empty());
 	secret = tmp;
+	return (0);
+}
+
+int	Contacts::printContact_small()
+{
+	// if (getName() == "")
+	// 	return (1);
+	std::cout << name << " | " << surname << " | " << nick << std::endl;
 	return (0);
 }
