@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:52:14 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/08/06 12:52:57 by codespace        ###   ########.fr       */
+/*   Updated: 2024/08/12 13:37:18 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,46 +37,59 @@ void Contacts::setSecret(std::string s){secret = s;}
 int	Contacts::fillContact()
 {
 	std::string tmp;
-	std::cout << "Please, introduce the NAME of your contact:" << std::endl;
 	do
 	{
+		std::cout << "Please, introduce the NAME of your contact:" << std::endl;
 		getline(std::cin, tmp);
 		if (std::cin.eof())
 			exit (1);
 	}
 	while (tmp.empty());
 	name = tmp;
-	std::cout << "Please, introduce the SURNAME of your contact:" << std::endl;
 	do
 	{
+		std::cout << "Please, introduce the SURNAME of your contact:" << std::endl;
 		getline(std::cin, tmp);
 		if (std::cin.eof())
 			exit (1);
 	}
 	while (tmp.empty());
 	surname = tmp;
-	std::cout << "Please, introduce the NICK of your contact:" << std::endl;
 	do
 	{
+		std::cout << "Please, introduce the NICK of your contact:" << std::endl;
 		getline(std::cin, tmp);
 		if (std::cin.eof())
 			exit (1);
 	}
 	while (tmp.empty());
 	nick = tmp;
-	std::cout << "Please, introduce the PHONE NUMBER of your contact:" << std::endl;
-	//missing to only be able to accept numbers and redo the loop till number var is full
 	do
 	{
+		std::cout << "Please, introduce the PHONE NUMBER of your contact:" << std::endl;
 		getline(std::cin, tmp);
 		if (std::cin.eof())
 			exit (1);
+		else if (!tmp.empty())
+		{
+			size_t i = 0;
+			while (i < tmp.length())
+			{
+				if (!isdigit(tmp[i]))
+				{
+					tmp = "";
+					std::cout << "Only numbers allowed" << std::endl;
+					break;
+				}
+				i++;
+			}
+		}
 	}
 	while (tmp.empty());
 	phone = tmp;
-	std::cout << "Please, introduce the DARKEST SECRET of your contact:" << std::endl;
 	do
 	{
+		std::cout << "Please, introduce the DARKEST SECRET of your contact:" << std::endl;
 		getline(std::cin, tmp);
 		if (std::cin.eof())
 			exit (1);
