@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   Contacts.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:51:15 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/08/12 13:28:38 by codespace        ###   ########.fr       */
+/*   Updated: 2024/08/26 16:37:24 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 #include <iostream>
 #include <cctype>
+#include <algorithm>
 
 class Contacts
 {
