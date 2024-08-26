@@ -36,7 +36,7 @@ int	PhoneBook::searchContact()
 	{
 		std::cout << "[" << i << "]";
 		cont[i].printContact_small();
-		i++;
+		i++;  
 	}
 	// std::getline(std::cin, str);
 	// if (!number)	//missing the way to check is only number
