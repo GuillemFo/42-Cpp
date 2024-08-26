@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:52:14 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/08/26 16:38:33 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/08/26 16:55:50 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	Contacts::fillContact()
 		getline(std::cin, tmp);
 		if (std::cin.eof())
 			exit (1);
-		remove(tmp.begin(),tmp.end(),' ');//pending to check correctly
+		//need to find a way to cut spaces in front and after the string. and check if sting is empty for all cin
 	}
 	while (tmp.empty());
 	name = tmp;
