@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:52:14 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/08/26 13:15:20 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/08/26 15:25:32 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,9 +102,55 @@ int	Contacts::fillContact()
 //missing to short the print max 10 chars and add.. if over 10 replacing the 10th for .
 int	Contacts::printContact_small()
 {
+	unsigned long length = 10;
 	if (getName() == "")
 		return (1);
-	std::cout << " " << name << " | " << surname << " | " << nick << std::endl;
+	std::cout << " ";// << name << " | " << surname << " | " << nick << std::endl;
+	if (name.length() > length)
+		std::cout << name.substr(0, length -1) << ".";
+	else if (name.length() < length)
+	{
+		int i = length - name.length();
+		while (i > 0)
+		{
+			std::cout << " ";
+			i--;
+		}
+		std::cout << name;
+	}
+	else
+		std::cout << name;
+	std::cout << " | ";
+	if (surname.length() > length)
+		std::cout << surname.substr(0, length -1) << ".";
+	else if (surname.length() < length)
+	{
+		int i = length - surname.length();
+		while (i > 0)
+		{
+			std::cout << " ";
+			i--;
+		}
+		std::cout << surname;
+	}
+	else
+		std::cout << surname;
+	std::cout << " | ";
+	if (nick.length() > length)
+		std::cout << nick.substr(0, length -1) << ".";
+	else if (nick.length() < length)
+	{
+		int i = length - nick.length();
+		while (i > 0)
+		{
+			std::cout << " ";
+			i--;
+		}
+		std::cout << nick;
+	}
+	else
+		std::cout << nick;
+	std::cout << std::endl;
 	return (0);
 }
 
@@ -113,5 +159,6 @@ int	Contacts::printContact_big()
 	if (getName() == "")
 		return (1);
 	std::cout << "Contact: " << name << " | " << surname << " | " << nick << " | " << phone << " | " << secret << std::endl;
+	std::cout << std::endl;
 	return (0);
 }
