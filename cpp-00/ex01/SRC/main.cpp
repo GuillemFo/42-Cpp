@@ -6,12 +6,12 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:52:25 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/08/26 13:43:03 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/08/26 15:32:03 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
-#include <iostream>
+
 
 int	main()
 {
@@ -22,7 +22,9 @@ int	main()
 	{
 		std::cout << "Available commands: ADD, SEARCH, EXIT" << std::endl;
 		std::getline(std::cin, in);
-		if (in == "ADD")
+		if (std::cin.eof())
+			exit (1);
+		else if (in == "ADD")
 			book.addContact();
 		else if (in == "SEARCH")
 			book.searchContact();
