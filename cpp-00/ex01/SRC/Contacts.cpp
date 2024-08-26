@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Contacts.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:52:14 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/08/12 13:37:18 by codespace        ###   ########.fr       */
+/*   Updated: 2024/08/26 13:15:20 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int	Contacts::printContact_small()
 {
 	if (getName() == "")
 		return (1);
-	std::cout << name << " | " << surname << " | " << nick << std::endl;
+	std::cout << " " << name << " | " << surname << " | " << nick << std::endl;
 	return (0);
 }
 
@@ -112,6 +112,6 @@ int	Contacts::printContact_big()
 {
 	if (getName() == "")
 		return (1);
-	std::cout << name << " | " << surname << " | " << nick << phone << secret << std::endl;
+	std::cout << "Contact: " << name << " | " << surname << " | " << nick << " | " << phone << " | " << secret << std::endl;
 	return (0);
 }

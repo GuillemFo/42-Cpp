@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:52:25 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/08/12 13:37:52 by codespace        ###   ########.fr       */
+/*   Updated: 2024/08/26 13:43:03 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,5 @@ int	main()
 			book.searchContact();
 		else if (in == "EXIT")
 			book.exitProgram();
-		else
-			std::cout << "Available commands: ADD, SEARCH, EXIT" << std::endl;
 	}
 }

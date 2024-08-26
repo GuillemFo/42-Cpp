@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PhoneBook.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 15:15:38 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/08/06 11:11:30 by codespace        ###   ########.fr       */
+/*   Updated: 2024/08/26 13:22:43 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 class	PhoneBook
 {
 	private:
-		int	index;
+		int	contQtt;
 		Contacts cont[8];
 	public:
 		PhoneBook();

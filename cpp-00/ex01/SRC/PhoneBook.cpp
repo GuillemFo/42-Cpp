@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PhoneBook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 14:51:32 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/08/12 13:27:37 by codespace        ###   ########.fr       */
+/*   Updated: 2024/08/26 13:44:27 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 
 PhoneBook::PhoneBook()
 {
-	index = 0;
+	contQtt = 0;
 }
 
 int	PhoneBook::addContact()
 {
-	cont[index % 8].fillContact();
-	index++;
+	cont[contQtt % 8].fillContact();
+	contQtt++;
 	return (0);
 }
 
@@ -29,20 +29,43 @@ int	PhoneBook::searchContact()
 {
 	int i = 0;
 	std::string str;
-	std::cout << "Plsease, type a number to expand the desired contact:" << std::endl;
-	if (cont[i].getName() == "")
+	if (contQtt == 0)
+	{	
 		std::cout << "Plsease, add a contact before search." << std::endl;
-	while (cont[i].getName() != "" )
+		return (1);
+	}
+	std::cout << "Available contacts:" << std::endl;
+	while (i < contQtt  && i < 8)
 	{
 		std::cout << "[" << i << "]";
 		cont[i].printContact_small();
 		i++;  
 	}
-	// std::getline(std::cin, str);
-	// if (!number)	//missing the way to check is only number
-		// std::cout << "Plsease, type a number to expand the desired contact:" << std::endl;
-	// else if (number) //missing the way to check is only number
-		// cont[missing number conversion from str var].printContact_big();
+	do
+	{
+		std::cout << "Plsease, type a number to expand the desired contact:" << std::endl;
+		getline(std::cin, str);
+		if (std::cin.eof())
+			exit (1);
+		else if (!str.empty())
+		{
+			size_t e = 0;
+			while (e < str.length())
+			{
+				if (!isdigit(str[e]))
+				{
+					str = "";
+					std::cout << "Only numbers allowed" << std::endl;
+					break;
+				}
+				e++;
+			}
+			if (!str.empty() && atoi(str.c_str()) >= i)
+				str = "";
+		}
+	}
+	while (str.empty());
+	cont[atoi(str.c_str())].printContact_big();
 	return (0);
 }
 
