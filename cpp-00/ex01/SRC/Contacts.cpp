@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:52:14 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/08/26 15:25:32 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/08/26 15:34:10 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,13 +99,13 @@ int	Contacts::fillContact()
 	return (0);
 }
 
-//missing to short the print max 10 chars and add.. if over 10 replacing the 10th for .
+
 int	Contacts::printContact_small()
 {
 	unsigned long length = 10;
 	if (getName() == "")
 		return (1);
-	std::cout << " ";// << name << " | " << surname << " | " << nick << std::endl;
+	std::cout << " ";
 	if (name.length() > length)
 		std::cout << name.substr(0, length -1) << ".";
 	else if (name.length() < length)
