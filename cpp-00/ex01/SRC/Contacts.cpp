@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:52:14 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/08/27 14:59:35 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/08/27 16:17:06 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,73 +33,46 @@ void Contacts::setSurname(std::string s){surname = s;}
 void Contacts::setNick(std::string s){nick = s;}
 void Contacts::setPhone(std::string s){phone = s;}
 void Contacts::setSecret(std::string s){secret = s;}
+std::string trim(const std::string& str)
+{
+	size_t first = str.find_first_not_of(' ');
+	if (first == std::string::npos)
+		return ("");
+	size_t	last = str.find_last_not_of(' ');
+	return (str.substr(first, (last - first +1)));
+}
 
 int	Contacts::fillContact()
 {
 	std::string tmp;
-	std::string word;
-	std::string result;
 	do
 	{
 		std::cout << "Please, introduce the NAME of your contact:" << std::endl;
 		getline(std::cin, tmp);
 		if (std::cin.eof())
 			exit (1);
-		if (!tmp.empty())
-		{
-			bool firstword = true;
-			std::stringstream ss(tmp);
-			while (ss >> word)
-			{
-				if (firstword)
-				{
-					result = word;
-					firstword = false;
-				}
-				else
-					result += " " + word;
-			}
-			if (result.empty())
-				tmp = "";
-		}
+		tmp = trim(tmp);
 		//need to find a way to cut spaces in front and after the string. and check if sting is empty for all cin
 	}
 	while (tmp.empty());
-	name = result;
-	result.clear();
+	name = tmp;
 	do
 	{
 		std::cout << "Please, introduce the SURNAME of your contact:" << std::endl;
 		getline(std::cin, tmp);
 		if (std::cin.eof())
 			exit (1);
-		if (!tmp.empty())
-		{
-			bool firstword = true;
-			std::stringstream ss(tmp);
-			while (ss >> word)
-			{
-				if (firstword)
-				{
-					result = word;
-					firstword = false;
-				}
-				else
-					result += " " + word;
-			}
-			if (result.empty())
-				tmp = "";
-		}
+		tmp = trim(tmp);
 	}
 	while (tmp.empty());
-	surname = result;
-	result.clear();
+	surname = tmp;
 	do
 	{
 		std::cout << "Please, introduce the NICK of your contact:" << std::endl;
 		getline(std::cin, tmp);
 		if (std::cin.eof())
 			exit (1);
+		tmp = trim(tmp);
 	}
 	while (tmp.empty());
 	nick = tmp;
@@ -132,6 +105,7 @@ int	Contacts::fillContact()
 		getline(std::cin, tmp);
 		if (std::cin.eof())
 			exit (1);
+		tmp = trim(tmp);
 	}
 	while (tmp.empty());
 	secret = tmp;
