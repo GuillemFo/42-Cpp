@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:52:14 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/08/26 16:55:50 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/08/27 14:59:35 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,25 +37,63 @@ void Contacts::setSecret(std::string s){secret = s;}
 int	Contacts::fillContact()
 {
 	std::string tmp;
+	std::string word;
+	std::string result;
 	do
 	{
 		std::cout << "Please, introduce the NAME of your contact:" << std::endl;
 		getline(std::cin, tmp);
 		if (std::cin.eof())
 			exit (1);
+		if (!tmp.empty())
+		{
+			bool firstword = true;
+			std::stringstream ss(tmp);
+			while (ss >> word)
+			{
+				if (firstword)
+				{
+					result = word;
+					firstword = false;
+				}
+				else
+					result += " " + word;
+			}
+			if (result.empty())
+				tmp = "";
+		}
 		//need to find a way to cut spaces in front and after the string. and check if sting is empty for all cin
 	}
 	while (tmp.empty());
-	name = tmp;
+	name = result;
+	result.clear();
 	do
 	{
 		std::cout << "Please, introduce the SURNAME of your contact:" << std::endl;
 		getline(std::cin, tmp);
 		if (std::cin.eof())
 			exit (1);
+		if (!tmp.empty())
+		{
+			bool firstword = true;
+			std::stringstream ss(tmp);
+			while (ss >> word)
+			{
+				if (firstword)
+				{
+					result = word;
+					firstword = false;
+				}
+				else
+					result += " " + word;
+			}
+			if (result.empty())
+				tmp = "";
+		}
 	}
 	while (tmp.empty());
-	surname = tmp;
+	surname = result;
+	result.clear();
 	do
 	{
 		std::cout << "Please, introduce the NICK of your contact:" << std::endl;
