@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:52:14 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/08/29 08:14:01 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/08/29 09:36:13 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,7 @@ int	Contacts::printContact_big()
 {
 	if (getName() == "")
 		return (1);
-	std::cout << "Contact: " << name << " | " << surname << " | " << nick << " | " << phone << " | " << secret << std::endl;
+	std::cout << "Contact info:" << std::endl << "Name: " << name << std::endl << "Surname: " << surname << std::endl << "Nick: "  << nick << std::endl << "Phone: " << phone << std::endl << "Secret: " << secret << std::endl;
 	std::cout << std::endl;
 	return (0);
 }
