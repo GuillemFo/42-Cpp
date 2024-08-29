@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 14:51:32 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/08/29 08:15:41 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/08/29 09:18:13 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,24 +42,29 @@ int	PhoneBook::searchContact()
 	}
 	do
 	{
-		std::cout << "Plsease, type a number to expand the desired contact:" << std::endl;
+		std::cout << "Plsease, type a valid number to expand the desired contact:" << std::endl;
 		getline(std::cin, str);
 		if (std::cin.eof())
 			exit (1);
 		else if (!str.empty())
 		{
-			size_t j = 0;
-			while (j < str.length())
+			if (str.length() <= 2 )
 			{
-				if (!isdigit(str[j]))
+				size_t j = 0;
+				while (j < str.length())
 				{
-					str = "";
-					std::cout << "Only numbers allowed" << std::endl;
-					break;
+					if (!isdigit(str[j]))
+					{
+						str = "";
+						std::cout << "Only numbers allowed" << std::endl;
+						break;
+					}
+					j++;
 				}
-				j++;
+				if (!str.empty() && atoi(str.c_str()) >= i)
+					str = "";
 			}
-			if (!str.empty() && atoi(str.c_str()) >= i)
+			else
 				str = "";
 		}
 	}
