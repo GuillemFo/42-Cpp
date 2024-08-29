@@ -6,8 +6,13 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 10:38:51 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/08/29 10:39:33 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/08/29 11:56:37 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
+
+Zombie* newZombie( std::string name)
+{
+	return (new Zombie(name));
+}

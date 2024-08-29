@@ -6,13 +6,13 @@
 #    By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/30 08:52:23 by gforns-s          #+#    #+#              #
-#    Updated: 2024/08/29 09:53:14 by gforns-s         ###   ########.fr        #
+#    Updated: 2024/08/29 12:53:50 by gforns-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = 
+NAME = Zombie
 
-SRC = 
+SRC = main.cpp newZombie.cpp randomChump.cpp Zombie.cpp
 
 SRC_P = SRC/
 
@@ -47,12 +47,12 @@ tmp:
 	@mkdir -p $(TMP)
 
 $(NAME): $(OBJ)
-	@c++ $(FLAGS) $(OBJ) -I $(INC) -o $(NAME)
+	c++ $(FLAGS) $(OBJ) -I $(INC) -o $(NAME)
 	@echo "$(GREEN)$(NAME) compiled$(RESET)"
 
 $(TMP)%.o: $(SRC_P)%.cpp
 	@mkdir -p $(dir $@)
-	@c++ $(FLAGS) -c $< -I $(INC) -o $@
+	c++ $(FLAGS) -c $< -I $(INC) -o $@
 
 re: fclean all
 
