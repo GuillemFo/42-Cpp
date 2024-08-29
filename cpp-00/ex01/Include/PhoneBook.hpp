@@ -6,13 +6,12 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 15:15:38 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/08/26 15:31:55 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/08/29 08:11:08 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 #include <iostream>
-#include <cstdlib>
 #include "Contacts.hpp"
 
 class	PhoneBook

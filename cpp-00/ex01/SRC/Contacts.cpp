@@ -6,12 +6,11 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:52:14 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/08/27 16:17:06 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/08/29 08:14:01 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Contacts.hpp"
-#include <cstdlib> 
 
 Contacts::Contacts()
 {
@@ -33,7 +32,8 @@ void Contacts::setSurname(std::string s){surname = s;}
 void Contacts::setNick(std::string s){nick = s;}
 void Contacts::setPhone(std::string s){phone = s;}
 void Contacts::setSecret(std::string s){secret = s;}
-std::string trim(const std::string& str)
+
+std::string	Contacts::trim(const std::string& str)
 {
 	size_t first = str.find_first_not_of(' ');
 	if (first == std::string::npos)
@@ -52,7 +52,6 @@ int	Contacts::fillContact()
 		if (std::cin.eof())
 			exit (1);
 		tmp = trim(tmp);
-		//need to find a way to cut spaces in front and after the string. and check if sting is empty for all cin
 	}
 	while (tmp.empty());
 	name = tmp;
