@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Contacts.hpp                                       :+:      :+:    :+:   */
+/*   Contact.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -17,7 +17,7 @@
 #include <cstdlib>
 
 
-class Contacts
+class Contact
 {
 	private:
 		std::string name;
@@ -26,7 +26,7 @@ class Contacts
 		std::string phone;
 		std::string secret;
 	public:
-		Contacts();
+		Contact();
 		std::string	getName();
 		std::string	getSurname();
 		std::string	getNick();

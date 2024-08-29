@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 14:51:32 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/08/29 09:35:01 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/08/29 09:48:01 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	PhoneBook::searchContact()
 		std::cout << "Please, add a contact before search" << std::endl;
 		return (1);
 	}
-	std::cout << "Available contacts:" << std::endl;
+	std::cout << "Available Contacts:" << std::endl;
 	while (i < contQtt  && i < 8)
 	{
 		std::cout << "[" << i << "]";

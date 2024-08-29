@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Contacts.cpp                                       :+:      :+:    :+:   */
+/*   Contact.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Contacts.hpp"
+#include "Contact.hpp"
 
-Contacts::Contacts()
+Contact::Contact()
 {
 	name = "";
 	surname = "";
@@ -21,19 +21,19 @@ Contacts::Contacts()
 	secret = "";
 }
 
-std::string Contacts::getName(){return(name);}
-std::string Contacts::getSurname(){return(surname);}
-std::string Contacts::getNick(){return(nick);}
-std::string	Contacts::getPhone(){return(phone);}
-std::string	Contacts::getSecret(){return (secret);}
+std::string Contact::getName(){return(name);}
+std::string Contact::getSurname(){return(surname);}
+std::string Contact::getNick(){return(nick);}
+std::string	Contact::getPhone(){return(phone);}
+std::string	Contact::getSecret(){return (secret);}
 
-void Contacts::setName(std::string s){name = s;}
-void Contacts::setSurname(std::string s){surname = s;}
-void Contacts::setNick(std::string s){nick = s;}
-void Contacts::setPhone(std::string s){phone = s;}
-void Contacts::setSecret(std::string s){secret = s;}
+void Contact::setName(std::string s){name = s;}
+void Contact::setSurname(std::string s){surname = s;}
+void Contact::setNick(std::string s){nick = s;}
+void Contact::setPhone(std::string s){phone = s;}
+void Contact::setSecret(std::string s){secret = s;}
 
-std::string	Contacts::trim(const std::string& str)
+std::string	Contact::trim(const std::string& str)
 {
 	size_t first = str.find_first_not_of(' ');
 	if (first == std::string::npos)
@@ -42,7 +42,7 @@ std::string	Contacts::trim(const std::string& str)
 	return (str.substr(first, (last - first +1)));
 }
 
-int	Contacts::fillContact()
+int	Contact::fillContact()
 {
 	std::string tmp;
 	do
@@ -112,7 +112,7 @@ int	Contacts::fillContact()
 }
 
 
-int	Contacts::printContact_small()
+int	Contact::printContact_small()
 {
 	unsigned long length = 10;
 	if (getName() == "")
@@ -166,7 +166,7 @@ int	Contacts::printContact_small()
 	return (0);
 }
 
-int	Contacts::printContact_big()
+int	Contact::printContact_big()
 {
 	if (getName() == "")
 		return (1);
