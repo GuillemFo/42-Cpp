@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 14:51:32 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/08/29 08:10:26 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/08/29 08:15:41 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,16 @@ int	PhoneBook::searchContact()
 			exit (1);
 		else if (!str.empty())
 		{
-			size_t e = 0;
-			while (e < str.length())
+			size_t j = 0;
+			while (j < str.length())
 			{
-				if (!isdigit(str[e]))
+				if (!isdigit(str[j]))
 				{
 					str = "";
 					std::cout << "Only numbers allowed" << std::endl;
 					break;
 				}
-				e++;
+				j++;
 			}
 			if (!str.empty() && atoi(str.c_str()) >= i)
 				str = "";
