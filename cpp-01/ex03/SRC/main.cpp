@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 14:41:10 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/09/02 16:22:14 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/09/02 16:28:01 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,7 @@ return 0;
 /*
 Problems:
 Cant change the content of weapon type.
+
+•While HumanA takes the Weapon in its constructor, HumanB doesn’t. (Human A weapon should be & ??)
+•HumanB may not always have a Weapon, whereas HumanA will always be armed. (Human B weapon should be * ??)
 */
