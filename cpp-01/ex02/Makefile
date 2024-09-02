@@ -6,15 +6,15 @@
 #    By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/30 08:52:23 by gforns-s          #+#    #+#              #
-#    Updated: 2024/08/29 14:41:36 by gforns-s         ###   ########.fr        #
+#    Updated: 2024/09/02 13:38:40 by gforns-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = 
+NAME = point_ref
 
-SRC = main.cpp Zombie.cpp 
+SRC = main.cpp
 
-SRC_P = SRC/zombieHorde.cpp
+SRC_P = SRC/
 
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
