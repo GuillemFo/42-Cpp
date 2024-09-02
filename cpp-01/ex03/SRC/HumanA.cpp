@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 14:47:04 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/09/02 16:15:18 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/09/02 17:58:31 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 // 	//how do i set a weapon always if empty? do i need it?
 // }
 
-HumanA::HumanA(std::string nm, Weapon& wnm)
+HumanA::HumanA(std::string nm, Weapon &wnm)
 {
 	name = nm;
 	A = wnm;
