@@ -6,7 +6,7 @@
 #    By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/30 08:52:23 by gforns-s          #+#    #+#              #
-#    Updated: 2024/09/02 13:38:40 by gforns-s         ###   ########.fr        #
+#    Updated: 2024/09/02 14:51:56 by gforns-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,6 @@ SRC_P = SRC/
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
 TMP = tmp/
-
-INC = Include/
 
 OBJ = $(addprefix $(TMP), $(SRC:.cpp=.o))
 
@@ -47,12 +45,12 @@ tmp:
 	@mkdir -p $(TMP)
 
 $(NAME): $(OBJ)
-	@c++ $(FLAGS) $(OBJ) -I $(INC) -o $(NAME)
+	@c++ $(FLAGS) $(OBJ) -o $(NAME)
 	@echo "$(GREEN)$(NAME) compiled$(RESET)"
 
 $(TMP)%.o: $(SRC_P)%.cpp
 	@mkdir -p $(dir $@)
-	@c++ $(FLAGS) -c $< -I $(INC) -o $@
+	@c++ $(FLAGS) -c $< -o $@
 
 re: fclean all
 
