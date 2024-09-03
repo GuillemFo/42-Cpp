@@ -6,13 +6,13 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 14:47:07 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/09/03 10:28:46 by codespace        ###   ########.fr       */
+/*   Updated: 2024/09/03 12:36:51 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "HumanB.hpp"
 
-HumanB::HumanB(std::string nm)
+HumanB::HumanB(std::string nm) : name(nm), B(NULL)
 {
 	name = nm;
 }
@@ -24,10 +24,10 @@ HumanB::~HumanB()
 
 void HumanB::setWeapon(Weapon& wnm)
 {
-	B = wnm;
+	B = &wnm;
 }
 
-void HumanB::attack()
+void HumanB::attack()const
 {
-	std::cout << name << " attacks with their " << B.getType() << std::endl;
+	std::cout << name << " attacks with their " << B->getType() << std::endl;
 }
