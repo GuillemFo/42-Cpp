@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 14:41:10 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/09/03 10:28:45 by codespace        ###   ########.fr       */
+/*   Updated: 2024/09/04 08:19:06 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,7 @@ int main()
 		jim.attack();
 		club.setType("some other type of club");
 		jim.attack();
-}
-return 0;
+	}
+	return 0;
 }
 
-/*
-Problems:
-Cant change the content of weapon type.
-
-•While HumanA takes the Weapon in its constructor, HumanB doesn’t. (Human A weapon should be & ??)
-•HumanB may not always have a Weapon, whereas HumanA will always be armed. (Human B weapon should be * ??)
-*/
