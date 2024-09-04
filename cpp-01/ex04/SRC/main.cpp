@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 08:22:51 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/09/04 11:40:49 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/09/04 12:12:57 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int ac, char **av)
 			std::cout << "Program cannot tolerate empty fields" << std::endl;
 			return (1);
 		}
-		std::ifstream in_file(filename);
+		std::ifstream in_file(filename); // c_str ??
 		std::ofstream out_file(filename + ".replace");
 		if (in_file.is_open() && out_file.is_open())
 		{
