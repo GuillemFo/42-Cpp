@@ -6,11 +6,11 @@
 #    By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/30 08:52:23 by gforns-s          #+#    #+#              #
-#    Updated: 2024/09/04 08:20:34 by gforns-s         ###   ########.fr        #
+#    Updated: 2024/09/04 08:22:41 by gforns-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = 
+NAME = Sed_is_for losers
 
 SRC = main.cpp
 
