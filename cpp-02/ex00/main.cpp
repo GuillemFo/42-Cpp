@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Fixed.hpp                                          :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/10 08:49:44 by codespace         #+#    #+#             */
-/*   Updated: 2024/09/10 10:00:45 by codespace        ###   ########.fr       */
+/*   Created: 2024/09/10 08:49:28 by codespace         #+#    #+#             */
+/*   Updated: 2024/09/10 09:46:01 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FIXED_HPP
-# define FIXED_HPP
-#pragma once
+#include "Fixed.hpp"
 #include <iostream>
-class Fixed
-{
-	private:
-		int fixed;
-		static const int fracbits = 8;
-	public:
-		Fixed();
-		~Fixed();
-		int		getRawBits( void ) const;
-		void	setRawBits( int const raw );
-};
 
-#endif
+int	main( void ) 
+{
+	Fixed a;
+	Fixed b( a );
+	Fixed c;
+	c = b;
+	std::cout << a.getRawBits() << std::endl;
+	std::cout << b.getRawBits() << std::endl;
+	std::cout << c.getRawBits() << std::endl;
+	return 0;
+}
