@@ -6,13 +6,13 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 10:39:02 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/08/29 12:53:54 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/09/12 08:22:26 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#include <string>
 #include <iostream>
+#include <string>
 
 class	Zombie
 {
@@ -25,5 +25,5 @@ class	Zombie
 		void announce( void );
 };
 
-Zombie* newZombie( std::string name );
-void randomChump( std::string name );
+Zombie*	newZombie(std::string name);
+void	randomChump(std::string name);

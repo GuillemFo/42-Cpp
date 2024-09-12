@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 09:29:27 by codespace         #+#    #+#             */
-/*   Updated: 2024/09/10 09:58:48 by codespace        ###   ########.fr       */
+/*   Updated: 2024/09/12 09:09:34 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,26 @@ Fixed::~Fixed()
 	std::cout << "Destructor for Fixed was called" << std::endl;
 }
 
-int	Fixed::getRawBits() const
+Fixed::Fixed(const Fixed& a)
 {
-	return (rawbits);
+	std::cout << "Copy constructor called for Fixed" << std::endl;
+	*this = a;
 }
 
-void Fixed::setRawBits( int const raw )
+Fixed& Fixed::operator=(const Fixed& b)
 {
-	rawbits = raw;
+	std::cout << "Copy assignment operator called for Fixed" << std::endl;
+	if (this != &b)
+		fixed = b.fixed;
+	return (*this);
+}
+
+int	Fixed::getRawBits() const
+{
+	return (fixed);
+}
+
+void Fixed::setRawBits(int const raw)
+{
+	fixed = raw;
 }
