@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 08:49:44 by codespace         #+#    #+#             */
-/*   Updated: 2024/09/12 09:00:17 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/09/12 09:30:51 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,4 @@ class Fixed
 		Fixed& 	operator=(const Fixed &b);
 		int		getRawBits( void ) const;
 		void	setRawBits( int const raw );
-		
 };

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 08:49:28 by codespace         #+#    #+#             */
-/*   Updated: 2024/09/10 09:46:01 by codespace        ###   ########.fr       */
+/*   Updated: 2024/09/12 09:30:37 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,14 @@ int	main( void )
 	std::cout << a.getRawBits() << std::endl;
 	std::cout << b.getRawBits() << std::endl;
 	std::cout << c.getRawBits() << std::endl;
+
+
+	Fixed d;
+	std::cout << "D1 "<< d.getRawBits() << std::endl;
+	d.setRawBits(10);
+	std::cout << "D2 " << d.getRawBits() << std::endl;
+	Fixed e;
+	e = d;
+	std::cout << "E = D " <<e.getRawBits() << std::endl;
 	return 0;
 }
