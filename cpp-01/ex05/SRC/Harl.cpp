@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 09:55:26 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/09/06 13:31:00 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/09/12 10:32:50 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,29 +39,14 @@ Harl::~Harl()
 void	Harl::complain(std::string level)
 {
 	void (Harl::*actions[])(void) = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
-	std::string str[]{"debug", "info", "warning", "error"};
+	std::string str[] = {"debug", "info", "warning", "error"};
 	for (int i = 0; i < 4; i++)
 	{
 		if (str[i] == level)
 		{
-			switch (i)
-			{
-				case 0:
-					this->debug();
-					break;
-				case 1:
-					this->info();
-					break;
-				case 2:
-					this->warning();
-					break;
-				case 3:
-					this->error();
-					break;
-				default:
-					std::cout << "Invalid option" << std::endl;
-					break;
-			}
+			(this->*actions[i])();
+			return;
 		}
 	}
+	std::cout << "Unknown level " << level << std::endl;
 }

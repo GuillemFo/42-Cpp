@@ -6,7 +6,7 @@
 #    By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/30 08:52:23 by gforns-s          #+#    #+#              #
-#    Updated: 2024/09/05 09:56:09 by gforns-s         ###   ########.fr        #
+#    Updated: 2024/09/12 09:36:44 by gforns-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SRC = main.cpp Harl.cpp
 
 SRC_P = SRC/
 
-FLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic -pedantic-errors -Wconversion -Wshadow -Wold-style-cast -Woverloaded-virtual -Wmissing-field-initializers -fstack-protector-strong
+FLAGS = -Wall -Wextra -Werror -std=c++98
 
 TMP = tmp/
 
