@@ -6,11 +6,13 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 08:22:51 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/09/05 09:52:36 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/09/12 10:40:20 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Replace_me.hpp"
+#include <iostream>
+#include <string>
+#include <fstream>
 
 int	main(int ac, char **av)
 {
