@@ -6,7 +6,7 @@
 #    By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/30 08:52:23 by gforns-s          #+#    #+#              #
-#    Updated: 2024/04/30 14:40:12 by gforns-s         ###   ########.fr        #
+#    Updated: 2024/09/13 09:34:14 by gforns-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,11 +14,15 @@ NAME = megaphone
 
 SRC = megaphone.cpp
 
-FLAGS = -Wall -Wextra -Werror -std=c++98
+FLAGS = -Wall -Wextra -Werror -std=c++98 -MMD -MP -pedantic -pedantic-errors
 
 TMP = tmp/
 
+INC = Include/
+
 OBJ = $(addprefix $(TMP), $(SRC:.cpp=.o))
+
+DEP = $(OBJ:o=.d)
 
 #############################################################################
 
@@ -42,23 +46,24 @@ all: tmp $(NAME)
 tmp:
 	@mkdir -p $(TMP)
 
-$(NAME): $(OBJ) tmp
-		@c++ $(FLAGS) $(OBJ) -o $(NAME)
-		@echo "$(GREEN)$(NAME) compiled$(RESET)"
+$(NAME): $(OBJ)
+	c++ $(FLAGS) $(OBJ) -I $(INC) -o $(NAME)
+	@echo "$(GREEN)$(NAME) compiled$(RESET)"
 
+$(TMP)%.o: $(SRC_P)%.cpp Makefile $(INC)*.hpp
+	@mkdir -p $(dir $@)
+	c++ $(FLAGS) -c $< -I $(INC) -o $@
 
-$(TMP)%.o:%.cpp Makefile
-				@mkdir -p $(dir $@)
-				@c++ $(FLAGS) -c $< -o $@
+-include $(DEP)
 
 re: fclean all
 
 clean:
-		@rm -rf $(TMP)
-		@echo "$(CYAN)$(NAME) $(YELLOW)- $(RED)Obj deleted$(RESET)"
+	@rm -rf $(TMP)
+	@echo "$(CYAN)$(NAME) $(YELLOW)- $(RED)Obj deleted$(RESET)"
 
 fclean: clean
-			@rm -rf $(NAME)
-			@echo "$(CYAN)$(NAME) $(RED)deleted$(RESET)"
+	@rm -rf $(NAME)
+	@echo "$(CYAN)$(NAME) $(RED)deleted$(RESET)"
 
-.PHONY: all re clean fclean 
+.PHONY: all re clean fclean

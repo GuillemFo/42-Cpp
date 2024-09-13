@@ -6,7 +6,7 @@
 #    By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/30 08:52:23 by gforns-s          #+#    #+#              #
-#    Updated: 2024/08/27 16:30:38 by gforns-s         ###   ########.fr        #
+#    Updated: 2024/09/13 09:34:30 by gforns-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,13 +16,15 @@ SRC = tests.cpp Acount.cpp
 
 SRC_P = SRC/
 
-FLAGS = -Wall -Wextra -Werror -std=c++98
+FLAGS = -Wall -Wextra -Werror -std=c++98 -MMD -MP -pedantic -pedantic-errors
 
 TMP = tmp/
 
 INC = Include/
 
 OBJ = $(addprefix $(TMP), $(SRC:.cpp=.o))
+
+DEP = $(OBJ:o=.d)
 
 #############################################################################
 
@@ -47,12 +49,14 @@ tmp:
 	@mkdir -p $(TMP)
 
 $(NAME): $(OBJ)
-	@c++ $(FLAGS) $(OBJ) -I $(INC) -o $(NAME)
+	c++ $(FLAGS) $(OBJ) -I $(INC) -o $(NAME)
 	@echo "$(GREEN)$(NAME) compiled$(RESET)"
 
-$(TMP)%.o: $(SRC_P)%.cpp
+$(TMP)%.o: $(SRC_P)%.cpp Makefile $(INC)*.hpp
 	@mkdir -p $(dir $@)
-	@c++ $(FLAGS) -c $< -I $(INC) -o $@
+	c++ $(FLAGS) -c $< -I $(INC) -o $@
+
+-include $(DEP)
 
 re: fclean all
 
