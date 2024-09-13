@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 09:29:27 by codespace         #+#    #+#             */
-/*   Updated: 2024/09/13 11:58:52 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/09/13 13:10:55 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ Fixed& Fixed::operator=(const Fixed& b)
 
 int	Fixed::getRawBits() const
 {
-	std::cout << "getRawBits member function called" << std::endl;
+	//std::cout << "getRawBits member function called" << std::endl;
 	return (fixed);
 }
 
@@ -48,12 +48,29 @@ void Fixed::setRawBits(int const raw)
 	fixed = raw;
 }
 
+Fixed::Fixed(const int a)
+{
+	std::cout << "Int constructor called" << std::endl;
+	this->setRawBits(a << fracbits);
+}
+
+Fixed::Fixed(const float a)
+{
+	std::cout << "Float constructor called" << std::endl;
+	this->setRawBits(static_cast<int>(roundf(a * (1 << fracbits))));
+}
+
 float	Fixed::toFloat(void)const
 {
-
+	return (static_cast<float>(getRawBits()) / (1 << fracbits));	
 }
 
 int		Fixed::toInt(void)const
 {
-	
+	return (getRawBits() >> fracbits);	
+}
+
+std::ostream &operator<<(std::ostream &val, const Fixed &nb)
+{
+	return (val << nb.toFloat());
 }

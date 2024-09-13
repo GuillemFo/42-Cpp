@@ -6,16 +6,15 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 09:29:27 by codespace         #+#    #+#             */
-/*   Updated: 2024/09/12 09:30:15 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/09/13 13:15:11 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
 
-Fixed::Fixed()
+Fixed::Fixed() : fixed(0)
 {
 	std::cout << "Default constructor called for Fixed" << std::endl;
-	fixed = 0;
 }
 
 Fixed::~Fixed()
