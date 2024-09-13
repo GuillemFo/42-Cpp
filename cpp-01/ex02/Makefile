@@ -6,7 +6,7 @@
 #    By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/30 08:52:23 by gforns-s          #+#    #+#              #
-#    Updated: 2024/09/13 09:32:43 by gforns-s         ###   ########.fr        #
+#    Updated: 2024/09/13 10:10:43 by gforns-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,15 +16,17 @@ SRC = main.cpp
 
 SRC_P = SRC/
 
-FLAGS = -Wall -Wextra -Werror -std=c++98 -MMD -MP -pedantic -pedantic-errors
+FLAGS = -Wall -Wextra -Werror -std=c++98 -MMD -pedantic -pedantic-errors
 
 TMP = tmp/
 
 INC = Include/
 
-OBJ = $(addprefix $(TMP), $(SRC:.cpp=.o))
+SRC_PREFIX = $(addprefix $(SRC_P),$(SRC))
 
-DEP = $(OBJ:o=.d)
+OBJ = $(addprefix $(TMP), $(SRC_PREFIX:.cpp=.o))
+
+DEP = $(OBJ:.o=.d)
 
 #############################################################################
 
@@ -52,7 +54,7 @@ $(NAME): $(OBJ)
 	c++ $(FLAGS) $(OBJ) -I $(INC) -o $(NAME)
 	@echo "$(GREEN)$(NAME) compiled$(RESET)"
 
-$(TMP)%.o: $(SRC_P)%.cpp Makefile $(INC)*.hpp
+$(TMP)%.o: %.cpp Makefile
 	@mkdir -p $(dir $@)
 	c++ $(FLAGS) -c $< -I $(INC) -o $@
 
