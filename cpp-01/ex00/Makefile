@@ -6,7 +6,7 @@
 #    By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/30 08:52:23 by gforns-s          #+#    #+#              #
-#    Updated: 2024/09/12 09:36:25 by gforns-s         ###   ########.fr        #
+#    Updated: 2024/09/13 09:32:28 by gforns-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,13 +16,15 @@ SRC = main.cpp newZombie.cpp randomChump.cpp Zombie.cpp
 
 SRC_P = SRC/
 
-FLAGS = -Wall -Wextra -Werror -std=c++98
+FLAGS = -Wall -Wextra -Werror -std=c++98 -MMD -MP -pedantic -pedantic-errors
 
 TMP = tmp/
 
 INC = Include/
 
 OBJ = $(addprefix $(TMP), $(SRC:.cpp=.o))
+
+DEP = $(OBJ:o=.d)
 
 #############################################################################
 
@@ -50,9 +52,11 @@ $(NAME): $(OBJ)
 	c++ $(FLAGS) $(OBJ) -I $(INC) -o $(NAME)
 	@echo "$(GREEN)$(NAME) compiled$(RESET)"
 
-$(TMP)%.o: $(SRC_P)%.cpp
+$(TMP)%.o: $(SRC_P)%.cpp Makefile $(INC)*.hpp
 	@mkdir -p $(dir $@)
 	c++ $(FLAGS) -c $< -I $(INC) -o $@
+
+-include $(DEP)
 
 re: fclean all
 
