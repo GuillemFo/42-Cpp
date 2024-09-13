@@ -6,7 +6,7 @@
 #    By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/30 08:52:23 by gforns-s          #+#    #+#              #
-#    Updated: 2024/09/13 10:10:52 by gforns-s         ###   ########.fr        #
+#    Updated: 2024/09/13 10:53:16 by gforns-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,7 @@ $(NAME): $(OBJ)
 	c++ $(FLAGS) $(OBJ) -I $(INC) -o $(NAME)
 	@echo "$(GREEN)$(NAME) compiled$(RESET)"
 
-$(TMP)%.o: %.cpp Makefile
+$(TMP)%.o:%.cpp Makefile
 	@mkdir -p $(dir $@)
 	c++ $(FLAGS) -c $< -I $(INC) -o $@
 

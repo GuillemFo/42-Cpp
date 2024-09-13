@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   HumanA.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 14:47:04 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/09/03 12:16:17 by codespace        ###   ########.fr       */
+/*   Updated: 2024/09/13 10:18:11 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "HumanA.hpp"
 
-HumanA::HumanA(std::string nm, Weapon& wnm) : name(nm), A(wnm){}
+HumanA::HumanA(std::string nm, Weapon& wnm) : name(nm), w_typeA(wnm){}
 
 HumanA::~HumanA()
 {
@@ -21,5 +21,5 @@ HumanA::~HumanA()
 
 void HumanA::attack()const
 {
-	std::cout << name << " attacks with their " << A.getType() << std::endl;
+	std::cout << name << " attacks with their " << w_typeA.getType() << std::endl;
 }

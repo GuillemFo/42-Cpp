@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   HumanB.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 14:47:07 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/09/03 12:36:51 by codespace        ###   ########.fr       */
+/*   Updated: 2024/09/13 10:52:09 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "HumanB.hpp"
 
-HumanB::HumanB(std::string nm) : name(nm), B(NULL)
+HumanB::HumanB(std::string nm) : name(nm), w_typeB(NULL)
 {
 	name = nm;
 }
@@ -24,10 +24,13 @@ HumanB::~HumanB()
 
 void HumanB::setWeapon(Weapon& wnm)
 {
-	B = &wnm;
+	w_typeB = &wnm;
 }
 
 void HumanB::attack()const
 {
-	std::cout << name << " attacks with their " << B->getType() << std::endl;
+	if (HumanB::w_typeB == NULL)
+		std::cout << name << " attacks with their " << "hands" << std::endl;
+	else
+		std::cout << name << " attacks with their " << w_typeB->getType() << std::endl;
 }
