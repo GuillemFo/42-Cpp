@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 10:06:17 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/09/17 10:06:18 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/09/17 10:34:07 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,74 @@ int		Fixed::toInt(void)const
 std::ostream &operator<<(std::ostream &val, const Fixed &nb)
 {
 	return (val << nb.toFloat());
+}
+
+Fixed	&Fixed::operator>(const Fixed &b)
+{
+
+}
+
+Fixed	&Fixed::operator<(const Fixed &b)
+{
+
+}
+
+Fixed	&Fixed::operator>=(const Fixed &b)
+{
+
+}
+
+Fixed	&Fixed::operator<=(const Fixed &b)
+{
+
+}
+
+Fixed	&Fixed::operator==(const Fixed &b)
+{
+	
+}
+
+Fixed	&Fixed::operator!=(const Fixed &b)
+{
+
+}
+
+Fixed	&Fixed::operator+(const Fixed &b)
+{
+
+}
+
+Fixed	&Fixed::operator-(const Fixed &b)
+{
+
+}
+
+Fixed	&Fixed::operator*(const Fixed &b)
+{
+
+}
+
+Fixed	&Fixed::operator/(const Fixed &b)
+{
+	
+}
+
+static Fixed	&min(Fixed &a, Fixed &b)
+{
+
+}
+
+static Fixed	&min(const Fixed &a, const Fixed &b)
+{
+
+}
+
+static Fixed	&max(Fixed &a, Fixed &b)
+{
+
+}
+
+static Fixed	&max(const Fixed &a, const Fixed &b)
+{
+	
 }
