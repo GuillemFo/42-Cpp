@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 10:06:17 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/09/17 10:34:07 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/09/18 10:35:51 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,72 +76,100 @@ std::ostream &operator<<(std::ostream &val, const Fixed &nb)
 	return (val << nb.toFloat());
 }
 
-Fixed	&Fixed::operator>(const Fixed &b)
+bool	Fixed::operator>(const Fixed &b)	const
 {
-
+	return (this->fixed > b.fixed);
 }
 
-Fixed	&Fixed::operator<(const Fixed &b)
+bool	Fixed::operator<(const Fixed &b)	const
 {
-
+	return(this->fixed < b.fixed);
 }
 
-Fixed	&Fixed::operator>=(const Fixed &b)
+bool	Fixed::operator>=(const Fixed &b)	const
 {
-
+	return (this->fixed) >= b.fixed;
 }
 
-Fixed	&Fixed::operator<=(const Fixed &b)
+bool	Fixed::operator<=(const Fixed &b)	const
 {
-
+	return (this->fixed) <= b.fixed;
 }
 
-Fixed	&Fixed::operator==(const Fixed &b)
+bool	Fixed::operator==(const Fixed &b)	const
 {
+	return (this->fixed == b.fixed);
+}
+
+bool	Fixed::operator!=(const Fixed &b)	const
+{
+	return (this->fixed != b.fixed);
+}
+
+Fixed	Fixed::operator+(const Fixed &b)	const
+{
+	return (this->toFloat() + b.toFloat());
+}
+
+Fixed	Fixed::operator-(const Fixed &b)	const
+{
+	return (this->toFloat() - b.toFloat());
+}
+
+Fixed	Fixed::operator*(const Fixed &b)	const
+{
+	return (this->toFloat() * b.toFloat());
+}
+
+Fixed	Fixed::operator/(const Fixed &b)	const
+{
+	return (this->toFloat() / b.toFloat());
+}
+
+
+Fixed	Fixed::operator++(int)
+{
+	Fixed tmp = *this;
+	++(*this);
+	return (tmp);
+}
+
+Fixed	Fixed::operator--(int)
+{
+	Fixed tmp = *this;
+	--(*this);			//dunno if its 100% correct
+	return (tmp);
+}
+
+Fixed	&Fixed::operator++()
+{
+	++fixed;
+	return (*this);
+}
+
+Fixed	&Fixed::operator--()
+{
+	--fixed;
+	return (*this);
+}
+
+// Fixed	&Fixed::max(Fixed &a, Fixed &b)
+// {
 	
-}
+// }
 
-Fixed	&Fixed::operator!=(const Fixed &b)
-{
+// Fixed	&Fixed::min(Fixed &a, Fixed &b)
+// {
 
-}
+// }
 
-Fixed	&Fixed::operator+(const Fixed &b)
-{
+// const Fixed	&Fixed::max(const Fixed &a, const Fixed &b)
+// {
 
-}
+// }
 
-Fixed	&Fixed::operator-(const Fixed &b)
-{
+// const Fixed	&Fixed::min(const Fixed &a, const Fixed &b)
+// {
 
-}
+// }
 
-Fixed	&Fixed::operator*(const Fixed &b)
-{
-
-}
-
-Fixed	&Fixed::operator/(const Fixed &b)
-{
-	
-}
-
-static Fixed	&min(Fixed &a, Fixed &b)
-{
-
-}
-
-static Fixed	&min(const Fixed &a, const Fixed &b)
-{
-
-}
-
-static Fixed	&max(Fixed &a, Fixed &b)
-{
-
-}
-
-static Fixed	&max(const Fixed &a, const Fixed &b)
-{
-	
-}
