@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 10:06:17 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/09/18 08:54:20 by codespace        ###   ########.fr       */
+/*   Updated: 2024/09/18 08:56:52 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,13 +169,19 @@ Fixed	&Fixed::min(Fixed &a, Fixed &b)
 		return (b);	
 }
 
-// const Fixed	&Fixed::max(const Fixed &a, const Fixed &b)
-// {
-//
-// }
+const Fixed	&Fixed::max(const Fixed &a, const Fixed &b)
+{
+	if (a > b)
+		return (a);
+	else
+		return (b);
+}
 
-// const Fixed	&Fixed::min(const Fixed &a, const Fixed &b)
-// {
-//
-// }
+const Fixed	&Fixed::min(const Fixed &a, const Fixed &b)
+{
+	if (a < b)
+		return (a);
+	else
+		return (b);
+}
 
