@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 10:04:49 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/09/18 10:22:26 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/09/18 08:54:33 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ class Fixed
 		
 		
 
-		//static Fixed	&max(Fixed &a, Fixed &b);
-		//static Fixed	&min(Fixed &a, Fixed &b);
+		static Fixed	&max(Fixed &a, Fixed &b);
+		static Fixed	&min(Fixed &a, Fixed &b);
 		//static const Fixed	&max(const Fixed &a, const Fixed &b);
 		//static const Fixed	&min(const Fixed &a, const Fixed &b);
 		
