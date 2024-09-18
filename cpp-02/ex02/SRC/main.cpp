@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 10:02:15 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/09/18 08:56:57 by codespace        ###   ########.fr       */
+/*   Updated: 2024/09/18 09:01:54 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,16 @@ int	main( void )
 	std::cout << a << std::endl;
 	std::cout << b << std::endl;
 	std::cout << Fixed::max( a, b ) << std::endl;
+
+	Fixed	c;
+	Fixed const	d( Fixed(42.42f) / Fixed(2));
+	std::cout << c << std::endl;
+	std::cout << ++c << std::endl;
+	std::cout << c << std::endl;
+	std::cout << c++ << std::endl;
+	std::cout << c << std::endl;
+	std::cout << d << std::endl;
+	std::cout << "MAX: " << Fixed::max( c, d ) << std::endl;
+	std::cout << "MIN: " << Fixed::min( c, d ) << std::endl;
 	return 0;
 }
