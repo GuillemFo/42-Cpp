@@ -6,11 +6,11 @@
 #    By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/30 08:52:23 by gforns-s          #+#    #+#              #
-#    Updated: 2024/09/18 11:29:20 by gforns-s         ###   ########.fr        #
+#    Updated: 2024/09/18 11:46:18 by gforns-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = Fixed2
+NAME = ClapTrap
 
 SRC = main.cpp ClapTrap.cpp
 
