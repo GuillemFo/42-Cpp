@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 10:04:49 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/09/18 08:56:49 by codespace        ###   ########.fr       */
+/*   Updated: 2024/09/23 08:02:28 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 #include <iostream>
-#include <cstring>
-#include <fstream>
 #include <cmath>
 
 class Fixed
