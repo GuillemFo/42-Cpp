@@ -6,16 +6,20 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 11:28:02 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/09/23 13:25:56 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/09/23 13:49:32 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 
+ClapTrap::ClapTrap() : _name("someone"), _hit_pts(10), _energy(10), _attack(0)
+{
+	std::cout << "Default constructor called for " << _name << std::endl;
+}
 ClapTrap::ClapTrap(std::string a) : _hit_pts(10), _energy(10), _attack(0)
 {
-	std::cout << "Default constructor called for " << a << std::endl;
 	_name = a;
+	std::cout << "Default constructor called for " << _name << std::endl;
 }
 
 ClapTrap::~ClapTrap()
@@ -49,22 +53,24 @@ void	ClapTrap::attack(const std::string& target)
 		return;
 	}
 	_energy = _energy - 1;
-	std::cout << this->_name << "attacks" << &target << ", causing " << _attack << "points of damage!" << std::endl;
+	std::cout << _name << " attacks " << target << ", causing " << _attack << " points of damage!" << std::endl;
 }
 
 void	ClapTrap::takeDamage(unsigned int ammount)
 {
 	if (_hit_pts == 0)
 	{
-		std::cout << "the target is already dead" << std::endl;
+		std::cout << _name << " is already dead" << std::endl;
 		return;
 	}
 	if (_hit_pts < ammount)
 	{
 		_hit_pts = 0;
-		std::cout << "the target died" << std::endl;
+		std::cout << _name << " died" << std::endl;
+		return;
 	}
 	_hit_pts = _hit_pts - ammount;
+	std::cout << _name << " received " << ammount << " of damage!" << std::endl;
 }
 
 void	ClapTrap::beRepaired(unsigned int ammount)
@@ -72,6 +78,11 @@ void	ClapTrap::beRepaired(unsigned int ammount)
 	if (_energy == 0)
 	{
 		std::cout << "Not enough energy to repair" << std::endl;
+		return;
+	}
+	if (_hit_pts == 0)
+	{
+		std::cout << _name << " is already dead" << std::endl;
 		return;
 	}
 	_energy = _energy - 1;
