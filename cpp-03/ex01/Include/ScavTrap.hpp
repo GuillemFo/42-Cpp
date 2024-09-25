@@ -3,10 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ScavTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 08:49:51 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/09/25 08:49:52 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/09/25 08:05:37 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+class ScavTrap
+{
+	protected:
+
+	public:
+
+};
