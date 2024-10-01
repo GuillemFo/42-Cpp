@@ -3,10 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ScavTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 08:49:47 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/09/25 08:49:49 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/10/01 13:19:36 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <ScavTrap.hpp>
 
