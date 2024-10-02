@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 11:28:02 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/10/02 09:10:37 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/10/02 09:24:21 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	ClapTrap::takeDamage(unsigned int ammount)
 {
 	if (_hit_pts == 0)
 	{
-		std::cout << _name << " is already dead" << std::endl;
+		std::cout << _name << " is already dead and cannot receive damage" << std::endl;
 		return;
 	}
 	if (_hit_pts < ammount)
@@ -83,7 +83,7 @@ void	ClapTrap::beRepaired(unsigned int ammount)
 	}
 	if (_hit_pts == 0)
 	{
-		std::cout << _name << " is already dead" << std::endl;
+		std::cout << _name << " is already dead and cannot be healed" << std::endl;
 		return;
 	}
 	_energy = _energy - 1;
