@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 11:28:02 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/09/23 13:49:32 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/10/02 09:13:02 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ ClapTrap::ClapTrap(std::string a) : _hit_pts(10), _energy(10), _attack(0)
 
 ClapTrap::~ClapTrap()
 {
-
+	std::cout << "Destructor for ClapTrap was called" << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap &a)
@@ -38,7 +38,7 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &a)
 	if (this != &a)
 	{
 		this->_attack = a._attack;
-		this->_energy = a._energy;		//have to double check if i need setters and getters (check if setter and getter is per class or element)
+		this->_energy = a._energy;
 		this->_hit_pts = a._hit_pts;
 		this->_name = a._name;
 	}
