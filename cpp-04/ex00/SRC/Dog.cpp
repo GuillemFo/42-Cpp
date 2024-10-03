@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 08:19:33 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/10/03 08:44:24 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/10/03 08:50:08 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ Dog::~Dog()
 	std::cout << "Dog destructor called" << std::endl;
 }
 
-void Dog::makeSound()
+void Dog::makeSound() const
 {
 	std::cout << "Bark" << std::endl;
 }

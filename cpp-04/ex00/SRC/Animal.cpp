@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 10:34:46 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/10/03 08:41:08 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/10/03 08:49:35 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ Animal	&Animal::operator=(const Animal &other)
 	return (*this);
 }
 
-std::string	Animal::getType()
+std::string	Animal::getType() const
 {
 	return (this->_type);
 }
@@ -46,7 +46,7 @@ Animal::~Animal()
 	std::cout << "Animal destructor called" << std::endl;
 }
 
-void Animal::makeSound()
+void Animal::makeSound() const
 {
 	std::cout << "Default sound" << std::endl;
 }
