@@ -6,13 +6,14 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 10:42:03 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/10/02 16:45:53 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/10/03 08:29:50 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#pragma once
 #include "Animal.hpp"
 
-class Cat : Animal
+class Cat : public Animal
 {
 	protected:
 
@@ -21,6 +22,6 @@ class Cat : Animal
 		Cat(std::string s);
 		Cat(const Cat &other);
 		~Cat();
-		Cat &operator=(const Cat &other);
-		void makeSound();
+		Cat		&operator=(const Cat &other);
+		void	makeSound();
 };
