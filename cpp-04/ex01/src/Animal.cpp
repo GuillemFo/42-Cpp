@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 10:34:46 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/10/03 08:49:35 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/10/03 11:51:18 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,11 @@ Animal::~Animal()
 void Animal::makeSound() const
 {
 	std::cout << "Default sound" << std::endl;
+}
+
+/*	This is for testing deep or shallow copies*/
+void Animal::setType(std::string a)
+{
+	this->_type = a;
 }
 
