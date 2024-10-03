@@ -6,10 +6,11 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 10:34:00 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/10/03 12:17:57 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/10/03 13:04:18 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <iostream>
 #include "Animal.hpp"
 #include "Dog.hpp"
 #include "Cat.hpp"
