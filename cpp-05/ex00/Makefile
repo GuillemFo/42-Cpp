@@ -6,11 +6,11 @@
 #    By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/30 08:52:23 by gforns-s          #+#    #+#              #
-#    Updated: 2024/10/03 15:10:29 by gforns-s         ###   ########.fr        #
+#    Updated: 2024/10/03 15:11:46 by gforns-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = Abstract_class
+NAME = Mommy,_when_I_grow_up,_I_want_to_be_a_bureaucrat!
 
 SRC = main.cpp 
 
