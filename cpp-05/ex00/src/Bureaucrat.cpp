@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 01:18:18 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/10/09 10:00:25 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/10/09 10:35:29 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ Bureaucrat::Bureaucrat(const Bureaucrat &other)
 }
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other)
 {
+	std::cout << "help me :(" << std::endl;
 	if (this != &other)
 	{
-		std::cout << "help me :(" << std::endl;
-		//setname and set grade but name is const so cannot change it??
+		this->grade = other.grade;
 	}
 	return (*this);
 }
@@ -47,5 +47,4 @@ int Bureaucrat::getGrade()
 {
 	return (this->grade);	
 }
-
 
