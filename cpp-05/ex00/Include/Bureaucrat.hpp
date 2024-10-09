@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 01:18:21 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/10/09 09:46:38 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/10/09 11:09:17 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,7 @@ class Bureaucrat
 
 		const std::string getName() const;
 		int getGrade();
-		int setGrade();
+		int incrementGrade();
+		int decrementGrade();
+		
 };

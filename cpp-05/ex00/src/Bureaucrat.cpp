@@ -6,15 +6,32 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 01:18:18 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/10/09 10:35:29 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/10/09 11:10:30 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat(const std::string nm, int i) : name(nm), grade(i)
+Bureaucrat::Bureaucrat(const std::string nm, int i) : name(nm)
 {
 	std::cout << "Bureaucrat " << this->name << " constructor" << std::endl;
+	try
+	{
+		if (i > 150)
+			throw Bureaucrat::GradeTooHighException;
+		else if (i < 1)
+			throw Bureaucrat::GradeTooLowException;
+		else if (i >= 1 && i <= 150)
+			grade = i;
+		else
+			throw Bureaucrat::SendHelp;
+	}
+	catch(int nbr)
+	{
+		if (nbr < 1)
+			std::cout << " Is this the way to do it?" << std::endl;
+	}
+	
 }
 
 Bureaucrat::~Bureaucrat()
