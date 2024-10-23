@@ -6,31 +6,25 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 01:18:18 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/10/23 08:53:33 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/10/23 10:14:25 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
 
+Bureaucrat::Bureaucrat() :_name("Default"), _grade(150)
+{
+	std::cout << "Bureaucrat " << this->_name << " constructor" << std::endl;
+}
+
 Bureaucrat::Bureaucrat(const std::string nm, int i) : _name(nm)
 {
 	std::cout << "Bureaucrat " << this->_name << " constructor" << std::endl;
-	try
-	{
-		if (i > 150)
-			throw Bureaucrat::GradeTooHighException("Grade too high");
-		else if (i < 1)
-			throw Bureaucrat::GradeTooLowException("Grade too low");
-		else if (i >= 1 && i <= 150)
-			_grade = i;
-
-	}
-	catch(int nbr)
-	{
-		if (nbr < 1)
-			std::cout << " Is this the way to do it?" << std::endl;
-	}
-	
+	if (i > 150)
+		throw Bureaucrat::GradeTooHighException();
+	else if (i < 1)
+		throw Bureaucrat::GradeTooLowException();
+	_grade = i;
 }
 
 Bureaucrat::~Bureaucrat()
@@ -41,12 +35,13 @@ Bureaucrat::~Bureaucrat()
 Bureaucrat::Bureaucrat(const Bureaucrat &other)
 {
 	*this = other;
-	std::cout << "Copy constructor " << &other << std::endl;
-
+	std::cout << "Copy constructor :)"<< std::endl;
 }
+
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other)
 {
 	std::cout << "help me :(" << std::endl;
+	std::cout << "Operator =" << std::endl;
 	if (this != &other)
 	{
 		this->_grade = other._grade;
@@ -64,6 +59,21 @@ int Bureaucrat::getGrade()
 	return (this->_grade);	
 }
 
+
+int	Bureaucrat::incrementGrade()
+{
+	if (this->getGrade() <= 1)
+		throw Bureaucrat::GradeTooHighException();
+	this->_grade += 1;
+}
+
+int	Bureaucrat::decrementGrade()
+{
+	if (this->getGrade() >= 150)
+		throw Bureaucrat::GradeTooLowException();
+	this->_grade -= 1;
+}
+
 const char *Bureaucrat::GradeTooHighException::what(void) const throw()
 {
 	return ("Grade too high, range [1 - 150].");
@@ -72,4 +82,9 @@ const char *Bureaucrat::GradeTooHighException::what(void) const throw()
 const char *Bureaucrat::GradeTooLowException::what(void) const throw()
 {
 	return ("Grade too low, range [1 - 150].");
+}
+
+std::ostream &operator<<(std::ostream &val, Bureaucrat &who)
+{
+	return (val << who.getGrade());
 }

@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 01:18:21 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/10/23 08:47:31 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/10/23 10:07:33 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ class Bureaucrat
 		const std::string _name;
 		int _grade;
 	public:
+		Bureaucrat();
 		Bureaucrat(const std::string nm, int i);
 		~Bureaucrat();
 		Bureaucrat(const Bureaucrat &other);
@@ -41,3 +42,4 @@ class Bureaucrat
 				const char* what() const throw();		
 		};
 };
+std::ostream &operator<<(std::ostream &val, const Bureaucrat &grade);
