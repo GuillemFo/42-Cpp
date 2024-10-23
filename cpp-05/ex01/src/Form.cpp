@@ -6,13 +6,13 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 11:08:33 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/10/23 13:44:59 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/10/23 13:59:13 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Form.hpp"
 
-Form::Form() : _name("Default"), _reqGrade(10), _execGrade(5), _isSign(false)
+Form::Form() : _name("Default"), _reqGrade(150), _execGrade(150), _isSign(false)
 {
 	std::cout << "Form " << this->_name << " constructor" << std::endl;
 }
@@ -68,3 +68,19 @@ const char *Form::GradeTooLowException::what(void) const throw()
 	return ("Grade too low, range [1 - 150].");
 }
 
+void Form::beSigned(Bureaucrat &bur)
+{
+	if (bur.getGrade() > this->getReqGrade())
+		throw Form::GradeTooLowException();
+	this->_isSign = true;
+}
+
+std::ostream &operator<<(std::ostream &val, const Form &form)
+{
+	return (val << "-----------------" << std::endl
+			<< "Form name: " << form.getName() << std::endl
+			<< "Status: " << (form.getSign() ? "Signed" : "Not signed") << std::endl
+			<< "Grade required to sign: " << form.getReqGrade() << std::endl
+			<< "Grade required to exectue: " << form.getExecGrade() << std::endl
+			<< "-----------------");
+}
