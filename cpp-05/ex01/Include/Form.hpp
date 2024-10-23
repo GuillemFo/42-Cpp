@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 11:08:18 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/10/23 13:30:58 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/10/23 13:43:09 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ class Form
 		const std::string	_name;
 		const int			_reqGrade;
 		const int 			_execGrade;
-		bool				_sign;
+		bool				_isSign;	
 	public:
 		Form();
 		Form(std::string nm, int req, int exec, bool def_status);
@@ -31,7 +31,7 @@ class Form
 		std::string getName() const;
 		int	getReqGrade() const;
 		int	getExecGrade() const;
-		bool getSign();
+		bool getSign() const;
 		void beSigned(Bureaucrat &a); ///pending to investigate
 
 	class GradeTooHighException : public std::exception
