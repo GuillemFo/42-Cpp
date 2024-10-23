@@ -6,11 +6,12 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 11:08:33 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/10/23 13:59:13 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/10/23 14:05:07 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Form.hpp"
+#include "Bureaucrat.hpp"
 
 Form::Form() : _name("Default"), _reqGrade(150), _execGrade(150), _isSign(false)
 {
@@ -84,3 +85,4 @@ std::ostream &operator<<(std::ostream &val, const Form &form)
 			<< "Grade required to exectue: " << form.getExecGrade() << std::endl
 			<< "-----------------");
 }
+

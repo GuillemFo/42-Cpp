@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 01:18:18 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/10/23 11:04:50 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/10/23 14:06:48 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,17 @@ const char *Bureaucrat::GradeTooLowException::what(void) const throw()
 std::ostream &operator<<(std::ostream &val, const Bureaucrat &who)
 {
 	return (val << who.getName() << ", bureaucrat grade " << who.getGrade());
+}
+
+void Bureaucrat::signForm(Form &form)
+{
+	try
+	{
+		form.be
+	}
+	catch ()
+	{
+		
+	}
+	
 }
