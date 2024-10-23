@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:10:20 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/10/23 11:00:08 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/10/23 11:04:28 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,12 @@ int main()
 	{
 		std::cerr << e.what() << std::endl;
 	}
+
+	Bureaucrat Jules;
+	std::cout << Jules << " This should be default" << std::endl;
+	Jules = BOB;
+	std::cout << Jules << " This should be a copy" << std::endl;
+
+
 	std::cout << "And thats all folks" << std::endl;
 }

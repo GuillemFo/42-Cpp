@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 01:18:18 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/10/23 10:50:03 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/10/23 11:04:50 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ Bureaucrat::Bureaucrat(const Bureaucrat &other)
 
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other)
 {
-	std::cout << "help me :(" << std::endl;
-	std::cout << "Operator =" << std::endl;
+	//std::cout << "help me :(" << std::endl;
+	//std::cout << "Operator =" << std::endl;
 	if (this != &other)
 	{
 		this->_grade = other._grade;
