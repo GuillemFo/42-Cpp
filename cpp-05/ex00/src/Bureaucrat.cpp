@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 01:18:18 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/10/23 10:14:25 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/10/23 10:50:03 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,24 +54,24 @@ const std::string Bureaucrat::getName() const
 	return (this->_name);
 }
 
-int Bureaucrat::getGrade()
+int Bureaucrat::getGrade() const
 {
 	return (this->_grade);	
 }
 
 
-int	Bureaucrat::incrementGrade()
+void	Bureaucrat::incrementGrade()
 {
 	if (this->getGrade() <= 1)
 		throw Bureaucrat::GradeTooHighException();
-	this->_grade += 1;
+	this->_grade -= 1;
 }
 
-int	Bureaucrat::decrementGrade()
+void	Bureaucrat::decrementGrade()
 {
 	if (this->getGrade() >= 150)
 		throw Bureaucrat::GradeTooLowException();
-	this->_grade -= 1;
+	this->_grade += 1;
 }
 
 const char *Bureaucrat::GradeTooHighException::what(void) const throw()
@@ -84,7 +84,7 @@ const char *Bureaucrat::GradeTooLowException::what(void) const throw()
 	return ("Grade too low, range [1 - 150].");
 }
 
-std::ostream &operator<<(std::ostream &val, Bureaucrat &who)
+std::ostream &operator<<(std::ostream &val, const Bureaucrat &who)
 {
-	return (val << who.getGrade());
+	return (val << who.getName() << ", bureaucrat grade " << who.getGrade());
 }

@@ -6,14 +6,14 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 01:18:21 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/10/23 10:07:33 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/10/23 10:44:58 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 #include <iostream>
-#include <string>
-#include <stdexcept>
+// #include <string>
+// #include <stdexcept>
 
 class Bureaucrat
 {
@@ -28,9 +28,9 @@ class Bureaucrat
 		Bureaucrat &operator=(const Bureaucrat &other);
 
 		const std::string getName() const;
-		int getGrade();
-		int incrementGrade();
-		int decrementGrade();
+		int getGrade() const;
+		void incrementGrade();
+		void decrementGrade();
 		class GradeTooHighException : public std::exception
 		{
 			public:

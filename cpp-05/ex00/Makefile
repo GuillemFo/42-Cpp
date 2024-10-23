@@ -6,13 +6,13 @@
 #    By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/30 08:52:23 by gforns-s          #+#    #+#              #
-#    Updated: 2024/10/03 15:11:46 by gforns-s         ###   ########.fr        #
+#    Updated: 2024/10/23 10:26:47 by gforns-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = Mommy,_when_I_grow_up,_I_want_to_be_a_bureaucrat!
 
-SRC = main.cpp 
+SRC = main.cpp Bureaucrat.cpp
 
 SRC_P = src/
 
