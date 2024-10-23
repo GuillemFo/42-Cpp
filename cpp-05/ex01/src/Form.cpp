@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 11:08:33 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/10/23 14:05:07 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/10/23 14:27:54 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ Form::Form() : _name("Default"), _reqGrade(150), _execGrade(150), _isSign(false)
 {
 	std::cout << "Form " << this->_name << " constructor" << std::endl;
 }
-Form::Form(std::string nm, int req, int exec, bool def_status) : _name(nm), _reqGrade(req), _execGrade(exec), _isSign(false)
+Form::Form(std::string nm, int req, int exec) : _name(nm), _reqGrade(req), _execGrade(exec), _isSign(false)
 {
 	std::cout << "Form " << this->_name << " constructor" << std::endl;
 }

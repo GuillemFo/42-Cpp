@@ -6,13 +6,15 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 11:08:18 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/10/23 13:43:09 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/10/23 14:38:55 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 #include <iostream>
 #include "Bureaucrat.hpp"
+
+class	Bureaucrat;
 
 class Form
 {
@@ -23,7 +25,7 @@ class Form
 		bool				_isSign;	
 	public:
 		Form();
-		Form(std::string nm, int req, int exec, bool def_status);
+		Form(std::string nm, int req, int exec);
 		~Form();
 		Form(const Form &other);
 		Form &operator=(const Form &a);
@@ -32,7 +34,7 @@ class Form
 		int	getReqGrade() const;
 		int	getExecGrade() const;
 		bool getSign() const;
-		void beSigned(Bureaucrat &a); ///pending to investigate
+		void beSigned(Bureaucrat &a);
 
 	class GradeTooHighException : public std::exception
 	{

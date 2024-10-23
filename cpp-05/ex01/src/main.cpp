@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:10:20 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/10/23 14:01:34 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/10/23 14:39:44 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,23 @@ int	main(void)
 {
 	try
 	{
-		Bureaucrat	ferran("Ferran", 140);
-		Bureaucrat	boss("Boss", 1);
+		Bureaucrat	BOB("BOB", 140);
+		Bureaucrat	Jules("Jules", 1);
 		Form		basicForm("Basic stuff", 140, 150);
 		Form		basicForm2(basicForm);
 		Form		advancedForm("Advanced stuff", 10, 1);
 		
-		std::cout << ferran << std::endl;
-		std::cout << boss << std::endl;
+		std::cout << BOB << std::endl;
+		std::cout << Jules << std::endl;
 		std::cout << basicForm << std::endl;
 		std::cout << basicForm2 << std::endl;
 		std::cout << advancedForm << std::endl;
 		
-		ferran.signForm(basicForm);
-		boss.signForm(basicForm2);
-		ferran.signForm(advancedForm);
+		BOB.signForm(basicForm);
+		Jules.signForm(basicForm2);
+		BOB.signForm(advancedForm);
 
-		boss.signForm(advancedForm);
+		Jules.signForm(advancedForm);
 		std::cout << basicForm << std::endl;
 		std::cout << basicForm2 << std::endl;
 		std::cout << advancedForm << std::endl;
