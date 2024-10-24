@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 14:48:37 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/10/24 09:26:38 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/10/24 09:56:54 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other)
 	
 }
 
-ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationForm &other)
+ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationForm &other) //should i copy the _target too?
 {
 	AForm::operator=(other);
 	return (*this);
