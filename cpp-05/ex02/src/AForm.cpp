@@ -6,12 +6,11 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 11:08:33 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/10/23 14:46:28 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/10/24 10:21:23 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "AForm.hpp"
-#include "Bureaucrat.hpp"
 
 AForm::AForm() : _name("Default"), _reqGrade(150), _execGrade(150), _isSign(false)
 {
@@ -69,6 +68,11 @@ const char *AForm::GradeTooLowException::what(void) const throw()
 	return ("Grade too low, range [1 - 150].");
 }
 
+const char *AForm::FormNotSigned::what() const throw()
+{
+	return ("Form not signed, can't execute");
+}
+
 void AForm::beSigned(Bureaucrat &bur)
 {
 	if (bur.getGrade() > this->getReqGrade())
@@ -86,3 +90,12 @@ std::ostream &operator<<(std::ostream &val, const AForm &form)
 			<< "-----------------");
 }
 
+void AForm::execute(Bureaucrat const & executor) const
+{
+	if (this->getSign() == false)
+		throw AForm::FormNotSigned();
+	else if (executor.getGrade() > this->getExecGrade())
+		throw AForm::GradeTooLowException();
+	//execute 
+	
+}
