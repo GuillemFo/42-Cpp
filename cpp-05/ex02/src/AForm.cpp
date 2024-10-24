@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 11:08:33 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/10/24 10:21:23 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/10/24 12:08:36 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,5 @@ void AForm::execute(Bureaucrat const & executor) const
 		throw AForm::FormNotSigned();
 	else if (executor.getGrade() > this->getExecGrade())
 		throw AForm::GradeTooLowException();
-	//execute 
-	
+		
 }
