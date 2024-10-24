@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 14:48:48 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/10/24 08:55:00 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/10/24 16:07:54 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@ class RobotomyRequestForm : public AForm
 		const std::string _target;
 	public:
 		RobotomyRequestForm();
-		RobotomyRequestForm(std::string nm);
+		RobotomyRequestForm(const std::string nm);
 		RobotomyRequestForm(const RobotomyRequestForm &other);
 		~RobotomyRequestForm();
 		RobotomyRequestForm &operator=(const RobotomyRequestForm &other);
+		void	executeForm() const;
 };
