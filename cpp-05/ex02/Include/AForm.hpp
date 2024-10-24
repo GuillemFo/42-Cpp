@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 11:08:18 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/10/23 14:46:47 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/10/24 08:49:25 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ class AForm
 	public:
 		AForm();
 		AForm(std::string nm, int req, int exec);
-		~AForm();
+		virtual ~AForm();
 		AForm(const AForm &other);
 		AForm &operator=(const AForm &a);
 		
