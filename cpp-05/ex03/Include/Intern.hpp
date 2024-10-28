@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   Intern.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:11:15 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/10/24 17:59:19 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/10/28 08:30:01 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#pragma once
 #include "AForm.hpp"
 
 class Intern : public AForm
@@ -18,9 +19,9 @@ class Intern : public AForm
 
 	public:
 		Intern();
-		Intern(const std::string nm, int i);
 		~Intern();
 		Intern(const Intern &other);
 		Intern &operator=(const Intern &other);
-
+		
+		AForm	*makeForm(const std::string nmf, const std::string target);
 };
