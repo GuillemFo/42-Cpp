@@ -6,59 +6,64 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:10:20 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/10/28 10:27:08 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/10/28 11:09:47 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
-#include "AForm.hpp"
-#include "Bureaucrat.hpp"
-#include "ShrubberyCreationForm.hpp"
-#include "RobotomyRequestForm.hpp"
-#include "PresidentialPardonForm.hpp"
+#include <iostream>
 #include "Intern.hpp"
+#include "Bureaucrat.hpp"
+#include "Form.hpp"
+#include "PresidentialPardonForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "ShrubberyCreationForm.hpp"
 
-int	main(void)
-{
-	Bureaucrat	BOB("BOB", 145);
-	Bureaucrat	Linx("Linx", 1);
-	AForm		*shrubberyForm = new ShrubberyCreationForm("Xmas");
-	AForm		*robotomyForm = new RobotomyRequestForm("Roger");
-	AForm		*pardonForm = new PresidentialPardonForm("Pal");
+int main() {
+    try {
+        Intern someRandomIntern;
+        Bureaucrat boss("Alice", 1);       // Highest rank
+        Bureaucrat assistant("Bob", 50);   // Mid-rank
+        Bureaucrat intern("Charlie", 140); // Lower rank
 
-	try
-	{
-		std::cout << BOB << std::endl;
-		std::cout << Linx << std::endl;
-		std::cout << *shrubberyForm << std::endl;
-		std::cout << *robotomyForm << std::endl;
-		std::cout << *pardonForm << std::endl;
+        Form* form;
 
-		BOB.signForm(*shrubberyForm);
-		BOB.executeForm(*shrubberyForm);
+        // Test case 1: Create and execute "robotomy request" form with different bureaucrats
+        form = someRandomIntern.makeForm("robotomy request", "Bender");
+        std::cout << "Created Form: " << *form << std::endl;
 
-		std::cout << *shrubberyForm << std::endl;
+        form->beSigned(assistant);  // Assistant attempts to sign
+        boss.executeForm(*form);    // Boss attempts to execute
 
-		Linx.executeForm(*shrubberyForm);
+        delete form;
 
-		std::cout << *robotomyForm << std::endl;
-		BOB.signForm(*robotomyForm);
-		Linx.signForm(*robotomyForm);
-		Linx.executeForm(*robotomyForm);
+        // Test case 2: Create and execute "shrubbery creation" form
+        form = someRandomIntern.makeForm("shrubbery creation", "Garden");
+        std::cout << "\nCreated Form: " << *form << std::endl;
 
-		BOB.signForm(*pardonForm);
-		BOB.executeForm(*pardonForm);
-		Linx.executeForm(*pardonForm);
-		Linx.signForm(*pardonForm);
-		Linx.executeForm(*pardonForm);
-	}
-	catch (std::exception & e)
-	{
-		std::cout << "Exception caught: " << e.what() << std::endl;
-	}
-	delete shrubberyForm;
-	delete robotomyForm;
-	delete pardonForm;
-	return (0);
+        intern.signForm(*form);      // Intern attempts to sign (should fail)
+        assistant.signForm(*form);   // Assistant signs successfully
+        assistant.executeForm(*form); // Assistant attempts to execute (should fail)
+        boss.executeForm(*form);     // Boss executes successfully
+
+        delete form;
+
+        // Test case 3: Create and execute "presidential pardon" form
+        form = someRandomIntern.makeForm("presidential pardon", "Arthur Dent");
+        std::cout << "\nCreated Form: " << *form << std::endl;
+
+        assistant.signForm(*form);   // Assistant attempts to sign (should fail)
+        boss.signForm(*form);        // Boss signs successfully
+        boss.executeForm(*form);     // Boss executes successfully
+
+        delete form;
+
+        // Test case 4: Attempt to create a non-existent form
+        form = someRandomIntern.makeForm("time off request", "Marvin"); // Should throw an exception
+    } 
+    catch (const std::exception &e) {
+        std::cerr << "Exception caught: " << e.what() << std::endl;
+    }
+
+    return 0;
 }
+

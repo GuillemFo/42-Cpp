@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:11:12 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/10/28 10:25:45 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/10/28 11:06:29 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,15 @@ Intern &Intern::operator=(const Intern &other)
 	return (*this);
 }
 
-AForm *Intern::makeForm(std::string form_nm, std::string target)
+Form *Intern::makeForm(std::string form_nm, std::string target)
 {
 	int type = -1; //protection
-	std::string form_type[3] = {"Presidential", "Robotomy", "Shrubbery"};
+	std::string form_type[3] = {"presidential pardon", "robotomy request", "shrubbery creation"};
 	
 
 	for (int i = 0; i < 3 && type == -1; i++)
 	{
-		if (form_type[i] = form_nm)
+		if (form_type[i] == form_nm)
 		{
 			type = i;
 		}
@@ -55,17 +55,21 @@ AForm *Intern::makeForm(std::string form_nm, std::string target)
 	switch(type)
 	{
 		case 0:
+			std::cout<< "Intern creates " << "PresidentialPardonForm" << std::endl;
 			return (new PresidentialPardonForm(target));
 		case 1:
+			std::cout<< "Intern creates " << "RobotomyRequestForm" << std::endl;
 			return (new RobotomyRequestForm(target));
 		case 2:
+			std::cout<< "Intern creates " << "ShrubberyCreationForm" << std::endl;
 			return (new ShrubberyCreationForm(target));
 		default:
 			throw NoFormType();
+			break;
 	}
 }
 
 const char *Intern::NoFormType::what() const throw()
 {
-	return ("No form type found. Available forms: Presidential, Robotomy or Shrubbery");
+	return ("No form type found. Available forms: presidential pardon, robotomy request or shrubbery creation");
 }
