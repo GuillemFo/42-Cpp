@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+  /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ScalarConverter.cpp                                :+:      :+:    :+:   */
@@ -24,7 +24,7 @@ ScalarConverter::~ScalarConverter()
 
 ScalarConverter::ScalarConverter(const ScalarConverter &other)
 {
-	*this = other
+	*this = other;
 }
 
 ScalarConverter &ScalarConverter::operator=(const ScalarConverter &other)
@@ -36,5 +36,31 @@ ScalarConverter &ScalarConverter::operator=(const ScalarConverter &other)
 void	ScalarConverter::convert(const std::string in)
 {
 
+
+}
+
+
+int	WhatIs()
+{
+	
+}
+
+char	toChar()
+{
+
+}
+
+int	toInt()
+{
+
+}
+
+float toFloat()
+{
+
+}
+
+double	toDouble()
+{
 
 }
