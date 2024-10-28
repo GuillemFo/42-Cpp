@@ -1,86 +1,86 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.cpp                                          :+:      :+:    :+:   */
+/*   AForm.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 11:08:33 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/10/24 16:10:25 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/10/28 11:25:47 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Form.hpp"
+#include "AForm.hpp"
 
-Form::Form() : _name("Default"), _reqGrade(150), _execGrade(150), _isSign(false)
+AForm::AForm() : _name("Default"), _reqGrade(150), _execGrade(150), _isSign(false)
 {
 	std::cout << "Form " << this->_name << " constructor" << std::endl;
 }
-Form::Form(std::string nm, int req, int exec) : _name(nm), _reqGrade(req), _execGrade(exec), _isSign(false)
+AForm::AForm(std::string nm, int req, int exec) : _name(nm), _reqGrade(req), _execGrade(exec), _isSign(false)
 {
 	std::cout << "Form " << this->_name << " constructor" << std::endl;
 }
 
-Form::~Form()
+AForm::~AForm()
 {
 	std::cout << "Form " << this->_name << " destructor" << std::endl;
 }
 
-Form::Form(const Form &other) : _name(other.getName()), _reqGrade(other.getReqGrade()), _execGrade(other.getExecGrade()), _isSign(other.getSign())
+AForm::AForm(const AForm &other) : _name(other.getName()), _reqGrade(other.getReqGrade()), _execGrade(other.getExecGrade()), _isSign(other.getSign())
 {
 	std::cout << "Copy constructor Form :)"<< std::endl;
 }
 
-Form &Form::operator=(const Form &other)
+AForm &AForm::operator=(const AForm &other)
 {
 	if (this != &other)
 		this->_isSign = other._isSign;
 	return (*this);
 }
 
-std::string	Form::getName() const
+std::string	AForm::getName() const
 {
 	return (this->_name);
 }
 
-int Form::getReqGrade() const
+int AForm::getReqGrade() const
 {
 	return (this->_reqGrade);
 }
 
-int Form::getExecGrade() const
+int AForm::getExecGrade() const
 {
 	return (this->_execGrade);
 }
 
-bool Form::getSign() const
+bool AForm::getSign() const
 {
 	return (this->_isSign);
 }
 
-const char *Form::GradeTooHighException::what(void) const throw()
+const char *AForm::GradeTooHighException::what(void) const throw()
 {
 	return ("Grade too high, range [1 - 150].");
 }
 
-const char *Form::GradeTooLowException::what(void) const throw()
+const char *AForm::GradeTooLowException::what(void) const throw()
 {
 	return ("Grade too low, range [1 - 150].");
 }
 
-const char *Form::FormNotSigned::what() const throw()
+const char *AForm::FormNotSigned::what() const throw()
 {
 	return ("Form not signed, can't execute");
 }
 
-void Form::beSigned(Bureaucrat &bur)
+void AForm::beSigned(Bureaucrat &bur)
 {
 	if (bur.getGrade() > this->getReqGrade())
-		throw Form::GradeTooLowException();
+		throw AForm::GradeTooLowException();
 	this->_isSign = true;
 }
 
-std::ostream &operator<<(std::ostream &val, const Form &form)
+std::ostream &operator<<(std::ostream &val, const AForm &form)
 {
 	return (val << "-----------------" << std::endl
 			<< "Form name: " << form.getName() << std::endl
@@ -90,12 +90,12 @@ std::ostream &operator<<(std::ostream &val, const Form &form)
 			<< "-----------------");
 }
 
-void Form::execute(Bureaucrat const & executor) const
+void AForm::execute(Bureaucrat const & executor) const
 {
 	if (this->getSign() == false)
-		throw Form::FormNotSigned();
+		throw AForm::FormNotSigned();
 	else if (executor.getGrade() > this->getExecGrade())
-		throw Form::GradeTooLowException();
+		throw AForm::GradeTooLowException();
 	this->executeForm();
 }
 

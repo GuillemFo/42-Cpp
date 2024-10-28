@@ -6,15 +6,15 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 14:49:37 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/10/28 11:06:29 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/10/28 11:30:53 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#include "Form.hpp"
+#include "AForm.hpp"
 #include <iostream>
 
-class PresidentialPardonForm : public Form
+class PresidentialPardonForm : public AForm
 {
 	private:
 		const std::string _target;

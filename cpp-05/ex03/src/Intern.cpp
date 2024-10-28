@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:11:12 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/10/28 11:06:29 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/10/28 11:34:00 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ Intern &Intern::operator=(const Intern &other)
 	return (*this);
 }
 
-Form *Intern::makeForm(std::string form_nm, std::string target)
+AForm *Intern::makeForm(std::string form_nm, std::string target)
 {
 	int type = -1; //protection
 	std::string form_type[3] = {"presidential pardon", "robotomy request", "shrubbery creation"};

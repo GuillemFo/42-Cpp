@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.hpp                                          :+:      :+:    :+:   */
+/*   AForm.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 11:08:18 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/10/24 16:10:14 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/10/28 11:30:32 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 class	Bureaucrat;
 
-class Form
+class AForm
 {
 	private:
 		const std::string	_name;
@@ -24,11 +24,11 @@ class Form
 		const int 			_execGrade;
 		bool				_isSign;	
 	public:
-		Form();
-		Form(std::string nm, int req, int exec);
-		virtual ~Form();
-		Form(const Form &other);
-		Form &operator=(const Form &a);
+		AForm();
+		AForm(std::string nm, int req, int exec);
+		virtual ~AForm();
+		AForm(const AForm &other);
+		AForm &operator=(const AForm &a);
 		
 		std::string getName() const;
 		int	getReqGrade() const;
@@ -54,4 +54,4 @@ class Form
 			const char *what() const throw();
 	};
 };
-std::ostream &operator<<(std::ostream &val, const Form &who);
+std::ostream &operator<<(std::ostream &val, const AForm &who);

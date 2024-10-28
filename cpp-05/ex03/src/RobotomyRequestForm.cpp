@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 14:49:35 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/10/28 11:06:29 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/10/28 11:33:24 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 #include <ctime>
 #include <cstdlib>
 
-RobotomyRequestForm::RobotomyRequestForm() : Form("RobotomyRequestForm", 72, 45), _target("Default")
+RobotomyRequestForm::RobotomyRequestForm() : AForm("RobotomyRequestForm", 72, 45), _target("Default")
 {
 	std::cout << "Constructor for " << _target << " created using " << getName() << std::endl;
 }
 
-RobotomyRequestForm::RobotomyRequestForm(const std::string nm) : Form("RobotomyRequestForm", 72, 45), _target(nm) //might need const before param
+RobotomyRequestForm::RobotomyRequestForm(const std::string nm) : AForm("RobotomyRequestForm", 72, 45), _target(nm)
 {
 	std::cout << "Constructor for " << _target << " created using " << getName() << std::endl;
 }
@@ -29,14 +29,14 @@ RobotomyRequestForm::~RobotomyRequestForm()
 
 }
 
-RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &other) : Form(other), _target(other._target)
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &other) : AForm(other), _target(other._target)
 {
 	
 }
 
-RobotomyRequestForm &RobotomyRequestForm::operator=(const RobotomyRequestForm &other) //should i copy the _target too?
+RobotomyRequestForm &RobotomyRequestForm::operator=(const RobotomyRequestForm &other)
 {
-	Form::operator=(other);
+	AForm::operator=(other);
 	return (*this);
 }
 
