@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   Intern.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:11:15 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/10/28 08:30:01 by codespace        ###   ########.fr       */
+/*   Updated: 2024/10/28 10:24:49 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 #include "AForm.hpp"
 
-class Intern : public AForm
+class Intern
 {
 	private:
 
@@ -23,5 +23,11 @@ class Intern : public AForm
 		Intern(const Intern &other);
 		Intern &operator=(const Intern &other);
 		
-		AForm	*makeForm(const std::string nmf, const std::string target);
+		AForm	*makeForm(const std::string form_nm, const std::string target);
+		class NoFormType : public std::exception
+		{
+			public:
+				const char *what() const throw();
+		};	
 };
+
