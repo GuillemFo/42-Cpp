@@ -87,14 +87,33 @@ void	ScalarConverter::convert(const std::string &str)
 	{
 		if (str.length() == 1)
 			isChar(str[0]);
-		else if ()
-			isInt(); 
+		else if (ckInt(tmp))	//find a way to pass stringstream as a parameter.
+			isInt(); 			//use stringstream >> to convert and look for issues with the .fail, if fail, print non convertible and reset the fail status with .clear()
 		else if	()
 			isFloat();
 		else if ()
 			isDouble();		
 	}
 }
+
+bool	ckInt(std::stringstream tmp)
+{
+
+
+}
+
+bool	ckFlo(std::stringstream tmp)
+{
+
+	
+}
+
+bool	ckDou(std::stringstream tmp)
+{
+
+
+}
+
 
 void	isChar(char c)
 {
@@ -107,7 +126,15 @@ void	isChar(char c)
 	std::cout << "double: " << static_cast<double>(c) << std::endl;
 }
 
-void	isInt(int)
+void	isInt(int i)
 {
-
+	if ((i >= 0 && i <= 255) && isprint(i) != 0)
+	{
+		std::cout << "char: " << i << std::endl;
+	}
+	else
+		std::cout << "char: " << "Non displayable" << std::endl;
+	std::cout << "int: " << i << std::endl;
+	std::cout << "float: " << static_cast<float>(i) << std::endl;
+	std::cout << "double: " << static_cast<double>(i) << std::endl;
 }
