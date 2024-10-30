@@ -42,12 +42,12 @@ void	ScalarConverter::convert(const std::string in)
 
 int	WhatIs()
 {
-	
+	//guess the number of bits?
 }
 
 char	toChar()
 {
-
+	
 }
 
 int	toInt()
