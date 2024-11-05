@@ -35,7 +35,6 @@ ScalarConverter &ScalarConverter::operator=(const ScalarConverter &other)
 
 void	ScalarConverter::convert(const std::string &str)
 {
-	std::stringstream tmp(str);
 	int		iVal;
 	float	fVal;
 	double	dVal;
@@ -87,32 +86,40 @@ void	ScalarConverter::convert(const std::string &str)
 	{
 		if (str.length() == 1)
 			isChar(str[0]);
-		else if (ckInt(tmp))	//find a way to pass stringstream as a parameter.
-			isInt(); 			//use stringstream >> to convert and look for issues with the .fail, if fail, print non convertible and reset the fail status with .clear()
-		else if	()
-			isFloat();
-		else if ()
-			isDouble();		
+		else if (ckInt(str))	
+			isInt(str); 			//use stringstream >> to convert and look for issues with the .fail, if fail, print non convertible and reset the fail status with .clear()
+		// else if	()
+		// 	isFloat();
+		// else if ()	//stof
+		// 	isDouble();	//stod	
 	}
 }
 
-bool	ckInt(std::stringstream tmp)
+bool	ckInt(const std::string str)
 {
+	std::stringstream tmp(str);
+	int result;
 
-
+	tmp >> result;
+	if (tmp.fail() || !tmp.eof())
+	{
+		std::cout << "Error loading stringstream" << std::endl;
+		return (false);
+	}
+	return (true);
 }
 
-bool	ckFlo(std::stringstream tmp)
-{
+// bool	ckFlo(std::string tmp) //check if it has a f at the end
+// {
 
 	
-}
+// }
 
-bool	ckDou(std::stringstream tmp)
-{
+// bool	ckDou(std::stringstream tmp) //check if it has a . somewhere after a number and that has numbers after + no f at the end.
+// {
 
 
-}
+// }
 
 
 void	isChar(char c)
@@ -121,19 +128,16 @@ void	isChar(char c)
 		std::cout << "char: " << c << std::endl;
 	else
 		std::cout << "char: " << "Non displayable" << std::endl;
-	std::cout << "int: " << static_cast<int>(c) << std::endl;
-	std::cout << "float: " << static_cast<float>(c) << std::endl;
-	std::cout << "double: " << static_cast<double>(c) << std::endl;
+
 }
 
-void	isInt(int i)
+void	isInt(const std::string str)
 {
-	if ((i >= 0 && i <= 255) && isprint(i) != 0)
-	{
-		std::cout << "char: " << i << std::endl;
-	}
-	else
-		std::cout << "char: " << "Non displayable" << std::endl;
+	std::string tmp(str);
+	int i;
+
+	if (i >= 0 && i <= 255)
+		isChar(static_cast<char>(i));
 	std::cout << "int: " << i << std::endl;
 	std::cout << "float: " << static_cast<float>(i) << std::endl;
 	std::cout << "double: " << static_cast<double>(i) << std::endl;
