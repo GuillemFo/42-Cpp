@@ -88,7 +88,7 @@ void	ScalarConverter::convert(const std::string &str)
 			isChar(str[0]);
 		else if (ckInt(str))	
 			isInt(str); 			//use stringstream >> to convert and look for issues with the .fail, if fail, print non convertible and reset the fail status with .clear()
-		// else if	()
+		// else if	(ckFlo)
 		// 	isFloat();
 		// else if ()	//stof
 		// 	isDouble();	//stod	
@@ -109,11 +109,15 @@ bool	ckInt(const std::string str)
 	return (true);
 }
 
-// bool	ckFlo(std::string tmp) //check if it has a f at the end
-// {
-
+bool	ckFlo(const std::string tmp) //check if it has a f at the end
+{
+	size_t pos = tmp.find(".", 0);
+	if ((pos != 0 || pos != -1) && (pos != tmp.length() || tmp.length() -1))
 	
-// }
+	if (tmp.find_first_of("f", 0) == tmp.find_last_of("f", 0))
+		return (true);
+	
+}
 
 // bool	ckDou(std::stringstream tmp) //check if it has a . somewhere after a number and that has numbers after + no f at the end.
 // {
