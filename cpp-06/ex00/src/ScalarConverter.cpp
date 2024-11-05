@@ -135,9 +135,11 @@ void	isInt(const std::string str)
 {
 	std::string tmp(str);
 	int i;
-
+	i = atoi(tmp.c_str());
 	if (i >= 0 && i <= 255)
 		isChar(static_cast<char>(i));
+	else
+		std::cout << "char: " << "Non displayable" << std::endl;	
 	std::cout << "int: " << i << std::endl;
 	std::cout << "float: " << static_cast<float>(i) << std::endl;
 	std::cout << "double: " << static_cast<double>(i) << std::endl;
