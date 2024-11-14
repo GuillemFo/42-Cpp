@@ -113,9 +113,11 @@ bool	ckFlo(const std::string tmp) //check if it has a f at the end
 {
 	size_t pos = tmp.find(".", 0);
 	if ((pos != 0 || pos != -1) && (pos != tmp.length() || tmp.length() -1))
-	
-	if (tmp.find_first_of("f", 0) == tmp.find_last_of("f", 0))
-		return (true);
+	{
+		if (tmp.find_first_of("f", 0) == tmp.find_last_of("f", 0) && (tmp.length() - 1 == tmp.find_first_of("f", 0)))	//the f cannot be in between, it has to always be the last char of the string
+			return (true);
+	}
+	return (false);
 	
 }
 
