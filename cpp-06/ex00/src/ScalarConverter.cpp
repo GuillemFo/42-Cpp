@@ -33,6 +33,14 @@ ScalarConverter &ScalarConverter::operator=(const ScalarConverter &other)
 	return (*this);
 }
 
+
+std::string	rm_Const(const std::string &str)
+{
+	std::string ret = str;
+	return (ret);
+}
+
+
 void	ScalarConverter::convert(const std::string &str)
 {
 	int		iVal;
@@ -40,7 +48,7 @@ void	ScalarConverter::convert(const std::string &str)
 	double	dVal;
 	char	cVal;
 
-	if (str == "-inff")
+	if (str == "-inff")	//check with cmath isinf and so...
 	{
 		std::cout << "char: " << "impossible" << std::endl;
 		std::cout << "int: " << "impossible" << std::endl;
@@ -109,13 +117,21 @@ bool	ckInt(const std::string str)
 	return (true);
 }
 
-bool	ckFlo(const std::string tmp) //check if it has a f at the end
+bool	ckFlo(const std::string str) //check if it has a f at the end // think if its necessary to check if it contains a '.' at some point to be 'f' type or not
 {
-	size_t pos = tmp.find(".", 0);
-	if ((pos != 0 || pos != -1) && (pos != tmp.length() || tmp.length() -1))
+	float result;
+	if (str.find_first_of('f') == str.find_last_of('f') && str.find_first_of('f') == str.length())
 	{
-		if (tmp.find_first_of("f", 0) == tmp.find_last_of("f", 0) && (tmp.length() - 1 == tmp.find_first_of("f", 0)))	//the f cannot be in between, it has to always be the last char of the string
-			return (true);
+		std::string hold = rm_Const(str); //workable
+		hold.resize(hold.length() -1); // removes last char from string which should be f
+		std::stringstream tmp(hold); //workable to push it to float type
+		tmp >> result;	//trying to change it
+		if (tmp.fail() || !tmp.eof())	//if fails print non displayable, perform a .clear() and exec double?
+		{
+			std::cout << "Error loading stringstream" << std::endl;
+			return (false);
+		}
+		return (true);
 	}
 	return (false);
 	
