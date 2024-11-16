@@ -54,7 +54,7 @@ bool	ckInt(const std::string &str)
 	return (true);
 }
 
-bool	ckFlo(const std::string &str) // -.1f should not work!!! ISSUES HERE
+bool	ckFlo(const std::string &str)
 {
 	float result;
 	if (str == "-inff" || str == "+inff" || str == "nanf")
@@ -69,7 +69,7 @@ bool	ckFlo(const std::string &str) // -.1f should not work!!! ISSUES HERE
 		}
 		if (str.find_first_of('f') == str.find_last_of('f') && str.find_first_of('f') == (str.length() -1))
 		{
-			std::string hold = str; //workable
+			std::string hold = str;
 			hold.resize(hold.length() -1);
 			std::stringstream tmp(hold);
 			tmp >> result;
@@ -84,12 +84,12 @@ bool	ckFlo(const std::string &str) // -.1f should not work!!! ISSUES HERE
 	return (false);
 }
 
-bool	ckDou(const std::string &str)	// -1. should not work!!! ISSUES HERE
+bool	ckDou(const std::string &str)
 {
 	double result;
 	if (str == "-inf" || str == "+inf" || str == "nan")
 		return (true);
-	else if (str[0] != '.' && (str.length() -1) != '.')	//idea: str.findfirstof . and check before and after if its a number??
+	else if (str[0] != '.' && (str.length() -1) != '.')
 	{
 		size_t a = str.find_first_of('.');
 		if (a != std::string::npos)
@@ -97,7 +97,7 @@ bool	ckDou(const std::string &str)	// -1. should not work!!! ISSUES HERE
 			if (!(a > 0 && std::isdigit(str[a - 1])) || !(a < str.size() - 1 && std::isdigit(str[a + 1])))
 				return (false);
 		}
-		std::stringstream tmp(str); //workable to push it to double type
+		std::stringstream tmp(str);
 		tmp >> result;
 		if (tmp.fail() || !tmp.eof())
 		{
