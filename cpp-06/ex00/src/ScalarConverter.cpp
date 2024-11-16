@@ -59,14 +59,18 @@ bool	ckFlo(const std::string &str) // -.1f should not work!!! ISSUES HERE
 	float result;
 	if (str == "-inff" || str == "+inff" || str == "nanf")
         return (true);
-	else if (str[0] != '.')
+	else if (str[0] != '.' && (str.length() -1) != '.')
 	{
-		if ((str[0] == '-' && str[1] == '.'))	//idea: str.findfirstof . and check before and after if its a number??
-			return (false);
-		else if ((str.find_first_of('.') != str.length() -2) && str.find_first_of('f') == str.find_last_of('f') && str.find_first_of('f') == (str.length() -1))
+		size_t a = str.find_first_of('.');
+		if (a != std::string::npos)
+		{
+			if (!(a > 0 && std::isdigit(str[a - 1])) || !(a < str.size() - 1 && std::isdigit(str[a + 1])))
+				return (false);
+		}
+		if (str.find_first_of('f') == str.find_last_of('f') && str.find_first_of('f') == (str.length() -1))
 		{
 			std::string hold = str; //workable
-			hold.resize(hold.length() -1); // removes last char from string which should be f
+			hold.resize(hold.length() -1);
 			std::stringstream tmp(hold);
 			tmp >> result;
 			if (tmp.fail() || !tmp.eof())
@@ -87,8 +91,12 @@ bool	ckDou(const std::string &str)	// -1. should not work!!! ISSUES HERE
 		return (true);
 	else if (str[0] != '.' && (str.length() -1) != '.')	//idea: str.findfirstof . and check before and after if its a number??
 	{
-		if ((str[0] == '-' && str[1] == '.'))
-			return (false);
+		size_t a = str.find_first_of('.');
+		if (a != std::string::npos)
+		{
+			if (!(a > 0 && std::isdigit(str[a - 1])) || !(a < str.size() - 1 && std::isdigit(str[a + 1])))
+				return (false);
+		}
 		std::stringstream tmp(str); //workable to push it to double type
 		tmp >> result;
 		if (tmp.fail() || !tmp.eof())
