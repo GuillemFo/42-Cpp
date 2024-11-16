@@ -54,24 +54,26 @@ bool	ckInt(const std::string &str)
 	return (true);
 }
 
-bool	ckFlo(const std::string &str) // 1.f should not work!!! ISSUES HERE
+bool	ckFlo(const std::string &str) // -.1f should not work!!! ISSUES HERE
 {
 	float result;
 	if (str == "-inff" || str == "+inff" || str == "nanf")
         return (true);
-	else if (str.find_first_of('f') == str.find_last_of('f') && str.find_first_of('f') == (str.length() -1) && (str.length() -2)!= '.')
+	else if ((str[0] != '.') || (str[0] == '-' && str[1] != '.')) // shit checker also has to be applied to ckDou
 	{
-		std::string hold = str; //workable
-		hold.resize(hold.length() -1); // removes last char from string which should be f
-		std::cout << "aaa:" << hold << ":" << std::endl;
-		std::stringstream tmp(hold);
-		tmp >> result;
-		if (tmp.fail() || !tmp.eof())
+		if ((str.find_first_of('.') != str.length() -2) && str.find_first_of('f') == str.find_last_of('f') && str.find_first_of('f') == (str.length() -1))
 		{
-			tmp.clear();
-			return (false);
+			std::string hold = str; //workable
+			hold.resize(hold.length() -1); // removes last char from string which should be f
+			std::stringstream tmp(hold);
+			tmp >> result;
+			if (tmp.fail() || !tmp.eof())
+			{
+				tmp.clear();
+				return (false);
+			}
+			return (true);
 		}
-		return (true);
 	}
 	return (false);
 }
@@ -81,14 +83,18 @@ bool	ckDou(const std::string &str)
 	double result;
 	if (str == "-inf" || str == "+inf" || str == "nan")
 		return (true);
-	std::stringstream tmp(str); //workable to push it to double type
-	tmp >> result;
-	if (tmp.fail() || !tmp.eof())
+	if ((str[0] != '.') || (str[0] == '-' && str[1] != '.')) // shit checker also has to be applied to ckFlo
 	{
-		tmp.clear();
-		return (false);
+		std::stringstream tmp(str); //workable to push it to double type
+		tmp >> result;
+		if (tmp.fail() || !tmp.eof())
+		{
+			tmp.clear();
+			return (false);
+		}
+		return (true);
 	}
-	return (true);
+	return (false);
 }
 
 char    getType(const std::string &str)
