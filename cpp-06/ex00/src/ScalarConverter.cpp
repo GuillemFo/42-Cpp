@@ -34,13 +34,6 @@ ScalarConverter &ScalarConverter::operator=(const ScalarConverter &other)
 }
 
 
-std::string	rm_Const(const std::string &str)
-{
-	std::string ret = str;
-	return (ret);
-}
-
-
 void	ScalarConverter::convert(const std::string &str)
 {
 	int		iVal;
@@ -96,8 +89,8 @@ void	ScalarConverter::convert(const std::string &str)
 			isChar(str[0]);
 		else if (ckInt(str))	
 			isInt(str); 			//use stringstream >> to convert and look for issues with the .fail, if fail, print non convertible and reset the fail status with .clear()
-		// else if	(ckFlo)
-		// 	isFloat();
+		else if	(ckFlo)
+			isFloat(str);
 		// else if ()	//stof
 		// 	isDouble();	//stod	
 	}
@@ -122,11 +115,9 @@ bool	ckFlo(const std::string str) //check if it has a f at the end // think if i
 	float result;
 	if (str.find_first_of('f') == str.find_last_of('f') && str.find_first_of('f') == str.length())
 	{
-		std::string hold = rm_Const(str); //workable
-		hold.resize(hold.length() -1); // removes last char from string which should be f
-		std::stringstream tmp(hold); //workable to push it to float type
+		std::stringstream tmp(str); //workable to push it to float type
 		tmp >> result;	//trying to change it
-		if (tmp.fail() || !tmp.eof())	//if fails print non displayable, perform a .clear() and exec double?
+		if (tmp.fail() || !tmp.eof())	//if fails print non displayable and perform a .clear()
 		{
 			std::cout << "Error loading stringstream" << std::endl;
 			return (false);
@@ -144,11 +135,17 @@ bool	ckFlo(const std::string str) //check if it has a f at the end // think if i
 // }
 
 
+void	isFloat(std::string str)
+{
+	
+
+}
+
 void	isChar(char c)
 {
 	if (isprint(c) != 0)
 		std::cout << "char: " << c << std::endl;
-	else
+	else											// might not be necessary due prints in other places.
 		std::cout << "char: " << "Non displayable" << std::endl;
 
 }
@@ -163,6 +160,6 @@ void	isInt(const std::string str)
 	else
 		std::cout << "char: " << "Non displayable" << std::endl;	
 	std::cout << "int: " << i << std::endl;
-	std::cout << "float: " << static_cast<float>(i) << std::endl;
+	std::cout << "float: " << static_cast<float>(i) << "f" << std::endl;
 	std::cout << "double: " << static_cast<double>(i) << std::endl;
 }
