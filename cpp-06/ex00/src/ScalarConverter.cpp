@@ -34,69 +34,13 @@ ScalarConverter &ScalarConverter::operator=(const ScalarConverter &other)
 }
 
 
-void	ScalarConverter::convert(const std::string &str)
+bool	ckCha(const std::string &str)
 {
-	int		iVal;
-	float	fVal;
-	double	dVal;
-	char	cVal;
-
-	if (str == "-inff")	//check with cmath isinf and so...
-	{
-		std::cout << "char: " << "impossible" << std::endl;
-		std::cout << "int: " << "impossible" << std::endl;
-		std::cout << "float: " << "-inff" << std::endl;
-		std::cout << "double: " << "-inf" << std::endl;
-	}
-	else if (str == "+inff")
-	{
-		std::cout << "char: " << "impossible" << std::endl;
-		std::cout << "int: " << "impossible" << std::endl;
-		std::cout << "float: " << "+inff" << std::endl;
-		std::cout << "double: " << "+inf" << std::endl;
-	}
-	else if (str == "nanf")
-	{
-		std::cout << "char: " << "impossible" << std::endl;
-		std::cout << "int: " << "impossible" << std::endl;
-		std::cout << "float: " << "nanf" << std::endl;
-		std::cout << "double: " << "nan" << std::endl;
-	}
-	else if (str == "-inf")
-	{
-		std::cout << "char: " << "impossible" << std::endl;
-		std::cout << "int: " << "impossible" << std::endl;
-		std::cout << "float: " << "impossible" << std::endl;
-		std::cout << "double: " << "-inf" << std::endl;
-	}
-	else if (str == "+inf")
-	{
-		std::cout << "char: " << "impossible" << std::endl;
-		std::cout << "int: " << "impossible" << std::endl;
-		std::cout << "float: " << "impossible" << std::endl;
-		std::cout << "double: " << "+inf" << std::endl;
-	}
-	else if (str == "nan")
-	{
-		std::cout << "char: " << "impossible" << std::endl;
-		std::cout << "int: " << "impossible" << std::endl;
-		std::cout << "float: " << "nanf" << std::endl;
-		std::cout << "double: " << "nan" << std::endl;
-	}
-	else
-	{
-		if (str.length() == 1)
-			isChar(str[0]);
-		else if (ckInt(str))	
-			isInt(str); 			//use stringstream >> to convert and look for issues with the .fail, if fail, print non convertible and reset the fail status with .clear()
-		else if	(ckFlo)
-			isFloat(str);
-		// else if ()	//stof
-		// 	isDouble();	//stod	
-	}
+	if (str.length() == 1 && isprint(str[0]))
+		return (true);
+	return (false);
 }
-
-bool	ckInt(const std::string str)
+bool	ckInt(const std::string &str)
 {
 	std::stringstream tmp(str);
 	int result;
@@ -104,62 +48,74 @@ bool	ckInt(const std::string str)
 	tmp >> result;
 	if (tmp.fail() || !tmp.eof())
 	{
-		std::cout << "Error loading stringstream" << std::endl;
+		tmp.clear();
 		return (false);
 	}
 	return (true);
 }
 
-bool	ckFlo(const std::string str) //check if it has a f at the end // think if its necessary to check if it contains a '.' at some point to be 'f' type or not
+bool	ckFlo(const std::string &str) // 1.f should not work!!! ISSUES HERE
 {
 	float result;
-	if (str.find_first_of('f') == str.find_last_of('f') && str.find_first_of('f') == str.length())
+	if (str == "-inff" || str == "+inff" || str == "nanf")
+        return (true);
+	else if (str.find_first_of('f') == str.find_last_of('f') && str.find_first_of('f') == (str.length() -1) && (str.length() -2)!= '.')
 	{
-		std::stringstream tmp(str); //workable to push it to float type
-		tmp >> result;	//trying to change it
-		if (tmp.fail() || !tmp.eof())	//if fails print non displayable and perform a .clear()
+		std::string hold = str; //workable
+		hold.resize(hold.length() -1); // removes last char from string which should be f
+		std::cout << "aaa:" << hold << ":" << std::endl;
+		std::stringstream tmp(hold);
+		tmp >> result;
+		if (tmp.fail() || !tmp.eof())
 		{
-			std::cout << "Error loading stringstream" << std::endl;
+			tmp.clear();
 			return (false);
 		}
 		return (true);
 	}
 	return (false);
-	
 }
 
-// bool	ckDou(std::stringstream tmp) //check if it has a . somewhere after a number and that has numbers after + no f at the end.
-// {
-
-
-// }
-
-
-void	isFloat(std::string str)
+bool	ckDou(const std::string &str)
 {
-	
-
+	double result;
+	if (str == "-inf" || str == "+inf" || str == "nan")
+		return (true);
+	std::stringstream tmp(str); //workable to push it to double type
+	tmp >> result;
+	if (tmp.fail() || !tmp.eof())
+	{
+		tmp.clear();
+		return (false);
+	}
+	return (true);
 }
 
-void	isChar(char c)
+char    getType(const std::string &str)
 {
-	if (isprint(c) != 0)
-		std::cout << "char: " << c << std::endl;
-	else											// might not be necessary due prints in other places.
-		std::cout << "char: " << "Non displayable" << std::endl;
-
+    if (ckInt(str))
+        return ('i');
+    else if (ckDou(str))
+        return ('d');
+    else if (ckFlo(str)) 
+        return ('f');
+    else if (ckCha(str))
+        return ('c');
+    return ('n');
 }
 
-void	isInt(const std::string str)
+void ScalarConverter::convert(const std::string& s)
 {
-	std::string tmp(str);
-	int i;
-	i = atoi(tmp.c_str());
-	if (i >= 0 && i <= 255)
-		isChar(static_cast<char>(i));
-	else
-		std::cout << "char: " << "Non displayable" << std::endl;	
-	std::cout << "int: " << i << std::endl;
-	std::cout << "float: " << static_cast<float>(i) << "f" << std::endl;
-	std::cout << "double: " << static_cast<double>(i) << std::endl;
+    char type = getType(s);
+
+	if (type == 'c')
+		std::cout << "is char" << std::endl;
+	else if (type == 'i')
+		std::cout << "is int" << std::endl;
+	else if (type == 'f')
+		std::cout << "is float" << std::endl;
+	else if (type == 'd')
+		std::cout << "is double" << std::endl;
+	else if (type == 'n')
+		std::cout << "is trash" << std::endl;
 }
