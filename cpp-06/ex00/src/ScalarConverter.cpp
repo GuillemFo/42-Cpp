@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 12:51:01 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/11/18 13:51:50 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/11/18 14:24:57 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,20 @@ bool	ckFlo(const std::string &str)
 	}
 	else
 	{
-		std::cout << "next step!!!" <<std::endl;
-		//proper protection for before the . and after the . to be a digit
+		if (res.length() > 0 && res[res.length() - 1] == 'f')
+			res.erase(res.length() - 1);
+		else 
+			return (false);
+		if (isdigit(res[(pos-1)]) && isdigit(res[(pos+1)]))
+		{
+			double	f;
+			char	*end;
+			f = std::strtod(res.c_str(), &end);
+			if (end == res.c_str() || *end != '\0' || f < FLOAT_MIN || f > std::numeric_limits<float>::max() || std::isnan(f))
+				return (false);
+			return (true);
+		}
+		return (false);
 	}
 
 	return (true);
@@ -140,7 +152,7 @@ void ScalarConverter::convert(const std::string &str)
 		else
 			std::cout << "char: " << "Non displayable" << std::endl;
 		std::cout << "int: " << static_cast<int>(num) << std::endl;
-		std::cout << std::fixed << std::setprecision(1); // forces cout to print full number instead of scientific notation
+		std::cout << std::fixed << std::setprecision(1);
 		std::cout << "float: " << std::setprecision(1) << static_cast<float>(num) << std::endl;
 		std::cout << "double: " << std::setprecision(1) << static_cast<double>(num) << std::endl;
 	}
@@ -158,9 +170,9 @@ void ScalarConverter::convert(const std::string &str)
 			std::cout << "double: " << tmp << std::endl;
 			return ;
 		}
-		double	d = 0.0;
+		float	d = 0.0;
 		char	*endp;
-		d = std::strtod(tmp.c_str(), &endp);
+		d = std::strtof(tmp.c_str(), &endp);
 		if (d <= 255 && d >= 0)
 		{
 			if (isprint(static_cast<int>(d)))
@@ -170,13 +182,13 @@ void ScalarConverter::convert(const std::string &str)
 		}
 		else
 			std::cout << "char: " << "Non displayable" << std::endl;
-		if (d <= INT_MAX && d >= INT_MIN)
+		if (d <= std::numeric_limits<int>::max() && d >= std::numeric_limits<int>::min())
 			std::cout << "int: " << static_cast<int>(d) << std::endl;
 		else
 			std::cout << "int: " "Non displayable" << std::endl;
-		std::cout << std::fixed << std::setprecision(1); // forces cout to print full number instead of scientific notation
-		std::cout << "float: " << std::setprecision(1) << static_cast<float>(d) << "f" << std::endl;
-		std::cout << "double: " << std::setprecision(1) << static_cast<double>(d) << std::endl;
+		std::cout << std::fixed << std::setprecision(4);
+		std::cout << "float: " << d << "f" << std::endl;
+		std::cout << "double: " << static_cast<double>(d) << std::endl;
 	}
 
 
@@ -203,13 +215,13 @@ void ScalarConverter::convert(const std::string &str)
 		}
 		else
 			std::cout << "char: " << "Non displayable" << std::endl;
-		if (d <= INT_MAX && d >= INT_MIN)
+		if (d <= std::numeric_limits<int>::max() && d >= std::numeric_limits<int>::min())
 			std::cout << "int: " << static_cast<int>(d) << std::endl;
 		else
 			std::cout << "int: " "Non displayable" << std::endl;
-		std::cout << std::fixed << std::setprecision(1); // forces cout to print full number instead of scientific notation
-		std::cout << "float: " << std::setprecision(1) << static_cast<float>(d) << "f" << std::endl;
-		std::cout << "double: " << std::setprecision(1) << static_cast<double>(d) << std::endl;
+		std::cout << std::fixed << std::setprecision(4);
+		std::cout << "float: " << static_cast<float>(d) << "f" << std::endl;
+		std::cout << "double: " << d << std::endl;
 	}
 
 	
