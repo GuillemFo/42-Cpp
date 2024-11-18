@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 12:51:01 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/11/18 13:16:03 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/11/18 13:51:50 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,25 +59,28 @@ bool	ckFlo(const std::string &str)
 		return (true);
 	if (str.empty())
 		return false;
-	size_t pos = str.find(".", 0);
-	if ((pos != 0) && (pos != str.length() && pos != (str.length() -1)))
+	std::string res = str;
+	size_t pos = str.find('.');
+	if (pos == std::string::npos) 
 	{
-		if (std::isdigit(str.at(pos -1)) && std::isdigit(str.at(pos +1)))
-		{
-			std::string res = str;
-			if (res.length() > 0 && res[res.length() - 1] == 'f')
-				res.erase(res.length() - 1);
-			else 
-				return (false);
-			double	f;
-			char	*end;
-			f = std::strtod(res.c_str(), &end);
-			if (end == res.c_str() || *end != '\0' || f < FLOAT_MIN || f > std::numeric_limits<float>::max() || std::isnan(f))
-				return (false);
-			return (true);
-		}
+		if (res.length() > 0 && res[res.length() - 1] == 'f')
+			res.erase(res.length() - 1);
+		else 
+			return (false);
+		double	f;
+		char	*end;
+		f = std::strtod(res.c_str(), &end);
+		if (end == res.c_str() || *end != '\0' || f < FLOAT_MIN || f > std::numeric_limits<float>::max() || std::isnan(f))
+			return (false);
+		return (true);
 	}
-	return (false);
+	else
+	{
+		std::cout << "next step!!!" <<std::endl;
+		//proper protection for before the . and after the . to be a digit
+	}
+
+	return (true);
 }
 
 bool	ckDou(const std::string &str)
@@ -86,20 +89,12 @@ bool	ckDou(const std::string &str)
 		return (true);
 	if (str.empty())
 		return (false);
-	size_t pos = str.find(".", 0);
-	if ((pos != 0) && (pos != str.length() && pos != (str.length() -1)))
-	{
-		if (std::isdigit(str.at(pos -1)) && std::isdigit(str.at(pos +1)))
-		{
-			double	d;
-			char	*end;
-			d = std::strtod(str.c_str(), &end);
-			if (end == str.c_str() || *end != '\0' || d == std::numeric_limits<double>::infinity() || d == -std::numeric_limits<double>::infinity() || std::isnan(d))
-				return (false);
-			return (true);
-		}
-	}
-	return (false);
+	double	d;
+	char	*end;
+	d = std::strtod(str.c_str(), &end);
+	if (end == str.c_str() || *end != '\0' || d == std::numeric_limits<double>::infinity() || d == -std::numeric_limits<double>::infinity() || std::isnan(d))
+		return (false);
+	return (true);
 }
 
 char	getType(const std::string &str)
@@ -166,7 +161,7 @@ void ScalarConverter::convert(const std::string &str)
 		double	d = 0.0;
 		char	*endp;
 		d = std::strtod(tmp.c_str(), &endp);
-		if (d <= 255 && d >= 0 && !str.find('.'))
+		if (d <= 255 && d >= 0)
 		{
 			if (isprint(static_cast<int>(d)))
 				std::cout << "char: " << static_cast<char>(d) << std::endl;
