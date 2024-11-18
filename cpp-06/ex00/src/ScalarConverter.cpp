@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 12:51:01 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/11/18 14:37:07 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/11/18 15:01:23 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ void ScalarConverter::convert(const std::string &str)
 	if (type == 'c')
 	{
 		if (isprint(static_cast<int>(str[0])))
-			std::cout << "char: " << static_cast<char>(str.at(0)) << std::endl;
+			std::cout << "char: '" << str.at(0) << "'" << std::endl;
 		else
 			std::cout << "char: " << "Non displayable" << std::endl;
 		std::cout << "int: " << static_cast<int>(str.at(0)) << std::endl;
@@ -145,7 +145,7 @@ void ScalarConverter::convert(const std::string &str)
 		if (num <= 255 && num >= 0)
 		{
 			if (isprint(num))
-				std::cout << "char: " << static_cast<char>(num) << std::endl;
+				std::cout << "char: '" << static_cast<char>(num) << "'" << std::endl;
 			else
 				std::cout << "char: " << "Non displayable" << std::endl;
 		}
@@ -153,7 +153,7 @@ void ScalarConverter::convert(const std::string &str)
 			std::cout << "char: " << "Non displayable" << std::endl;
 		std::cout << "int: " << static_cast<int>(num) << std::endl;
 		std::cout << std::fixed << std::setprecision(1);
-		std::cout << "float: " << std::setprecision(1) << static_cast<float>(num) << std::endl;
+		std::cout << "float: " << std::setprecision(1) << static_cast<float>(num) << "f" << std::endl;
 		std::cout << "double: " << std::setprecision(1) << static_cast<double>(num) << std::endl;
 	}
 
@@ -176,7 +176,7 @@ void ScalarConverter::convert(const std::string &str)
 		if (d <= 255 && d >= 0)
 		{
 			if (isprint(static_cast<int>(d)))
-				std::cout << "char: " << static_cast<char>(d) << std::endl;
+				std::cout << "char: '" << static_cast<char>(d) << "'" << std::endl;
 			else
 				std::cout << "char: " << "Non displayable" << std::endl;
 		}
@@ -186,7 +186,7 @@ void ScalarConverter::convert(const std::string &str)
 			std::cout << "int: " << static_cast<int>(d) << std::endl;
 		else
 			std::cout << "int: " "Non displayable" << std::endl;
-		std::cout << std::fixed << std::setprecision(4);
+		std::cout << std::fixed << std::setprecision(1);
 		std::cout << "float: " << d << "f" << std::endl;
 		std::cout << "double: " << static_cast<double>(d) << std::endl;
 	}
@@ -209,7 +209,7 @@ void ScalarConverter::convert(const std::string &str)
 		if (d <= 255 && d >= 0 && !str.find('.'))
 		{
 			if (isprint(static_cast<int>(d)))
-				std::cout << "char: " << static_cast<char>(d) << std::endl;
+				std::cout << "char: '" << static_cast<char>(d) << "'" << std::endl;
 			else
 				std::cout << "char: " << "Non displayable" << std::endl;
 		}
@@ -219,7 +219,7 @@ void ScalarConverter::convert(const std::string &str)
 			std::cout << "int: " << static_cast<int>(d) << std::endl;
 		else
 			std::cout << "int: " "Non displayable" << std::endl;
-		std::cout << std::fixed << std::setprecision(4);
+		std::cout << std::fixed << std::setprecision(1);
 		std::cout << "float: " << static_cast<float>(d) << "f" << std::endl;
 		std::cout << "double: " << d << std::endl;
 	}
