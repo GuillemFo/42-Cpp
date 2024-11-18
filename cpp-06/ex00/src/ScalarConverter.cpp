@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 12:51:01 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/11/18 12:36:43 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/11/18 13:16:03 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,24 +53,31 @@ bool	ckInt(const std::string &str)
 }
 
 
-bool	ckFlo(const std::string &s)
+bool	ckFlo(const std::string &str)
 {
-	if (s == "-inff" || s == "+inff" || s == "nanf")
+	if (str == "-inff" || str == "+inff" || str == "nanf")
 		return (true);
-	if (s.empty())
+	if (str.empty())
 		return false;
-	std::string res = s;
-	if (res.length() > 0 && res[res.length() - 1] == 'f')
-		res.erase(res.length() - 1);
-	else 
-		return (false);
-	double f;
-	char* end;
-	f = std::strtod(res.c_str(), &end);
-	if (end == res.c_str() || *end != '\0' || f < FLOAT_MIN || 
-		f > std::numeric_limits<float>::max() || std::isnan(f))
-		return (false);
-	return (true);
+	size_t pos = str.find(".", 0);
+	if ((pos != 0) && (pos != str.length() && pos != (str.length() -1)))
+	{
+		if (std::isdigit(str.at(pos -1)) && std::isdigit(str.at(pos +1)))
+		{
+			std::string res = str;
+			if (res.length() > 0 && res[res.length() - 1] == 'f')
+				res.erase(res.length() - 1);
+			else 
+				return (false);
+			double	f;
+			char	*end;
+			f = std::strtod(res.c_str(), &end);
+			if (end == res.c_str() || *end != '\0' || f < FLOAT_MIN || f > std::numeric_limits<float>::max() || std::isnan(f))
+				return (false);
+			return (true);
+		}
+	}
+	return (false);
 }
 
 bool	ckDou(const std::string &str)
@@ -79,13 +86,20 @@ bool	ckDou(const std::string &str)
 		return (true);
 	if (str.empty())
 		return (false);
-	double	d;
-	char	*end;
-	d = std::strtod(str.c_str(), &end);
-	if (end == str.c_str() || *end != '\0' || d == std::numeric_limits<double>::infinity()
-		|| d == -std::numeric_limits<double>::infinity() || std::isnan(d))
-		return (false);
-	return (true);
+	size_t pos = str.find(".", 0);
+	if ((pos != 0) && (pos != str.length() && pos != (str.length() -1)))
+	{
+		if (std::isdigit(str.at(pos -1)) && std::isdigit(str.at(pos +1)))
+		{
+			double	d;
+			char	*end;
+			d = std::strtod(str.c_str(), &end);
+			if (end == str.c_str() || *end != '\0' || d == std::numeric_limits<double>::infinity() || d == -std::numeric_limits<double>::infinity() || std::isnan(d))
+				return (false);
+			return (true);
+		}
+	}
+	return (false);
 }
 
 char	getType(const std::string &str)
@@ -125,6 +139,8 @@ void ScalarConverter::convert(const std::string &str)
 		{
 			if (isprint(num))
 				std::cout << "char: " << static_cast<char>(num) << std::endl;
+			else
+				std::cout << "char: " << "Non displayable" << std::endl;
 		}
 		else
 			std::cout << "char: " << "Non displayable" << std::endl;
@@ -147,33 +163,61 @@ void ScalarConverter::convert(const std::string &str)
 			std::cout << "double: " << tmp << std::endl;
 			return ;
 		}
-		/*
-		if (isprint(static_cast<int>()))
-			std::cout << "char: " << static_cast<char>() << std::endl;
+		double	d = 0.0;
+		char	*endp;
+		d = std::strtod(tmp.c_str(), &endp);
+		if (d <= 255 && d >= 0 && !str.find('.'))
+		{
+			if (isprint(static_cast<int>(d)))
+				std::cout << "char: " << static_cast<char>(d) << std::endl;
+			else
+				std::cout << "char: " << "Non displayable" << std::endl;
+		}
 		else
 			std::cout << "char: " << "Non displayable" << std::endl;
-		std::cout << "int: " << static_cast<int>() << std::endl;
-		std::cout << "float: " << static_cast<float>() << "f" << std::endl;
-		std::cout << "double: " << tmp << std::endl;
-		*/
-		std::cout << "Is Float" << std::endl;
+		if (d <= INT_MAX && d >= INT_MIN)
+			std::cout << "int: " << static_cast<int>(d) << std::endl;
+		else
+			std::cout << "int: " "Non displayable" << std::endl;
+		std::cout << std::fixed << std::setprecision(1); // forces cout to print full number instead of scientific notation
+		std::cout << "float: " << std::setprecision(1) << static_cast<float>(d) << "f" << std::endl;
+		std::cout << "double: " << std::setprecision(1) << static_cast<double>(d) << std::endl;
 	}
 
 
 	else if (type == 'd')
 	{
+		std::string tmp = str;
 		if (str == "-inf" || str == "+inf" || str == "nan")
 		{
 			std::cout << "char: impossible" << std::endl;
 			std::cout << "int: impossible" << std::endl;
-			std::cout << "float: " << str << "f" << std::endl;
-			std::cout << "double: " << str << std::endl;
+			std::cout << "float: " << tmp << "f" << std::endl;
+			std::cout << "double: " << tmp << std::endl;
 			return ;
 		}
-		std::cout << "is double" << std::endl;
+		double	d = 0.0;
+		char	*endp;
+		d = std::strtod(tmp.c_str(), &endp);
+		if (d <= 255 && d >= 0 && !str.find('.'))
+		{
+			if (isprint(static_cast<int>(d)))
+				std::cout << "char: " << static_cast<char>(d) << std::endl;
+			else
+				std::cout << "char: " << "Non displayable" << std::endl;
+		}
+		else
+			std::cout << "char: " << "Non displayable" << std::endl;
+		if (d <= INT_MAX && d >= INT_MIN)
+			std::cout << "int: " << static_cast<int>(d) << std::endl;
+		else
+			std::cout << "int: " "Non displayable" << std::endl;
+		std::cout << std::fixed << std::setprecision(1); // forces cout to print full number instead of scientific notation
+		std::cout << "float: " << std::setprecision(1) << static_cast<float>(d) << "f" << std::endl;
+		std::cout << "double: " << std::setprecision(1) << static_cast<double>(d) << std::endl;
 	}
 
 	
 	else if (type == 'n')
-		std::cout << "is trash" << std::endl;
+		std::cout << "Please, enter a valid value" << std::endl;
 }
