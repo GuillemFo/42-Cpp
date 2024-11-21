@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 15:07:44 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/11/18 15:21:23 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/11/21 11:35:04 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,16 @@
 
 typedef struct Data
 {
-	char c;
-}	Data;
+	int					my_Num;
+	char				my_Char;
+	float				my_Float;
+	double				my_Double;
+	long int			*my_LInt_ptr;
+	unsigned long int	my_ULInt;
+	uintptr_t			*my_UintPtr_T_ptr;
+	uint64_t			my_Uint64_T;
+	long double			my_LDouble;
+}						Data;
 
 class Serializer
 {
@@ -29,8 +37,8 @@ class Serializer
 		~Serializer();
 		Serializer &operator=(const Serializer &other);
 	public:
-		static uintptr_t serialize(Data* ptr);
-		static Data* deserialize(uintptr_t raw);
+		static uintptr_t	serialize(Data *ptr);
+		static Data			*deserialize(uintptr_t raw);
 		
 
 };
