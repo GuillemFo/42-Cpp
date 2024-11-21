@@ -6,13 +6,13 @@
 #    By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/30 08:52:23 by gforns-s          #+#    #+#              #
-#    Updated: 2024/11/18 15:27:18 by gforns-s         ###   ########.fr        #
+#    Updated: 2024/11/21 12:32:08 by gforns-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = real_type
 
-SRC = main.cpp ScalarConverter.cpp
+SRC = main.cpp Base.cpp
 
 SRC_P = src/
 
