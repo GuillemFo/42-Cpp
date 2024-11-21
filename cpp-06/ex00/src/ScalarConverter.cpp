@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 12:51:01 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/11/21 10:24:23 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/11/21 10:28:33 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ bool	ckFlo(const std::string &str)
 	double	f;
 	char	*endp;
 	f = std::strtod(res.c_str(), &endp);
-	if (endp == str.c_str() && *endp != '\0')
+	if (endp == str.c_str() && *endp != '\0')	//check if strtod was ok
 		return (false);
 	if ((std::isnan(f) || std::isinf(f)) && (endp != str.c_str() && *endp == '\0'))
 		return (true);
@@ -79,7 +79,7 @@ bool	ckDou(const std::string &str)
 	double	d;
 	char	*endp;
 	d = std::strtod(str.c_str(), &endp);
-	if (endp == str.c_str() && *endp != '\0')
+	if (endp == str.c_str() && *endp != '\0')	//check if strtod was ok
 		return (false);
 	if ((std::isnan(d) || std::isinf(d)) && (endp != str.c_str() && *endp == '\0'))
 		return (true);
@@ -196,7 +196,7 @@ void ScalarConverter::convert(const std::string &str)
 		}
 		else
 			std::cout << "char: " << "Non displayable" << std::endl;
-		if (d <= INT_MAX && d >= INT_MIN)
+		if (static_cast<int>(d) <= INT_MAX && static_cast<int>(d) >= INT_MIN)
 			std::cout << "int: " << static_cast<int>(d) << std::endl;
 		else
 			std::cout << "int: " "Non displayable" << std::endl;
