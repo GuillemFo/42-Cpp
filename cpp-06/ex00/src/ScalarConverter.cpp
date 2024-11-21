@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 12:51:01 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/11/21 15:09:45 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/11/21 15:11:37 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ bool	ckInt(const std::string &str)
 	double	num;
 	char	*endp;
 	num = std::strtod(str.c_str(), &endp);
-	if (endp != str.c_str() || *endp == '\0' || std::isnan(num) || std::isinf(num))
+	if (endp == str.c_str() || *endp != '\0' || std::isnan(num) || std::isinf(num))
 		return (false);
 	if ((endp != str.c_str() || *endp == '\0') && (num >= INT_MIN && num <= INT_MAX))
 		return (true);
