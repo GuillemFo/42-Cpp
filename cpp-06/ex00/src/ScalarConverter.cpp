@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 12:51:01 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/11/21 09:40:05 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/11/21 10:24:23 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ bool	ckInt(const std::string &str)
 {
 	double	num;
 	char	*endp;
-	num = std::strtol(str.c_str(), &endp, 10);
+	num = std::strtod(str.c_str(), &endp);
 	if (std::isnan(num) || std::isinf(num))
 		return (false);
-	if (*endp == '\0' && num >= INT_MIN && num <= INT_MAX)
+	if (endp != str.c_str() && *endp == '\0' && (num >= INT_MIN && num <= INT_MAX))
 		return (true);
 	return (false);
 }
@@ -63,32 +63,36 @@ bool	ckFlo(const std::string &str)
 	else 
 		return (false);
 	double	f;
-	char	*end;
-	f = std::strtod(res.c_str(), &end);
-	if ((std::isnan(f) || std::isinf(f)) && (end != res.c_str() && *end == '\0'))
-		return (true);
-	if (end == res.c_str() || *end != '\0' || f > FLT_MAX || f < FLT_MIN)
+	char	*endp;
+	f = std::strtod(res.c_str(), &endp);
+	if (endp == str.c_str() && *endp != '\0')
 		return (false);
-	return (true);
+	if ((std::isnan(f) || std::isinf(f)) && (endp != str.c_str() && *endp == '\0'))
+		return (true);
+	if ((f >= FLT_MIN && f <= FLT_MAX) && (endp != str.c_str() && *endp == '\0'))
+		return (true);
+	return (false);
 }
 
 bool	ckDou(const std::string &str)
 {
 	double	d;
-	char	*end;
-	d = std::strtod(str.c_str(), &end);
-	if ((std::isnan(d) || std::isinf(d)) && (end != str.c_str() && *end == '\0'))
-		return (true);
-	if (end == str.c_str() || *end != '\0' || d > DBL_MAX || d < DBL_MIN)
+	char	*endp;
+	d = std::strtod(str.c_str(), &endp);
+	if (endp == str.c_str() && *endp != '\0')
 		return (false);
-	return (true);
+	if ((std::isnan(d) || std::isinf(d)) && (endp != str.c_str() && *endp == '\0'))
+		return (true);
+	if (d >= -DBL_MAX && d <= DBL_MAX && (endp != str.c_str() && *endp == '\0'))
+		return (true);
+	return (false);
 }
 
 char	getType(const std::string &str)
 {
 	if (str.empty())
 		return('n');
-	if (ckInt(str))
+	else if (ckInt(str))
 		return ('i');
 	else if (ckDou(str))
 		return ('d');
