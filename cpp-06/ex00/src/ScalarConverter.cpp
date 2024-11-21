@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 12:51:01 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/11/18 15:01:23 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/11/21 08:00:51 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ ScalarConverter &ScalarConverter::operator=(const ScalarConverter &other)
 
 bool	ckCha(const std::string &str)
 {
-	if (str.length() == 1 && isprint(str[0]))
+	if (str.length() == 1 && std::isprint(str[0]))
 		return (true);
 	return (false);
 }
@@ -47,7 +47,7 @@ bool	ckInt(const std::string &str)
 	const char	*tmp = str.c_str();
 	char	*endp;
 	num = std::strtol(tmp, &endp, 10);
-	if (*endp == '\0' && num >= std::numeric_limits<int>::min() && num <= std::numeric_limits<int>::max())
+	if (*endp == '\0' && num >= INT_MIN && num <= INT_MAX)
 		return (true);
 	return (false);
 }
@@ -70,7 +70,7 @@ bool	ckFlo(const std::string &str)
 		double	f;
 		char	*end;
 		f = std::strtod(res.c_str(), &end);
-		if (end == res.c_str() || *end != '\0' || f < FLOAT_MIN || f > std::numeric_limits<float>::max() || std::isnan(f))
+		if (end == res.c_str() || *end != '\0' || f < FLT_MIN || f > FLT_MAX || std::isnan(f))
 			return (false);
 		return (true);
 	}
@@ -80,12 +80,12 @@ bool	ckFlo(const std::string &str)
 			res.erase(res.length() - 1);
 		else 
 			return (false);
-		if (isdigit(res[(pos-1)]) && isdigit(res[(pos+1)]))
+		if (std::isdigit(res[(pos-1)]) && std::isdigit(res[(pos+1)]))
 		{
 			double	f;
 			char	*end;
 			f = std::strtod(res.c_str(), &end);
-			if (end == res.c_str() || *end != '\0' || f < FLOAT_MIN || f > std::numeric_limits<float>::max() || std::isnan(f))
+			if (end == res.c_str() || *end != '\0' || f < FLT_MIN || f > FLT_MAX || std::isnan(f))
 				return (false);
 			return (true);
 		}
@@ -104,7 +104,7 @@ bool	ckDou(const std::string &str)
 	double	d;
 	char	*end;
 	d = std::strtod(str.c_str(), &end);
-	if (end == str.c_str() || *end != '\0' || d == std::numeric_limits<double>::infinity() || d == -std::numeric_limits<double>::infinity() || std::isnan(d))
+	if (end == str.c_str() || *end != '\0' || d == std::numeric_limits<double>::infinity() || d == -std::numeric_limits<double>::infinity() || std::isnan(d)) // check max double with adecuated formulas!!
 		return (false);
 	return (true);
 }
@@ -128,7 +128,7 @@ void ScalarConverter::convert(const std::string &str)
 
 	if (type == 'c')
 	{
-		if (isprint(static_cast<int>(str[0])))
+		if (std::isprint(static_cast<int>(str[0])))
 			std::cout << "char: '" << str.at(0) << "'" << std::endl;
 		else
 			std::cout << "char: " << "Non displayable" << std::endl;
@@ -144,7 +144,7 @@ void ScalarConverter::convert(const std::string &str)
 		num = atoi(str.c_str());
 		if (num <= 255 && num >= 0)
 		{
-			if (isprint(num))
+			if (std::isprint(num))
 				std::cout << "char: '" << static_cast<char>(num) << "'" << std::endl;
 			else
 				std::cout << "char: " << "Non displayable" << std::endl;
@@ -175,7 +175,7 @@ void ScalarConverter::convert(const std::string &str)
 		d = std::strtof(tmp.c_str(), &endp);
 		if (d <= 255 && d >= 0)
 		{
-			if (isprint(static_cast<int>(d)))
+			if (std::isprint(static_cast<int>(d)))
 				std::cout << "char: '" << static_cast<char>(d) << "'" << std::endl;
 			else
 				std::cout << "char: " << "Non displayable" << std::endl;
@@ -208,7 +208,7 @@ void ScalarConverter::convert(const std::string &str)
 		d = std::strtod(tmp.c_str(), &endp);
 		if (d <= 255 && d >= 0 && !str.find('.'))
 		{
-			if (isprint(static_cast<int>(d)))
+			if (std::isprint(static_cast<int>(d)))
 				std::cout << "char: '" << static_cast<char>(d) << "'" << std::endl;
 			else
 				std::cout << "char: " << "Non displayable" << std::endl;
