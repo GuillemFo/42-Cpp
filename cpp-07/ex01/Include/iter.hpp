@@ -1,39 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Whatever.hpp                                       :+:      :+:    :+:   */
+/*   iter.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/22 10:56:24 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/11/25 08:38:52 by gforns-s         ###   ########.fr       */
+/*   Created: 2024/11/25 08:47:20 by gforns-s          #+#    #+#             */
+/*   Updated: 2024/11/25 09:22:52 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#include <iostream>
+#include <string>
 
-template<typename T>
-void	swap(T &x, T &y)
+template< typename T, typename U, typename F >
+void	iter(T &addr, U len, F f)
 {
-	T tmp;
-	tmp = x;
-	x = y;
-	y = tmp;
-}
-
-template<typename T>
-const T &min(const T &x, const T &y)
-{
-	if (x < y)
-		return (x);
-	return (y);
-}
-
-template<typename T>
-const T &max(const T &x, const T &y)
-{
-	if (x > y)
-		return (x);
-	return (y);
+	U i = 0;
+	while ( i < len)
+	{
+		f(addr[i]);
+		i++;
+	}
 }

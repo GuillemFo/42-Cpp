@@ -6,11 +6,11 @@
 #    By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/30 08:52:23 by gforns-s          #+#    #+#              #
-#    Updated: 2024/11/25 09:35:51 by gforns-s         ###   ########.fr        #
+#    Updated: 2024/11/25 08:41:25 by gforns-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = template_v0
+NAME = template_v1
 
 SRC = main.cpp
 
