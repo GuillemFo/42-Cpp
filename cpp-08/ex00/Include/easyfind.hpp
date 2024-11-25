@@ -6,16 +6,16 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 12:56:59 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/11/25 13:27:07 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/11/25 13:40:50 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#include <vector>
+
 
 template< typename T >
-int easyfind(const T , int nb)
+int easyfind(const T v , int nb)
 {
-	
+	if (v.empty() || )
 	return (0);
 }
