@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 09:43:25 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/11/25 12:29:33 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/11/25 12:52:44 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ class Array
 		Array(int size) : _val(new T[size]), _nb(size){};
 		~Array()
 		{
+			std::cout << "Destroy called\n";
 			delete[] _val;
 		};
 
