@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 10:21:35 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/12/09 12:33:30 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/12/09 13:40:15 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,10 @@ int Span::shortestSpan()
 
 int Span::longestSpan()
 {
-	//pending
-	return (-100);
+	if (this->_nb.empty() || !this->_nb[2])
+		throw Err2();
+	std::sort(this->_nb.begin(), this->_nb.end());
+	return (this->_nb.at(_size-1) - this->_nb.at(0));
 }
 
 size_t Span::getSize()
