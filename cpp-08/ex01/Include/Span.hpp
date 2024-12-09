@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 10:21:39 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/12/09 12:34:58 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/12/09 15:16:55 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ class Span
 		
 		//	Subject
 		void addNumber(int i);
+		template<typename InputIterator>
+		void addRange(InputIterator start, InputIterator end);
+		
 		int shortestSpan();
 		int longestSpan();
 		

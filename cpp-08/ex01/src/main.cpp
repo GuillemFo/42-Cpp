@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 12:56:49 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/12/09 13:38:47 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/12/09 15:17:27 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ int main()
 	Span empty;
 	try
 	{
-		std::cout << "Size: "<< empty.getSize() << std::endl;
+		std::cout << "Size for empty: "<< empty.getSize() << std::endl;
+		std::cout << "Trying addNumber on empty" << std::endl;
 		empty.addNumber(6);
 	}
 	catch (std::exception &e)
@@ -46,16 +47,35 @@ int main()
 	}
 	try
 	{
-		std::cout << "Size: "<< empty.getSize() << std::endl;
+		std::cout << "Size for empty: "<< empty.getSize() << std::endl;
 		std::cout << "Longest Span empty: ";
 		std::cout << empty.longestSpan() << std::endl;
 	}
 	catch (std::exception &e)
 	{
 		std::cerr << e.what() << std::endl;
+	}	
+	Span small = Span(3);
+	try
+	{
+		std::cout << "Size for small: "<< small.getSize() << std::endl;
+		small.addNumber(6);
+		std::cout << "Size for small after addNumber: "<< small.getSize() << std::endl;
 	}
-
-
+	catch (std::exception &e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+	try
+	{
+		std::cout << "Size for small: "<< small.getSize() << std::endl;
+		std::cout << "Longest Span small: ";
+		std::cout << small.longestSpan() << std::endl;
+	}
+	catch (std::exception &e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
 	
 	return 0;
 }
