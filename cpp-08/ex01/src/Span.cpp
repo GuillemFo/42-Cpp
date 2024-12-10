@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 10:21:35 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/12/09 15:17:32 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/12/10 09:34:50 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,14 @@ void Span::printContent()
 }
 
 
-template<typename InputIterator>
-void Span::addRange(InputIterator start, InputIterator end)
+void Span::addRange(std::vector<int>::iterator start, std::vector<int>::iterator end)
 {
 	
+	//std::cout << "Nb end - start" << (end - start) << " " << "Nb size - size " << (_size - _nb.size()) <<std::endl;
+	
+	if (static_cast<unsigned long>(end - start) > (this->_size - this->_nb.size()))
+		throw Err1();
+	for (std::vector<int>::iterator it = start; it != end; it++)
+		this->_nb.push_back(*it);
 }
 //https://en.cppreference.com/w/cpp/algorithm/fill_n

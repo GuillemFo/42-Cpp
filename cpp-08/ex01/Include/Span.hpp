@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 10:21:39 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/12/09 15:16:55 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/12/10 09:29:42 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ class Span
 		
 		//	Subject
 		void addNumber(int i);
-		template<typename InputIterator>
-		void addRange(InputIterator start, InputIterator end);
+		void addRange(std::vector<int>::iterator start, std::vector<int>::iterator end);
 		
 		int shortestSpan();
 		int longestSpan();
@@ -55,7 +54,7 @@ class Span
 			public:
 				const char *what() const throw()
 				{
-					return ("No span can be found");
+					return ("No span can be calculated");
 				}
 		};
 };
