@@ -6,7 +6,17 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:18:19 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/12/10 12:18:20 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/12/10 12:21:34 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
+#include <iostream>
+#include "BitcoinExchange.hpp"
+
+int	main()
+{
+
+
+	return (0);
+}

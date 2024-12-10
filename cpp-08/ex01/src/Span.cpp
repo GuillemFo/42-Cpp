@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 10:21:35 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/12/10 09:34:50 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/12/10 12:32:51 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ Span::Span(const Span &other)
 	*this = other;
 }
 
-Span Span::operator=(const Span &other)
+Span &Span::operator=(const Span &other)
 {
 	if (this != &other)
 	{

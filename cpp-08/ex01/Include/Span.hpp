@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 10:21:39 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/12/10 09:29:42 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/12/10 12:32:41 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ class Span
 		Span(unsigned int);
 		~Span();
 		Span(const Span &other);
-		Span operator=(const Span &cpy);
+		Span &operator=(const Span &cpy);
 		
 		//	Tools
 		size_t getSize();
