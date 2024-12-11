@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 10:21:35 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/12/10 12:32:51 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/12/11 08:30:25 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,4 +93,15 @@ void Span::addRange(std::vector<int>::iterator start, std::vector<int>::iterator
 	for (std::vector<int>::iterator it = start; it != end; it++)
 		this->_nb.push_back(*it);
 }
+
+const char *Span::Err1::what(void) const throw()
+{
+	return ("Max space reached");
+}
+const char *Span::Err2::what(void) const throw()
+{
+	return ("No span can be calculated");
+}
+
+
 //https://en.cppreference.com/w/cpp/algorithm/fill_n

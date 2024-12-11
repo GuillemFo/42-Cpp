@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 10:21:39 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/12/10 12:32:41 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/12/11 08:29:59 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,11 @@ class Span
 		class Err1 : public std::exception
 		{
 			public:
-				const char *what() const throw()
-				{
-					return ("Max space reached");
-				}
+				const char *what() const throw();
 		};
 		class Err2 : public std::exception
 		{
 			public:
-				const char *what() const throw()
-				{
-					return ("No span can be calculated");
-				}
+				const char *what() const throw();
 		};
 };
