@@ -6,13 +6,13 @@
 #    By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/30 08:52:23 by gforns-s          #+#    #+#              #
-#    Updated: 2024/12/10 12:17:38 by gforns-s         ###   ########.fr        #
+#    Updated: 2024/12/13 15:12:00 by gforns-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = Bitcoin_Exchange
+NAME = btc
 
-SRC = main.cpp 
+SRC = main.cpp BitcoinExchange.cpp
 
 SRC_P = src/
 
