@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:18:05 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/12/13 15:05:42 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/12/17 09:39:02 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,8 @@
 #include <map>
 #include <sstream>
 #include <ctime>
-
-
-
+#include <stdexcept>
+#include <cstring>
 
 class BitcoinExchange
 {
