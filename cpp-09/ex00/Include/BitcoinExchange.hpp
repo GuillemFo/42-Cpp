@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:18:05 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/12/17 09:39:02 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/12/18 18:42:07 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ class BitcoinExchange
 		BitcoinExchange &operator=(const BitcoinExchange &cpy);
 
 		void			loadCsvDB();
-		std::time_t		Date_check(const std::string date);
-		float			Value_check();
-	
+		std::time_t		Date_check(const std::string &date);
+		float			Value_check(float nb);
 		
 };

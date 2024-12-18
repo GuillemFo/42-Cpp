@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:18:19 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/12/13 15:14:27 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/12/18 18:40:59 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int ac, char **av)
 		if (ac == 2)
 		{
 			BitcoinExchange btc;
-
+			btc.loadCsvDB();
 		}
 	}
 	catch(const std::exception& e)

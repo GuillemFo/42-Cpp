@@ -6,11 +6,37 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:18:21 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/12/17 09:38:45 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/12/18 18:48:11 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
+
+BitcoinExchange::BitcoinExchange()
+{
+
+}
+
+BitcoinExchange::~BitcoinExchange()
+{
+
+}
+
+BitcoinExchange::BitcoinExchange(const BitcoinExchange &other)
+{
+	*this = other;
+}
+
+BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &other)
+{
+	if (this != &other)
+	{
+		this->_csvDB = other._csvDB;
+	}
+	return (*this);
+}
+
+
 
 bool isValidDate(int year, int month, int day)
 {
@@ -42,20 +68,24 @@ void	BitcoinExchange::loadCsvDB()
 			time_t	dateKey = Date_check(date);
 			_csvDB[dateKey] = nb;
 		}
+		else
+			std::cout << "Error with date or numbers. Please do not modify the database!!" << std::endl;
 	}
 }
 
-std::time_t		BitcoinExchange::Date_check(const std::string date)
+std::time_t		BitcoinExchange::Date_check(const std::string &date)
 {
-
+	struct tm tmDate = {};
+	if (strptime(date.c_str(), "%Y-%m-%d", &tmDate) == NULL)
+		std::cout << "Date not valid" << std::endl;
+	return (mktime(&tmDate));
 }
 
-float	BitcoinExchange::Value_check()
+float	BitcoinExchange::Value_check(float nb)
 {
-
-
+	
+	return (nb);
 }
 
 	//https://cppscripts.com/strptime-cpp
 	//https://www.geeksforgeeks.org/mktime-function-in-c-stl/
-	
