@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:18:21 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/12/18 18:48:11 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/12/18 22:43:50 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,13 @@ bool isValidDate(int year, int month, int day)
 	return day <= daysInMonth[month - 1];
 }
 
+std::time_t		Date_check(const std::string &date)
+{
+	struct tm tmDate = {};
+	if (strptime(date.c_str(), "%Y-%m-%d", &tmDate) == NULL)
+		std::cout << "Date not valid" << std::endl;
+	return (mktime(&tmDate));
+}
 
 void	BitcoinExchange::loadCsvDB()
 {
@@ -62,29 +69,34 @@ void	BitcoinExchange::loadCsvDB()
 	{
 		std::stringstream ss(line);
 		std::string date;
+		
 		float nb;
 		if (std::getline(ss, date, ',') && ss >> nb)
 		{
 			time_t	dateKey = Date_check(date);
 			_csvDB[dateKey] = nb;
 		}
-		else
-			std::cout << "Error with date or numbers. Please do not modify the database!!" << std::endl;
 	}
 }
 
-std::time_t		BitcoinExchange::Date_check(const std::string &date)
+void	BitcoinExchange::cmpInput(std::fstream &inFile)
 {
-	struct tm tmDate = {};
-	if (strptime(date.c_str(), "%Y-%m-%d", &tmDate) == NULL)
-		std::cout << "Date not valid" << std::endl;
-	return (mktime(&tmDate));
+	if (!inFile.is_open())
+		throw "Missing Data file";
+	
 }
+
+
 
 float	BitcoinExchange::Value_check(float nb)
 {
-	
+	if (nb < 0 && nb > 1000)
+		std::cout << "Error too big or too small number" << std::endl;
 	return (nb);
+}
+const char *BitcoinExchange::DateError::what(void) const throw()
+{
+	return ("Invalid date!!");
 }
 
 	//https://cppscripts.com/strptime-cpp
