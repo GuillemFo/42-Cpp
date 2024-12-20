@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:18:21 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/12/20 17:45:39 by codespace        ###   ########.fr       */
+/*   Updated: 2024/12/20 18:25:02 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ std::time_t		Date_check(const std::string &date)
 	if (strptime(date.c_str(), "%Y-%m-%d", &tmDate) == NULL)
 		std::cout << "Date not valid" << std::endl;
 	return (mktime(&tmDate));
+	//redo this working with string and then converting it to proper time....
 }
 
 void	BitcoinExchange::loadCsvDB()
@@ -92,11 +93,9 @@ void	BitcoinExchange::cmpInput(std::fstream &inFile)
 		float nb;
 		if (std::getline(ss1, date2, '|') && ss1 >> nb)
 		{
-			time_t	dateKey = Date_check(date2);
+			time_t	dateKey2 = Date_check(date2);
 			if (Value_check(nb) == true)
-				std::cout << "maybe works:" << _csvDB[dateKey] * nb << std::endl;
-			else
-				std::cout << "Not valid:" << nb << std::endl;
+				std::cout << "maybe works:" << static_cast<float>(_csvDB[dateKey2] * nb )<< std::endl;
 		}
 	}
 }
@@ -105,9 +104,12 @@ void	BitcoinExchange::cmpInput(std::fstream &inFile)
 
 bool	BitcoinExchange::Value_check(float nb)
 {
-	if (static_cast<float>(0) > nb && static_cast<float>(1000) > nb)
+	if (nb < static_cast<float>(0)  || nb > static_cast<float>(1000))
 	{
-		std::cout << "Error too big or too small number" << std::endl;
+		if (nb < static_cast<float>(0))
+			std::cout << "Error: not a positive number." << std::endl;
+		else if (nb > static_cast<float>(1000))
+			std::cout << "Error: too large a number." << std::endl;
 		return (false);
 	}
 	return (true);
