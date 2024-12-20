@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   BitcoinExchange.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:18:21 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/12/18 22:43:50 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/12/20 11:57:20 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,19 @@ void	BitcoinExchange::cmpInput(std::fstream &inFile)
 {
 	if (!inFile.is_open())
 		throw "Missing Data file";
-	
+		std::string line;
+	while (std::getline(inFile, line))
+	{
+		std::stringstream ss(line);
+		std::string date;
+		
+		float nb;
+		if (std::getline(ss, date, '|') && ss >> nb)
+		{
+			time_t	dateKey = Date_check(date);
+			_csvDB[dateKey] = nb;
+		}
+	}
 }
 
 
