@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:18:05 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/12/20 17:27:06 by codespace        ###   ########.fr       */
+/*   Updated: 2024/12/20 18:47:09 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 class BitcoinExchange
 {
 	private:
-		std::map<std::time_t, float> _csvDB;
+		std::map<std::string, float> _csvDB;
 	public:
 		BitcoinExchange();
 		~BitcoinExchange();
