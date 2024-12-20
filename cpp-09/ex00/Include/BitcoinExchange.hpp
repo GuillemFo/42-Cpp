@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   BitcoinExchange.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:18:05 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/12/18 22:42:34 by gforns-s         ###   ########.fr       */
+/*   Updated: 2024/12/20 17:27:06 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ class BitcoinExchange
 		void			loadCsvDB();
 		//std::time_t		Date_check(const std::string &date);
 		void			cmpInput(std::fstream &inFile);
-		float			Value_check(float nb);
+		bool			Value_check(float nb);
 		
 	class DateError : public std::exception
 	{

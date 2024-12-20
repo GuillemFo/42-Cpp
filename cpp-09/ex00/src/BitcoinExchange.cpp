@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:18:21 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/12/20 11:57:20 by codespace        ###   ########.fr       */
+/*   Updated: 2024/12/20 17:45:39 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,28 +83,34 @@ void	BitcoinExchange::cmpInput(std::fstream &inFile)
 {
 	if (!inFile.is_open())
 		throw "Missing Data file";
-		std::string line;
+	std::string line;
 	while (std::getline(inFile, line))
 	{
-		std::stringstream ss(line);
-		std::string date;
+		std::stringstream ss1(line);
+		std::string date2;
 		
 		float nb;
-		if (std::getline(ss, date, '|') && ss >> nb)
+		if (std::getline(ss1, date2, '|') && ss1 >> nb)
 		{
-			time_t	dateKey = Date_check(date);
-			_csvDB[dateKey] = nb;
+			time_t	dateKey = Date_check(date2);
+			if (Value_check(nb) == true)
+				std::cout << "maybe works:" << _csvDB[dateKey] * nb << std::endl;
+			else
+				std::cout << "Not valid:" << nb << std::endl;
 		}
 	}
 }
 
 
 
-float	BitcoinExchange::Value_check(float nb)
+bool	BitcoinExchange::Value_check(float nb)
 {
-	if (nb < 0 && nb > 1000)
+	if (static_cast<float>(0) > nb && static_cast<float>(1000) > nb)
+	{
 		std::cout << "Error too big or too small number" << std::endl;
-	return (nb);
+		return (false);
+	}
+	return (true);
 }
 const char *BitcoinExchange::DateError::what(void) const throw()
 {
