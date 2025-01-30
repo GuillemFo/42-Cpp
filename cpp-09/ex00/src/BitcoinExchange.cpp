@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   BitcoinExchange.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:18:21 by gforns-s          #+#    #+#             */
-/*   Updated: 2024/12/20 18:52:41 by codespace        ###   ########.fr       */
+/*   Updated: 2025/01/30 01:20:01 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &other)
 }
 
 
-
 bool isValidDate(int year, int month, int day)
 {
 	if (year < 1900 || month < 1 || month > 12 || day < 1)
@@ -50,6 +49,15 @@ bool isValidDate(int year, int month, int day)
 
 	return (day <= daysInMonth[month - 1]);
 }
+
+std::string trim(const std::string &str)
+{
+	size_t first = str.find_first_not_of(" ");
+	if (first == std::string::npos) return "";
+	size_t last = str.find_last_not_of(" ");
+	return str.substr(first, last - first + 1);
+}
+
 
 std::string		Date_check(const std::string &date)
 {
@@ -75,12 +83,11 @@ void	BitcoinExchange::loadCsvDB()
 		std::string date;
 		
 		float nb;
+
 		if (std::getline(ss, date, ',') && ss >> nb)
 		{
 			std::string	dateKey = Date_check(date);
 			_csvDB[dateKey] = nb;
-			std::cout << ":" << dateKey << ":" << std::endl;
-			// problem is normal doc does not have spaces
 		}
 	}
 }
@@ -94,21 +101,27 @@ void	BitcoinExchange::cmpInput(std::fstream &inFile)
 	{
 		std::stringstream ss2(line2);
 		std::string date2;
-		
+		std::string valueStr;
 		float nb;
-		if (std::getline(ss2, date2, '|') && ss2 >> nb)
-		// problem is normal doc does not have spaces but the next string it does ... but why it enters if it does not exist?
+		if (std::getline(ss2, date2, '|'))
 		{
-			std::string	dateKey2 = Date_check(date2);
-			if (Value_check(nb) == true)
+			date2 = trim(date2);
+			if (std::getline(ss2, valueStr))
 			{
-				float num = _csvDB[dateKey2];
-				std::cout << "maybe works:" << dateKey2 << ":" << num << std::endl;
+				valueStr = trim(valueStr);
+				std::stringstream tmp(valueStr);
+				tmp >> nb;
+				std::string dateKey2 = Date_check(date2);
+				if (Value_check(nb))
+				{
+					_csvDB[dateKey2] = nb;
+					//std::cout << "db pos:" << dateKey2 << ":" << nb << ":" << std::endl; //Finally fixed i think
+					//std::cout << _csvDB[dateKey2] << std::endl;
+				}
 			}
 		}
 	}
 }
-
 
 
 bool	BitcoinExchange::Value_check(float nb)
@@ -123,6 +136,9 @@ bool	BitcoinExchange::Value_check(float nb)
 	}
 	return (true);
 }
+
+
+
 const char *BitcoinExchange::DateError::what(void) const throw()
 {
 	return ("Invalid date!!");
@@ -130,3 +146,4 @@ const char *BitcoinExchange::DateError::what(void) const throw()
 
 	//https://cppscripts.com/strptime-cpp
 	//https://www.geeksforgeeks.org/mktime-function-in-c-stl/
+	
