@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:18:19 by gforns-s          #+#    #+#             */
-/*   Updated: 2025/02/03 11:32:30 by gforns-s         ###   ########.fr       */
+/*   Updated: 2025/02/03 11:37:20 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,3 +34,10 @@ int	main(int ac, char **av)
 	}	
 	return (0);
 }
+
+
+/*
+	NOT WORKING:
+		- Invalid dates on incoming file (are not printed in console)
+		- Rounding up to the closest existant value before the specific date if no value found
+ */
