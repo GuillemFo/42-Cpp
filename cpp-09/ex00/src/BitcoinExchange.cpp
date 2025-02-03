@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:18:21 by gforns-s          #+#    #+#             */
-/*   Updated: 2025/01/30 01:20:01 by gforns-s         ###   ########.fr       */
+/*   Updated: 2025/02/03 09:55:27 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,22 @@ std::string trim(const std::string &str)
 
 std::string		Date_check(const std::string &date)
 {
-	int year, month, day;
-	char delim1, delim2;
-
-	std::istringstream ss(date);
-	ss >> year >> delim1 >> month >> delim2 >> day;
-	if (ss.fail() || delim1 != '-' || delim2 != '-' || !isValidDate(year, month, day)) //maybe check with atoi and if is number before passing it...
-		std::cout << "Date error" << std::endl;
-	return (date); // if the date is wrong stop the calc for this value and go next
+	try
+	{
+		int year, month, day;
+		char delim1, delim2;
+		
+		std::istringstream ss(date);
+		ss >> year >> delim1 >> month >> delim2 >> day;
+		if (ss.fail() || delim1 != '-' || delim2 != '-' || !isValidDate(year, month, day))
+			throw BitcoinExchange::InputErr();
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+	
+	return (date);
 }
 
 void	BitcoinExchange::loadCsvDB()
@@ -83,19 +91,29 @@ void	BitcoinExchange::loadCsvDB()
 		std::string date;
 		
 		float nb;
-
-		if (std::getline(ss, date, ',') && ss >> nb)
+		try
 		{
-			std::string	dateKey = Date_check(date);
-			_csvDB[dateKey] = nb;
+			if (std::getline(ss, date, ',') && ss >> nb)
+			{
+				std::string	dateKey = Date_check(date);
+				_csvDB[dateKey] = nb;
+				// i belive the numbers in same day will be replaced... :(
+			}	
+			else
+				throw BitcoinExchange::InputErr();
 		}
+		catch(const std::exception& e)
+		{
+			std::cout << e.what() << std::endl;
+		}
+		
 	}
 }
 
-void	BitcoinExchange::cmpInput(std::fstream &inFile)
+void	BitcoinExchange::compInput(std::fstream &inFile)
 {
 	if (!inFile.is_open())
-		throw "Missing Data file";
+		throw BitcoinExchange::FileOpenErr();	
 	std::string line2;
 	while (std::getline(inFile, line2))
 	{
@@ -126,22 +144,44 @@ void	BitcoinExchange::cmpInput(std::fstream &inFile)
 
 bool	BitcoinExchange::Value_check(float nb)
 {
-	if (nb < static_cast<float>(0)  || nb > static_cast<float>(1000))
+	try
 	{
-		if (nb < static_cast<float>(0))
-			std::cout << "Error: not a positive number." << std::endl;
-		else if (nb > static_cast<float>(1000))
-			std::cout << "Error: too large a number." << std::endl;
-		return (false);
+		if (nb < static_cast<float>(0) || nb > static_cast<float>(1000))
+		{
+			if (nb < static_cast<float>(0))
+				throw BitcoinExchange::NumNegative();
+			else if (nb > static_cast<float>(1000))
+				throw BitcoinExchange::NumTooLarge();
+			return (false);
+		}
+	}
+	catch(const std::exception& e)
+	{
+		std::cout << e.what() << std::endl;
 	}
 	return (true);
 }
 
 
 
-const char *BitcoinExchange::DateError::what(void) const throw()
+const char *BitcoinExchange::InputErr::what(void) const throw()
 {
-	return ("Invalid date!!");
+	return ("Error: bad input");
+}
+
+const char *BitcoinExchange::FileOpenErr::what() const throw()
+{
+	return ("Error: could not open file.");
+}
+
+const char *BitcoinExchange::NumNegative::what() const throw()
+{
+	return ("Error: not a positive number.");
+}
+
+const char *BitcoinExchange::NumTooLarge::what() const throw()
+{
+	return ("Error: too large a number.");
 }
 
 	//https://cppscripts.com/strptime-cpp
