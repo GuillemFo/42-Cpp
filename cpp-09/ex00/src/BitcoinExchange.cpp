@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:18:21 by gforns-s          #+#    #+#             */
-/*   Updated: 2025/02/03 11:33:33 by gforns-s         ###   ########.fr       */
+/*   Updated: 2025/02/03 14:09:11 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,15 @@ bool Date_check(const std::string &date)
 	return (true);
 }
 
+
+time_t *BitcoinExchange::DateToTime(const std::string dat)
+{
+	std::tm tmp = {};
+	strptime(dat.c_str(), "%Y-%m-%d", &tmp);
+	return (mktime(&tmp));
+}
+
+
 void	BitcoinExchange::loadCsvDB()
 {
 	std::fstream db_file("data.csv");
@@ -89,6 +98,8 @@ void	BitcoinExchange::loadCsvDB()
 	std::string line;
 	while (std::getline(db_file, line))
 	{
+		if (line.empty())
+			continue ;
 		std::stringstream ss(line);
 		std::string date;
 		float nb;
@@ -102,6 +113,7 @@ void	BitcoinExchange::loadCsvDB()
 				{
 					//std::string	dateKey = date;
 					//_csvDB[dateKey] = nb;
+					
 					_csvDB[date] = nb;
 				}
 			}	
