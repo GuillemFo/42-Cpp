@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:18:05 by gforns-s          #+#    #+#             */
-/*   Updated: 2025/02/03 11:32:38 by gforns-s         ###   ########.fr       */
+/*   Updated: 2025/02/03 14:19:38 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 class BitcoinExchange
 {
 	private:
-		std::map<std::string, float> _csvDB;
+		std::map<std::time_t, float> _csvDB;
 	public:
 		BitcoinExchange();
 		~BitcoinExchange();
@@ -34,6 +34,7 @@ class BitcoinExchange
 		//std::time_t		Date_check(const std::string &date);
 		void			compInput(std::fstream &inFile);
 		bool			Value_check(float nb);
+		time_t 			DateToTime(const std::string dat);
 		
 	class InputErr : public std::exception
 	{

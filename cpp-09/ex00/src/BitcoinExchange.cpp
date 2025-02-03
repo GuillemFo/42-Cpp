@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:18:21 by gforns-s          #+#    #+#             */
-/*   Updated: 2025/02/03 14:09:11 by gforns-s         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:17:10 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ bool Date_check(const std::string &date)
 }
 
 
-time_t *BitcoinExchange::DateToTime(const std::string dat)
+time_t BitcoinExchange::DateToTime(const std::string dat)
 {
 	std::tm tmp = {};
 	strptime(dat.c_str(), "%Y-%m-%d", &tmp);
@@ -114,7 +114,7 @@ void	BitcoinExchange::loadCsvDB()
 					//std::string	dateKey = date;
 					//_csvDB[dateKey] = nb;
 					
-					_csvDB[date] = nb;
+					_csvDB[BitcoinExchange::DateToTime(date)] = nb;
 				}
 			}	
 			else
@@ -160,9 +160,12 @@ void	BitcoinExchange::compInput(std::fstream &inFile)
 						}
 						else
 						{
-							std::string dateKey2 = date2;
+							time_t dateKey2 = BitcoinExchange::DateToTime(date2);
 							if (Value_check(nb))
-								std::cout << dateKey2 << " => " << (_csvDB[dateKey2] * nb) << std::endl;
+							{
+								//expand here to check for a closer date if dateKey2 is not found!!
+								std::cout << date2 << " => " << (_csvDB[dateKey2] * nb) << std::endl;
+							}
 							else if (nb < static_cast<float>(0))
 								throw BitcoinExchange::NumNegative();
 							else if (nb > static_cast<float>(1000))
