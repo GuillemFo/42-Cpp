@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:18:21 by gforns-s          #+#    #+#             */
-/*   Updated: 2025/02/03 09:55:27 by gforns-s         ###   ########.fr       */
+/*   Updated: 2025/02/03 11:33:33 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,54 +50,60 @@ bool isValidDate(int year, int month, int day)
 	return (day <= daysInMonth[month - 1]);
 }
 
-std::string trim(const std::string &str)
+std::string trim(const std::string &str)	//ok?
 {
 	size_t first = str.find_first_not_of(" ");
-	if (first == std::string::npos) return "";
+	if (first == std::string::npos)
+		return ("");
 	size_t last = str.find_last_not_of(" ");
-	return str.substr(first, last - first + 1);
+		return (str.substr(first, last - first + 1));
 }
 
 
-std::string		Date_check(const std::string &date)
+bool Date_check(const std::string &date)
 {
-	try
-	{
-		int year, month, day;
-		char delim1, delim2;
-		
-		std::istringstream ss(date);
-		ss >> year >> delim1 >> month >> delim2 >> day;
-		if (ss.fail() || delim1 != '-' || delim2 != '-' || !isValidDate(year, month, day))
-			throw BitcoinExchange::InputErr();
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << std::endl;
-	}
+	int year, month, day;
+	char delim1, delim2;
 	
-	return (date);
+	std::istringstream ss(date);
+	ss >> year >> delim1 >> month >> delim2 >> day;
+	if (ss.fail() || delim1 != '-' || delim2 != '-' || !isValidDate(year, month, day))
+	{
+		throw BitcoinExchange::InputErr();
+		return (false);
+	}
+	return (true);
 }
 
 void	BitcoinExchange::loadCsvDB()
 {
 	std::fstream db_file("data.csv");
 	if (!db_file.is_open())
-		throw ("Missing Data file");
+	{
+		throw BitcoinExchange::MissingDB();
+	}
+	std::string line2;
+	std::getline(db_file, line2);
+	if (line2 != "date,exchange_rate")
+		throw BitcoinExchange::FirstLineDB_Err();
 	std::string line;
 	while (std::getline(db_file, line))
 	{
 		std::stringstream ss(line);
 		std::string date;
-		
 		float nb;
 		try
 		{
 			if (std::getline(ss, date, ',') && ss >> nb)
 			{
-				std::string	dateKey = Date_check(date);
-				_csvDB[dateKey] = nb;
-				// i belive the numbers in same day will be replaced... :(
+				if (!Date_check(date))
+					throw BitcoinExchange::InputErr();
+				else
+				{
+					//std::string	dateKey = date;
+					//_csvDB[dateKey] = nb;
+					_csvDB[date] = nb;
+				}
 			}	
 			else
 				throw BitcoinExchange::InputErr();
@@ -105,66 +111,82 @@ void	BitcoinExchange::loadCsvDB()
 		catch(const std::exception& e)
 		{
 			std::cout << e.what() << std::endl;
-		}
-		
+		}		
 	}
 }
 
 void	BitcoinExchange::compInput(std::fstream &inFile)
 {
-	if (!inFile.is_open())
-		throw BitcoinExchange::FileOpenErr();	
-	std::string line2;
-	while (std::getline(inFile, line2))
+	try
 	{
-		std::stringstream ss2(line2);
-		std::string date2;
-		std::string valueStr;
-		float nb;
-		if (std::getline(ss2, date2, '|'))
+		if (!inFile.is_open())
+			throw BitcoinExchange::FileOpenErr();	
+		std::string line;
+		std::string line2;
+		std::getline(inFile, line);
+		if (line != "date | value")
+			throw BitcoinExchange::FirstLineFileErr();
+		while (std::getline(inFile, line2))
 		{
-			date2 = trim(date2);
-			if (std::getline(ss2, valueStr))
+			std::stringstream ss2(line2);
+			std::string date2;
+			std::string valueStr;
+			float nb;
+			try 
 			{
-				valueStr = trim(valueStr);
-				std::stringstream tmp(valueStr);
-				tmp >> nb;
-				std::string dateKey2 = Date_check(date2);
-				if (Value_check(nb))
+				if (std::getline(ss2, date2, '|'))
 				{
-					_csvDB[dateKey2] = nb;
-					//std::cout << "db pos:" << dateKey2 << ":" << nb << ":" << std::endl; //Finally fixed i think
-					//std::cout << _csvDB[dateKey2] << std::endl;
+					date2 = trim(date2);
+					if (std::getline(ss2, valueStr))
+					{
+						valueStr = trim(valueStr);
+						std::stringstream tmp(valueStr);
+						tmp >> nb;
+						if (!Date_check(date2))
+						{
+							throw BitcoinExchange::InputErr();
+						}
+						else
+						{
+							std::string dateKey2 = date2;
+							if (Value_check(nb))
+								std::cout << dateKey2 << " => " << (_csvDB[dateKey2] * nb) << std::endl;
+							else if (nb < static_cast<float>(0))
+								throw BitcoinExchange::NumNegative();
+							else if (nb > static_cast<float>(1000))
+								throw BitcoinExchange::NumTooLarge();
+							else
+								throw BitcoinExchange::InputErr();
+						}
+					}
 				}
+				else
+					throw BitcoinExchange::InputErr();
 			}
+			catch(const std::exception& e)
+	{
+		std::cout << e.what() << std::endl;
+	}
 		}
+	}
+	catch (const std::exception &e)
+	{
+		std::cout << e.what() << std::endl;
 	}
 }
 
 
 bool	BitcoinExchange::Value_check(float nb)
 {
-	try
-	{
-		if (nb < static_cast<float>(0) || nb > static_cast<float>(1000))
-		{
-			if (nb < static_cast<float>(0))
-				throw BitcoinExchange::NumNegative();
-			else if (nb > static_cast<float>(1000))
-				throw BitcoinExchange::NumTooLarge();
-			return (false);
-		}
-	}
-	catch(const std::exception& e)
-	{
-		std::cout << e.what() << std::endl;
-	}
+
+	if (nb < static_cast<float>(0) || nb > static_cast<float>(1000))
+		return (false);
 	return (true);
 }
 
 
 
-const char *BitcoinExchange::InputErr::what(void) const throw()
+const char *BitcoinExchange::InputErr::what() const throw()
 {
 	return ("Error: bad input");
 }
@@ -182,6 +204,21 @@ const char *BitcoinExchange::NumNegative::what() const throw()
 const char *BitcoinExchange::NumTooLarge::what() const throw()
 {
 	return ("Error: too large a number.");
+}
+
+const char *BitcoinExchange::MissingDB::what() const throw()
+{
+	return ("Error: missing database, ensure there is a data.csv file");
+}
+
+const char *BitcoinExchange::FirstLineFileErr::what() const throw()
+{
+	return ("Error: expected 'data | value' on first line of the loaded file and all the data should be structured as it");
+}
+
+const char *BitcoinExchange::FirstLineDB_Err::what() const throw()
+{
+	return ("Error: expected 'date,exchange_rate' on first line of the database (data.csv) and all the data should be structured as it");
 }
 
 	//https://cppscripts.com/strptime-cpp

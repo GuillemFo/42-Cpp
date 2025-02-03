@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:18:05 by gforns-s          #+#    #+#             */
-/*   Updated: 2025/02/03 09:28:25 by gforns-s         ###   ########.fr       */
+/*   Updated: 2025/02/03 11:32:38 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,21 @@ class BitcoinExchange
 			virtual const char* what() const throw();	
 	};
 	class FileOpenErr : public std::exception
+	{
+		public:
+			virtual const char* what() const throw();	
+	};
+	class MissingDB : public std::exception
+	{
+		public:
+			virtual const char* what() const throw();	
+	};
+	class FirstLineFileErr : public std::exception
+	{
+		public:
+			virtual const char* what() const throw();	
+	};
+	class FirstLineDB_Err : public std::exception
 	{
 		public:
 			virtual const char* what() const throw();	
