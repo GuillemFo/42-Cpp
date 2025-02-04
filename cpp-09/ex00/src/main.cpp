@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:18:19 by gforns-s          #+#    #+#             */
-/*   Updated: 2025/02/03 13:54:54 by gforns-s         ###   ########.fr       */
+/*   Updated: 2025/02/04 11:02:02 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ int	main(int ac, char **av)
 
 /*
 	NOT WORKING:
-		- Invalid dates on incoming file (are not printed in console)
-		- Rounding up to the closest existant value before the specific date if no value found
-		- 
+		- Invalid dates on incoming file need to be expanded to the exception prints properly
+		- Rounding up to the closest existant when date before existing in database. 
+		- ALL PRINTS ARE NOT CORRECT, MISSING AMMOUNT OF COINS BEFORE THE CALC!!!
 		
 
 

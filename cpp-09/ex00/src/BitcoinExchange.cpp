@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   BitcoinExchange.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:18:21 by gforns-s          #+#    #+#             */
-/*   Updated: 2025/02/03 15:17:10 by gforns-s         ###   ########.fr       */
+/*   Updated: 2025/02/04 10:58:11 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,7 @@ bool Date_check(const std::string &date)
 	std::istringstream ss(date);
 	ss >> year >> delim1 >> month >> delim2 >> day;
 	if (ss.fail() || delim1 != '-' || delim2 != '-' || !isValidDate(year, month, day))
-	{
-		throw BitcoinExchange::InputErr();
 		return (false);
-	}
 	return (true);
 }
 
@@ -98,8 +95,6 @@ void	BitcoinExchange::loadCsvDB()
 	std::string line;
 	while (std::getline(db_file, line))
 	{
-		if (line.empty())
-			continue ;
 		std::stringstream ss(line);
 		std::string date;
 		float nb;
@@ -149,30 +144,42 @@ void	BitcoinExchange::compInput(std::fstream &inFile)
 				if (std::getline(ss2, date2, '|'))
 				{
 					date2 = trim(date2);
+					if (!Date_check(date2))
+					{						/////////////////////////////// THIS WILL NOT WORK, CREATE CUSTOM EXCEPTION!!!
+						throw BitcoinExchange::InputErr();
+						std::cout << " => " << date2 << std::endl;
+					}
 					if (std::getline(ss2, valueStr))
 					{
 						valueStr = trim(valueStr);
 						std::stringstream tmp(valueStr);
 						tmp >> nb;
-						if (!Date_check(date2))
+						time_t dateKey2 = BitcoinExchange::DateToTime(date2);
+						if (Value_check(nb))
 						{
-							throw BitcoinExchange::InputErr();
-						}
-						else
-						{
-							time_t dateKey2 = BitcoinExchange::DateToTime(date2);
-							if (Value_check(nb))
-							{
-								//expand here to check for a closer date if dateKey2 is not found!!
-								std::cout << date2 << " => " << (_csvDB[dateKey2] * nb) << std::endl;
-							}
-							else if (nb < static_cast<float>(0))
-								throw BitcoinExchange::NumNegative();
-							else if (nb > static_cast<float>(1000))
-								throw BitcoinExchange::NumTooLarge();
+							std::map<time_t, float>::iterator it = _csvDB.find(dateKey2);
+							if (it != _csvDB.end())
+								std::cout << date2 << " => " << it->second * nb << std::endl;
 							else
-								throw BitcoinExchange::InputErr();
+							{
+								it = _csvDB.lower_bound(dateKey2);
+								if (it != _csvDB.begin())
+								{
+									--it;
+									std::cout << date2 << " => " << it->second * nb << std::endl;
+								}
+								else
+								{
+									std::cout << "Print the first available" << std::endl;
+								}
+							}
 						}
+						else if (nb < static_cast<float>(0))
+							throw BitcoinExchange::NumNegative();
+						else if (nb > static_cast<float>(1000))
+							throw BitcoinExchange::NumTooLarge();
+						else
+							throw BitcoinExchange::InputErr();
 					}
 				}
 				else
