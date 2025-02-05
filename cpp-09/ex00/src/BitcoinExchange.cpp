@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   BitcoinExchange.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:18:21 by gforns-s          #+#    #+#             */
-/*   Updated: 2025/02/04 10:58:11 by codespace        ###   ########.fr       */
+/*   Updated: 2025/02/05 12:45:15 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	BitcoinExchange::loadCsvDB()
 			if (std::getline(ss, date, ',') && ss >> nb)
 			{
 				if (!Date_check(date))
-					throw BitcoinExchange::InputErr();
+					throw "Error: bad input =>" + date;
 				else
 				{
 					//std::string	dateKey = date;
@@ -113,7 +113,7 @@ void	BitcoinExchange::loadCsvDB()
 				}
 			}	
 			else
-				throw BitcoinExchange::InputErr();
+				throw "Error: bad input =>" + line2;
 		}
 		catch(const std::exception& e)
 		{
@@ -122,55 +122,54 @@ void	BitcoinExchange::loadCsvDB()
 	}
 }
 
-void	BitcoinExchange::compInput(std::fstream &inFile)
+void BitcoinExchange::compInput(std::fstream &inFile)
 {
 	try
 	{
 		if (!inFile.is_open())
 			throw BitcoinExchange::FileOpenErr();	
 		std::string line;
-		std::string line2;
 		std::getline(inFile, line);
 		if (line != "date | value")
 			throw BitcoinExchange::FirstLineFileErr();
-		while (std::getline(inFile, line2))
+
+		while (std::getline(inFile, line))
 		{
-			std::stringstream ss2(line2);
-			std::string date2;
-			std::string valueStr;
+			std::stringstream ss2(line);
+			std::string date2, valueStr;
 			float nb;
+
 			try 
 			{
 				if (std::getline(ss2, date2, '|'))
 				{
 					date2 = trim(date2);
 					if (!Date_check(date2))
-					{						/////////////////////////////// THIS WILL NOT WORK, CREATE CUSTOM EXCEPTION!!!
-						throw BitcoinExchange::InputErr();
-						std::cout << " => " << date2 << std::endl;
-					}
+						throw std::string("Error: bad input => ") + date2;
+
 					if (std::getline(ss2, valueStr))
 					{
 						valueStr = trim(valueStr);
 						std::stringstream tmp(valueStr);
 						tmp >> nb;
 						time_t dateKey2 = BitcoinExchange::DateToTime(date2);
+
 						if (Value_check(nb))
 						{
 							std::map<time_t, float>::iterator it = _csvDB.find(dateKey2);
 							if (it != _csvDB.end())
-								std::cout << date2 << " => " << it->second * nb << std::endl;
+								std::cout << date2 << " => " << nb  << " = " << it->second * nb << std::endl;
 							else
 							{
 								it = _csvDB.lower_bound(dateKey2);
 								if (it != _csvDB.begin())
 								{
 									--it;
-									std::cout << date2 << " => " << it->second * nb << std::endl;
+									std::cout << date2 << " => " << nb << " = " << it->second * nb << std::endl;
 								}
 								else
 								{
-									std::cout << "Print the first available" << std::endl;
+									std::cout << date2 << " => " << nb  << " = " << _csvDB.begin()->second * nb << std::endl;
 								}
 							}
 						}
@@ -179,21 +178,37 @@ void	BitcoinExchange::compInput(std::fstream &inFile)
 						else if (nb > static_cast<float>(1000))
 							throw BitcoinExchange::NumTooLarge();
 						else
-							throw BitcoinExchange::InputErr();
+							throw std::string("Error: bad input => ") + line;
 					}
 				}
 				else
-					throw BitcoinExchange::InputErr();
+					throw std::string("Error: bad input => ") + line;
 			}
-			catch(const std::exception& e)
-	{
-		std::cout << e.what() << std::endl;
-	}
+			catch (const std::exception &e)
+			{
+				std::cout << e.what() << std::endl;
+			}
+			catch (const std::string &msg)
+			{
+				std::cout << msg << std::endl;
+			}
+			catch (const char *msg)
+			{
+				std::cout << msg << std::endl;
+			}
 		}
 	}
 	catch (const std::exception &e)
 	{
 		std::cout << e.what() << std::endl;
+	}
+	catch (const std::string &msg)
+	{
+		std::cout << msg << std::endl;
+	}
+	catch (const char *msg)
+	{
+		std::cout << msg << std::endl;
 	}
 }
 
@@ -206,12 +221,6 @@ bool	BitcoinExchange::Value_check(float nb)
 	return (true);
 }
 
-
-
-const char *BitcoinExchange::InputErr::what() const throw()
-{
-	return ("Error: bad input");
-}
 
 const char *BitcoinExchange::FileOpenErr::what() const throw()
 {

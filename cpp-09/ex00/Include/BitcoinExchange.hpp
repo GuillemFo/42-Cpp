@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:18:05 by gforns-s          #+#    #+#             */
-/*   Updated: 2025/02/03 14:19:38 by gforns-s         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:28:50 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,7 @@ class BitcoinExchange
 		void			compInput(std::fstream &inFile);
 		bool			Value_check(float nb);
 		time_t 			DateToTime(const std::string dat);
-		
-	class InputErr : public std::exception
-	{
-		public:
-			virtual const char* what() const throw();	
-	};
+	
 	class NumNegative : public std::exception
 	{
 		public:
