@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:18:19 by gforns-s          #+#    #+#             */
-/*   Updated: 2025/02/04 11:02:02 by codespace        ###   ########.fr       */
+/*   Updated: 2025/02/05 12:51:08 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,7 @@ int	main(int ac, char **av)
 
 /*
 	NOT WORKING:
-		- Invalid dates on incoming file need to be expanded to the exception prints properly
-		- Rounding up to the closest existant when date before existing in database. 
-		- ALL PRINTS ARE NOT CORRECT, MISSING AMMOUNT OF COINS BEFORE THE CALC!!!
+		- If database contains something wrong, the error crashes because the exception. need to build exception in a string type and catch a string msg.
 		
 
 

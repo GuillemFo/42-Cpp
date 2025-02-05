@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:18:21 by gforns-s          #+#    #+#             */
-/*   Updated: 2025/02/05 12:45:15 by gforns-s         ###   ########.fr       */
+/*   Updated: 2025/02/05 13:15:29 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	BitcoinExchange::loadCsvDB()
 			if (std::getline(ss, date, ',') && ss >> nb)
 			{
 				if (!Date_check(date))
-					throw "Error: bad input =>" + date;
+					throw std::string("Error: bad input in data.csv => ") + line;
 				else
 				{
 					//std::string	dateKey = date;
@@ -113,11 +113,11 @@ void	BitcoinExchange::loadCsvDB()
 				}
 			}	
 			else
-				throw "Error: bad input =>" + line2;
+				throw std::string("Error: bad input in data.csv => ") + line;
 		}
-		catch(const std::exception& e)
+		catch(const std::string msg)
 		{
-			std::cout << e.what() << std::endl;
+			std::cout << msg << std::endl;
 		}		
 	}
 }
@@ -224,7 +224,7 @@ bool	BitcoinExchange::Value_check(float nb)
 
 const char *BitcoinExchange::FileOpenErr::what() const throw()
 {
-	return ("Error: could not open file.");
+	return ("Error: could not open file. No permissions or does not exist");
 }
 
 const char *BitcoinExchange::NumNegative::what() const throw()
@@ -239,7 +239,7 @@ const char *BitcoinExchange::NumTooLarge::what() const throw()
 
 const char *BitcoinExchange::MissingDB::what() const throw()
 {
-	return ("Error: missing database, ensure there is a data.csv file");
+	return ("Error: missing database or permissions. Ensure there is a data.csv file and that it has read permissions");
 }
 
 const char *BitcoinExchange::FirstLineFileErr::what() const throw()
