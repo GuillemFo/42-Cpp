@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 08:38:29 by gforns-s          #+#    #+#             */
-/*   Updated: 2025/02/06 12:28:57 by gforns-s         ###   ########.fr       */
+/*   Updated: 2025/02/06 15:47:48 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 class RPN
 {
-	protected:
+	private:
 		std::stack<int> stack;
 		int result;
 	public:
