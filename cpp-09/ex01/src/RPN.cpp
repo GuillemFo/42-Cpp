@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 08:45:36 by gforns-s          #+#    #+#             */
-/*   Updated: 2025/02/06 11:32:15 by gforns-s         ###   ########.fr       */
+/*   Updated: 2025/02/06 11:44:43 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,13 @@ void RPN::solve(const std::string &in)
 			if (!std::isdigit(block[0]))
 				throw std::logic_error("Invalid input");
 			else if (std::isdigit(block[0]))
-				val.push();	
+				val.push(std::atoi(block.c_str()));
+			else if (isAllowed(block[0]))
+			{
+				if (block.empty())
+					throw std::logic_error("Error: Stack is empty");
+				
+			}	
 		}
 	}
 }
