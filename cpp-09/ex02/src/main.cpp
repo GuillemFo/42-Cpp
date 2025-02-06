@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 14:10:36 by gforns-s          #+#    #+#             */
-/*   Updated: 2025/02/06 15:09:40 by gforns-s         ###   ########.fr       */
+/*   Updated: 2025/02/06 15:19:53 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,12 @@
 int main(int ac, char **av)
 {
 	PmergeMe pm;
+
 	try
 	{
 		if (ac <= 2)
 			throw std::invalid_argument("Error"); // check subject!!
-		pm.isValid();
+		
 	}
 	catch (std::exception &e)
 	{
