@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 08:45:36 by gforns-s          #+#    #+#             */
-/*   Updated: 2025/02/06 09:10:31 by gforns-s         ###   ########.fr       */
+/*   Updated: 2025/02/06 10:50:50 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,17 @@ RPN &RPN::operator=(const RPN &other)
 	return (*this);
 }
 
-bool RPN::checkInput(const std::string in)
+bool RPN::IsAllowed(const char c)
 {
-	if ()
-	
+	return (c == '+' || c == '-' || c == '*' || c == '/');	
+}
+
+void RPN::checkInput(const std::string in)
+{
+	for (unsigned int i; i < in.length(); ++i)
+	{
+		const char c = in[i];
+		if (!std::isspace(c) || !std::isdigit(c) || !IsAllowed(c))
+			throw std::logic_error("Invalid input");
+	}
 }

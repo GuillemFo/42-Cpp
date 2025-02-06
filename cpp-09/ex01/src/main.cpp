@@ -6,17 +6,31 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:05:40 by gforns-s          #+#    #+#             */
-/*   Updated: 2025/02/06 08:39:20 by gforns-s         ###   ########.fr       */
+/*   Updated: 2025/02/06 10:50:01 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <RPN.hpp>
 
 
+/*
+std::stack <int>val; //first in last out // 4 2 8 * + // 8*2 // 4 16 + // 20
+*/
+
+
+
+
 int main(int ac, char **av)
 {
-	std::stack <int>val; //first in last out // 4 2 8 * + // 8*2 // 4 16 + // 20
-	if (ac < 2)
-		std::cout << "No input found" << std::endl;
+	try 
+	{
+		if (ac != 2)
+			throw std::logic_error("Error: Input must be 1 string"); 
+
+	}
+	catch (std::exception &e)
+	{
+		std::cout << e.what() << std::endl;
+	}
 	
 }
