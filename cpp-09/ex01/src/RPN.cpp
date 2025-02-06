@@ -1,22 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   RPN.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/18 17:05:40 by gforns-s          #+#    #+#             */
-/*   Updated: 2025/02/06 08:39:20 by gforns-s         ###   ########.fr       */
+/*   Created: 2025/02/06 08:45:36 by gforns-s          #+#    #+#             */
+/*   Updated: 2025/02/06 09:10:31 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <RPN.hpp>
+#include "RPN.hpp"
 
-
-int main(int ac, char **av)
+RPN::RPN()
 {
-	std::stack <int>val; //first in last out // 4 2 8 * + // 8*2 // 4 16 + // 20
-	if (ac < 2)
-		std::cout << "No input found" << std::endl;
+
+}
+
+RPN::~RPN()
+{
+
+}
+
+RPN::RPN(const RPN &other)
+{
+	*this = other;
+}
+
+RPN &RPN::operator=(const RPN &other)
+{
+	if (this != &other)
+	{
+		this->val = other.val;
+	}
+	return (*this);
+}
+
+bool RPN::checkInput(const std::string in)
+{
+	if ()
 	
 }
