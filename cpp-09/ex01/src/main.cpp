@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:05:40 by gforns-s          #+#    #+#             */
-/*   Updated: 2025/02/06 11:09:54 by gforns-s         ###   ########.fr       */
+/*   Updated: 2025/02/06 12:47:02 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ int main(int ac, char **av)
 		const std::string input = av[1];
 		stack.checkInput(input);
 		stack.solve(input);
+		stack.checkIfEnd();
 
 	}
 	catch (std::exception &e)
 	{
 		std::cout << e.what() << std::endl;
 	}
-	
 }

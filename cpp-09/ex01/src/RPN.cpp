@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 08:45:36 by gforns-s          #+#    #+#             */
-/*   Updated: 2025/02/06 11:44:43 by gforns-s         ###   ########.fr       */
+/*   Updated: 2025/02/06 12:54:36 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,14 @@ RPN &RPN::operator=(const RPN &other)
 {
 	if (this != &other)
 	{
-		this->val = other.val;
+		this->stack = other.stack;
 	}
 	return (*this);
+}
+
+int		RPN::getResult() const
+{
+	return (this->result);
 }
 
 bool RPN::isAllowed(const char c)
@@ -47,7 +52,7 @@ void RPN::checkInput(const std::string& in)
 	{
 		const char c = in[i];
 		if (!std::isspace(c) && !std::isdigit(c) && !isAllowed(c))
-			throw std::logic_error("Invalid input");
+			throw std::invalid_argument("Error: Invalid argument");
 	}
 }
 
@@ -59,18 +64,48 @@ void RPN::solve(const std::string &in)
 	{
 		if (block.length() != 1)
 			throw std::logic_error("Parameter too long");
-		else
+		if (std::isdigit(block[0]))
+			stack.push(std::atoi(block.c_str()));
+		else if (isAllowed(block[0]))
 		{
-			if (!std::isdigit(block[0]))
-				throw std::logic_error("Invalid input");
-			else if (std::isdigit(block[0]))
-				val.push(std::atoi(block.c_str()));
-			else if (isAllowed(block[0]))
+			if (stack.empty())
+				throw std::logic_error("Error: Stack is empty");
+			int nb = stack.top();
+			stack.pop();
+			if (stack.empty())
+				throw std::logic_error("Error: Stack is empty");
+			int nb2 = stack.top();
+			stack.pop();
+			if (block[0] == '/' && nb == 0)
 			{
-				if (block.empty())
-					throw std::logic_error("Error: Stack is empty");
-				
-			}	
+				throw std::invalid_argument("Error: Invalid argument");
+			}
+			result = sendMath(block[0], nb, nb2);
+			stack.push(result);
 		}
 	}
+}
+
+int RPN::sendMath(char c, int nb, int nb2)
+{
+	switch (c)
+	{
+		case '+':
+			return (nb2 + nb);
+		case '-':
+			return (nb2 - nb);
+		case '*':
+			return (nb2 * nb);
+		case '/':
+			return (nb2 / nb);
+	}
+	return (0);
+}
+
+void RPN::checkIfEnd()
+{
+	stack.pop();
+	if (!stack.empty())
+		throw std::logic_error("Error: Invalid argument");
+	std::cout << getResult() << std::endl;
 }
