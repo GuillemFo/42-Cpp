@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 08:45:36 by gforns-s          #+#    #+#             */
-/*   Updated: 2025/02/06 10:50:50 by gforns-s         ###   ########.fr       */
+/*   Updated: 2025/02/06 11:32:15 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,35 @@ RPN &RPN::operator=(const RPN &other)
 	return (*this);
 }
 
-bool RPN::IsAllowed(const char c)
+bool RPN::isAllowed(const char c)
 {
 	return (c == '+' || c == '-' || c == '*' || c == '/');	
 }
 
-void RPN::checkInput(const std::string in)
+void RPN::checkInput(const std::string& in)
 {
-	for (unsigned int i; i < in.length(); ++i)
+	for (unsigned int i = 0; i < in.length(); ++i)
 	{
 		const char c = in[i];
-		if (!std::isspace(c) || !std::isdigit(c) || !IsAllowed(c))
+		if (!std::isspace(c) && !std::isdigit(c) && !isAllowed(c))
 			throw std::logic_error("Invalid input");
+	}
+}
+
+void RPN::solve(const std::string &in)
+{
+	std::stringstream tool(in);
+	std::string block;
+	while (tool >> block)
+	{
+		if (block.length() != 1)
+			throw std::logic_error("Parameter too long");
+		else
+		{
+			if (!std::isdigit(block[0]))
+				throw std::logic_error("Invalid input");
+			else if (std::isdigit(block[0]))
+				val.push();	
+		}
 	}
 }
