@@ -15,7 +15,7 @@
 
 bool isValid(const std::string val)
 {
-	const char *str = val.c_str();
+	const char *str = val.c_str();-
 	char *endptr;
 	long nb = std::strtol(str, &endptr, 10);
 
@@ -33,6 +33,5 @@ std::vector<int>	mergeInsertSortVector(std::vector<int>	unsortedVec)
 
 std::deque<int>		mergeInsertSortDeque(std::deque<int> unsortedDeque)
 {
-	
-}
 
+}
