@@ -6,14 +6,53 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 14:10:39 by gforns-s          #+#    #+#             */
-/*   Updated: 2025/03/12 10:30:45 by gforns-s         ###   ########.fr       */
+/*   Updated: 2025/03/12 11:38:30 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 
+PmergeMe::PmergeMe(){}
+PmergeMe::~PmergeMe(){}
+PmergeMe::PmergeMe(const PmergeMe &other) { *this = other;}
+PmergeMe &PmergeMe::operator=(const PmergeMe &other)
+{
+	if (this != &other)
+	{
+		*this = other;
+	}
+	return (*this);
+}
+
+
 
 //Algorithms
+
+void PmergeMe::printV(std::vector<int> &vec, std::string s)
+{
+	std::cout << "Print Vector " << s << ": " << std::endl;
+	std::vector<int>::iterator it_beg = vec.begin();
+	std::vector<int>::iterator it_end = vec.end();
+	while (it_beg != it_end)
+	{
+		std::cout << " =" << *it_beg << "= ";
+		++it_beg;
+	}
+	std::cout << std::endl;
+}
+
+void PmergeMe::printD(std::deque<int> &vec, std::string s)
+{
+	std::cout << "Print Deque " << s << ": " << std::endl;
+	std::deque<int>::iterator it_beg = vec.begin();
+	std::deque<int>::iterator it_end = vec.end();
+	while (it_beg != it_end)
+	{
+		std::cout << " =" << *it_beg << "= ";
+	}
+	std::cout << std::endl;
+}
+
 
 // Split in pairs 
 
@@ -24,7 +63,7 @@ void PmergeMe::sortV(std::vector<int> &vec)
 	if (vec.size() <= 1)
 		return;
 
-	std::vector<std::pair<int, int>> pairs;
+	std::vector<std::pair<int, int> > pairs;
 	int last = -1;
 
 	//create pairs and sort small

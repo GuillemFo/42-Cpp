@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 14:10:36 by gforns-s          #+#    #+#             */
-/*   Updated: 2025/03/12 09:51:12 by gforns-s         ###   ########.fr       */
+/*   Updated: 2025/03/12 11:37:49 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@
 
 int main(int ac, char **av)
 {
+	PmergeMe	mer;
 	std::vector<int>	vec;
 	std::deque<int>		deq;
-	int	nb;
+
 	try
 	{
 		if (ac < 2)
@@ -38,7 +39,10 @@ int main(int ac, char **av)
 			vec.push_back(static_cast<int>(num));
 			deq.push_back(static_cast<int>(num));
 		}
+			mer.printV(vec, "Unsorted");
 
+
+/*
 	/////// PRINT PRE SORTED AND SORTED??
 
 		std::clock_t startV = std::clock();
@@ -52,6 +56,7 @@ int main(int ac, char **av)
 		//clock timers (dont know if correct!!!!!!!)
 		double timeV = 1000000.0 * (endV - startV) / CLOCKS_PER_SEC;
 		double timeD = 1000000.0 * (endD - startD) / CLOCKS_PER_SEC;
+*/
 	}
 	catch (std::exception &e)
 	{
