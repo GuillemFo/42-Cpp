@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 14:10:36 by gforns-s          #+#    #+#             */
-/*   Updated: 2025/03/12 11:37:49 by gforns-s         ###   ########.fr       */
+/*   Updated: 2025/03/12 11:52:46 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int main(int ac, char **av)
 			deq.push_back(static_cast<int>(num));
 		}
 			mer.printV(vec, "Unsorted");
+			mer.sortV(vec);
 
 
 /*

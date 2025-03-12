@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 14:10:39 by gforns-s          #+#    #+#             */
-/*   Updated: 2025/03/12 11:38:30 by gforns-s         ###   ########.fr       */
+/*   Updated: 2025/03/12 11:57:38 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void PmergeMe::sortV(std::vector<int> &vec)
 	std::vector<std::pair<int, int> > pairs;
 	int last = -1;
 
-	//create pairs and sort small
+	//loop for split and swap :)
 	for (std::vector<int>::iterator it = vec.begin(); it != vec.end();)
 	{
 		int first = *it;
@@ -83,11 +83,23 @@ void PmergeMe::sortV(std::vector<int> &vec)
 			last = first;
 	}
 
-	//merge sort
+	//merge sort // how should i do this?? im lost :( 
 
+	//PRINT PAIRS AND END
+	int i = 1;
+	std::vector<std::pair<int, int> >::iterator it_beg = pairs.begin();
+	std::vector<std::pair<int, int> >::iterator it_end = pairs.end();
+	while (it_beg != it_end)
+	{
+		std::cout << "Pair[" << i << "]:"<< "{" << it_beg->first << " | " << it_beg->second << "}" << std::endl;
+		++i;
+		++it_beg;
+	}
+	if (last >= 0) //remember last only use if not pair for last number alone;
+		std::cout << last << std::endl;
+	std::cout << "End" << std::endl;
 	
-	
-
+/*
 	// Store sorted
 	std::vector<int> sorted;
 	
@@ -102,5 +114,6 @@ void PmergeMe::sortV(std::vector<int> &vec)
 		sorted.insert(pos, last);
 	}
 	vec = sorted;
+*/
 }
 
