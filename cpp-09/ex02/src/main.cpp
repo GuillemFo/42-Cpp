@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 14:10:36 by gforns-s          #+#    #+#             */
-/*   Updated: 2025/02/06 16:14:52 by gforns-s         ###   ########.fr       */
+/*   Updated: 2025/03/12 09:01:42 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,39 @@
 
 int main(int ac, char **av)
 {
-	std::vector<int>	sVec;
-	std::deque<int>		sDeq;
+	std::vector<int>	vec;
+	std::deque<int>		deq;
 	int	nb;
 	try
 	{
 		if (ac < 2)
-			throw std::invalid_argument("Error"); // check subject!!
-		for (unsigned long i = 1; av[i]; ++i)
+			throw std::invalid_argument ("Error"); // check subject!!
+		for (int i = 1; i < ac; ++i)
 		{
-			if (isValid(av[i]) == true)
+			char *endp;
+			long num = std::strtol(av[i], &endp, 10);
+			if (*endp != '\0' || num < 0 || num > std::numeric_limits<int>::max())
 			{
-				nb = std::atoi(av[i]);
-				sVec.push_back(nb);
-				sDeq.push_back(nb);
+				throw std::invalid_argument ("Error");
+				return (1);
 			}
-			else
-				throw std::invalid_argument("Error: Argument not valid");
+			vec.push_back(static_cast<int>(num));
+			deq.push_back(static_cast<int>(num));
 		}
+
+	/////// PRINT PRE SORTED AND SORTED??
+
+		std::clock_t startV = std::clock();
+		//sortVector ...
+		std::clock_t endV = std::clock();
+
+		std::clock_t startD = std::clock();
+		//sortDeq ...
+		std::clock_t endD = std::clock();
+
+		//clock timers (dont know if correct!!!!!!!)
+		double timeV = 1000000.0 * (endV - startV) / CLOCKS_PER_SEC;
+		double timeD = 1000000.0 * (endD - startD) / CLOCKS_PER_SEC;
 	}
 	catch (std::exception &e)
 	{
