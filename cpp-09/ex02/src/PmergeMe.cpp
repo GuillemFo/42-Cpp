@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 14:10:39 by gforns-s          #+#    #+#             */
-/*   Updated: 2025/03/12 09:19:34 by gforns-s         ###   ########.fr       */
+/*   Updated: 2025/03/12 09:35:37 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,22 @@
 
 //Algorithms
 
-template <typename T>
-void mergeInsertSort(T &container)
+
+
+
+void PmergeMe::sortV(std::vector<int> &vec)
 {
-	if (container.size() <= 1)
+	if (vec.size() <= 1)
 		return;
 
 	std::vector<std::pair<int, int> > pairs;
 	int last = -1;
 
-	for (typename T::iterator it = container.begin(); it != container.end();)
+	for (std::vector<int, int>iterator it = vec.begin(); it != vec.end();)
 	{
 		int first = *it;
 		++it;
-		if (it != container.end())
+		if (it != vec.end())
 		{
 			int second = *it;
 			++it;
@@ -41,9 +43,53 @@ void mergeInsertSort(T &container)
 	}
 
 		/// sorting pairs from begin to end creating A and B and and sorting it;
-	std::sort(pairs.begin(), pairs.end(), [](const std::pair<int, int> &a, const std::pair<int, int> &b){return (a.second < b.second);})
+	//std::sort
 	
-	T sorted;
+	std::vector<int> sorted;
+	
+	for (size_t i = 0; i < pairs.size(); ++i)
+	{
+		sorted.push_back(pairs[i].second);
+	}
+
+	for (size_t i = 0; i < pairs.size(); ++i)
+	{
+		std::vector<int, int>::iterator pos = std::lower_bound(sorted.begin(), sorted.end(), last);
+		sorted.insert(pos, last);
+	}
+	vec = sorted;
+}
+
+
+void PmergeMe::sortD(std::deque<int> &deq)
+{
+	{
+	if (deq.size() <= 1)
+		return;
+
+	std::deque<std::pair<int, int> > pairs;
+	int last = -1;
+
+	for (std::deque<int, int>::iterator it = deq.begin(); it != deq.end();)
+	{
+		int first = *it;
+		++it;
+		if (it != deq.end())
+		{
+			int second = *it;
+			++it;
+			if (first > second)
+				std::swap(first, second);
+			pairs.puch_back(std::make_pair(first, second));
+		}
+		else
+			last = first;
+	}
+
+		/// sorting pairs from begin to end creating A and B and and sorting it;
+	//std::sort
+	
+	std::deque<int, int> sorted;
 	for (size_t i = 0; i < pairs.size(); ++i)
 	{
 		sorted.push_back(pairs[i].second);
@@ -54,15 +100,6 @@ void mergeInsertSort(T &container)
 		typename T::Iterator pos = std::lower_bound(sorted.begin(), sorted.end(), last);
 		sorted.insert(pos, last);
 	}
-	container = sorted;
-}
-
-void PmergeMe::sortV(std::vector<int> &vec)
-{
-	mergeInsertSort(vec);
-}
-
-void PmergeMe::sortD(std::deque<int> &deq)
-{
-	mergeInsertSort(deq);
+	deq = sorted;
+	}
 }
