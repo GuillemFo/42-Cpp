@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 14:10:39 by gforns-s          #+#    #+#             */
-/*   Updated: 2025/03/12 11:57:38 by gforns-s         ###   ########.fr       */
+/*   Updated: 2025/03/12 14:02:00 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ void PmergeMe::sortV(std::vector<int> &vec)
 	int last = -1;
 
 	//loop for split and swap :)
-	for (std::vector<int>::iterator it = vec.begin(); it != vec.end();)
+	std::vector<int>::iterator it = vec.begin();
+	while (it != vec.end())
 	{
 		int first = *it;
 		++it;
@@ -82,9 +83,46 @@ void PmergeMe::sortV(std::vector<int> &vec)
 		else
 			last = first;
 	}
+	//https://dev.to/emuminov/human-explanation-and-step-by-step-visualisation-of-the-ford-johnson-algorithm-5g91
 
-	//merge sort // how should i do this?? im lost :( 
+	//merge sort // how should i do this?? im lost :( merge groups and sort them for its second value. repeat froming bigger groups that can be paired. once max reach change algorithm??
+	// ./PmergeMe 11 2 17 0 16 8 6 15 10 3 21 1 18 9 14 19 12 5 4 20 13 7 
+	std::cout << "INFO??:" << pairs.size() << "'" << std::endl;
 
+	
+	std::vector<std::pair<int, int> >::iterator it_n = pairs.begin();
+	//how do i swap vector positions?? 12/03/25 14.01
+	std::pair<int, int> las;
+		while (it_n != pairs.end())
+	{
+		std::pair<int, int> fir = *it_n;
+		++it_n;
+		if (it_n != pairs.end())
+		{
+			std::pair<int, int> sec = *it_n;
+			if (fir.second > sec.second)
+				std::swap(fir, sec);
+			cpy.push_back(std::make_pair(fir, sec));
+			
+		}
+		else
+			las = fir;
+	}
+
+	int i = 1;
+	std::vector<std::pair<int, int> >::iterator it_beg = pairs.begin();
+	std::vector<std::pair<int, int> >::iterator it_end = pairs.end();
+	while (it_beg != it_end)
+	{
+		std::cout << "Pair[" << i << "]:"<< "{" << it_beg->first << " | " << it_beg->second << "}" << std::endl;
+		++i;
+		++it_beg;
+	}
+	if (last >= 0) //remember last only use if not pair for last number alone;
+		std::cout << last << std::endl;
+	std::cout << "End" << std::endl;
+
+/*
 	//PRINT PAIRS AND END
 	int i = 1;
 	std::vector<std::pair<int, int> >::iterator it_beg = pairs.begin();
@@ -98,6 +136,7 @@ void PmergeMe::sortV(std::vector<int> &vec)
 	if (last >= 0) //remember last only use if not pair for last number alone;
 		std::cout << last << std::endl;
 	std::cout << "End" << std::endl;
+*/
 	
 /*
 	// Store sorted
