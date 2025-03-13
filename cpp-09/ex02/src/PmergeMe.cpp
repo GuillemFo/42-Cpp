@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 14:10:39 by gforns-s          #+#    #+#             */
-/*   Updated: 2025/03/12 16:15:40 by gforns-s         ###   ########.fr       */
+/*   Updated: 2025/03/13 15:15:01 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,10 @@ void PmergeMe::sortV(std::vector<int> &vec)
 	// ./PmergeMe 11 2 17 0 16 8 6 15 10 3 21 1 18 9 14 19 12 5 4 20 13 7 
 	//std::cout << "INFO??:" << pairs.size() << "'" << std::endl;
 	
+
+	//dividir bloques en 2 luego 4 8 etc... hasta no poder tener mas grupos de ese tamano, guardar sobrantes, desde el bloque grande, dividir en 2 hacia atras otra vez, bajando en la 1a iteracion b1 y todos los grupos a, usar los numeros de jacobstal para reindizar la secuencia e ir insertando en funcion de indice, seguir ese bucle hasta tener solo parejas y luego ir insertando en funcion de menor que desde la mitad del 2o bloque, y luego ya ir insertando en fucion de menor que, los numeros restantes
+
+	//jacobsthal
 	//PRINT PAIRS AND END
 	int i = 1;
 	std::vector<std::pair<int, int> >::iterator it_beg = pairs.begin();
