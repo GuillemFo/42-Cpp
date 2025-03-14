@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 14:10:39 by gforns-s          #+#    #+#             */
-/*   Updated: 2025/03/13 15:15:01 by gforns-s         ###   ########.fr       */
+/*   Updated: 2025/03/14 14:26:03 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,36 +28,121 @@ PmergeMe &PmergeMe::operator=(const PmergeMe &other)
 
 //Algorithms
 
-void PmergeMe::printV(std::vector<int> &vec, std::string s)
+// Manual binary search for lower bound (to replace std::lower_bound)
+std::vector<int>::iterator binarySearchInsert(std::vector<int>& vec, int value)
 {
-	std::cout << "Print Vector " << s << ": " << std::endl;
-	std::vector<int>::iterator it_beg = vec.begin();
-	std::vector<int>::iterator it_end = vec.end();
-	while (it_beg != it_end)
-	{
-		std::cout << " =" << *it_beg << "= ";
-		++it_beg;
+	std::vector<int>::iterator low = vec.begin();
+	std::vector<int>::iterator high = vec.end();
+
+	while (low < high) {
+		std::vector<int>::iterator mid = low + (high - low) / 2;
+		if (*mid < value)
+			low = mid + 1;
+		else
+			high = mid;
 	}
-	std::cout << std::endl;
+	return low;
 }
 
-void PmergeMe::printD(std::deque<int> &vec, std::string s)
-{
-	std::cout << "Print Deque " << s << ": " << std::endl;
-	std::deque<int>::iterator it_beg = vec.begin();
-	std::deque<int>::iterator it_end = vec.end();
-	while (it_beg != it_end)
-	{
-		std::cout << " =" << *it_beg << "= ";
+// Generate Jacobsthal sequence indices for optimized insertion order
+std::vector<int> generateJacobsthalIndices(int n) {
+	std::vector<int> indices;
+	int a = 1, b = 1; // Jacobsthal numbers
+
+	while (a < n) {
+		indices.push_back(a);
+		int temp = a;
+		a = a + 2 * b;
+		b = temp;
 	}
-	std::cout << std::endl;
+	return indices;
 }
 
+// Ford-Johnson Sort (Merge-Insertion Sort)
+void fordJohnsonSort(std::vector<int>& vec) {
+	if (vec.size() <= 1)
+		return;
+
+	std::vector<int> mainSequence, pendSequence;
+	int last = -1; // To store an unpaired element if needed
+
+	// Step 1: Pair elements and sort within each pair
+	std::vector<int>::iterator it = vec.begin();
+	while (it != vec.end()) {
+		int first = *it;
+		++it;
+		if (it != vec.end()) {
+			int second = *it;
+			++it;
+			if (first > second) {
+				int temp = first;
+				first = second;
+				second = temp;
+			}
+			mainSequence.push_back(second); // Store the larger element
+			pendSequence.push_back(first);  // Store the smaller element
+		} else {
+			last = first; // Unpaired element
+		}
+	}
+
+	// Step 2: Recursively sort the larger elements (main sequence)
+	fordJohnsonSort(mainSequence);
+
+	// Step 3: Construct sorted sequence starting with the first pair's smallest element
+	std::vector<int> sortedVec;
+	sortedVec.push_back(pendSequence[0]); // Smallest element first
+	sortedVec.insert(sortedVec.end(), mainSequence.begin(), mainSequence.end());
+
+	// Step 4: Add any leftover elements to the pend sequence
+	std::vector<int>::iterator pendIt = pendSequence.begin() + 1;
+	while (pendIt != pendSequence.end()) {
+		sortedVec.insert(binarySearchInsert(sortedVec, *pendIt), *pendIt);
+		++pendIt;
+	}
+
+	if (last != -1) {
+		sortedVec.insert(binarySearchInsert(sortedVec, last), last);
+	}
+
+	// Step 5: Update the original vector with the sorted values
+	vec = sortedVec;
+}
+
+
+
+
+
+
+// void PmergeMe::printV(std::vector<int> &vec, std::string s)
+// {
+// 	std::cout << "Print Vector " << s << ": " << std::endl;
+// 	std::vector<int>::iterator it_beg = vec.begin();
+// 	std::vector<int>::iterator it_end = vec.end();
+// 	while (it_beg != it_end)
+// 	{
+// 		std::cout << " =" << *it_beg << "= ";
+// 		++it_beg;
+// 	}
+// 	std::cout << std::endl;
+// }
+
+// void PmergeMe::printD(std::deque<int> &vec, std::string s)
+// {
+// 	std::cout << "Print Deque " << s << ": " << std::endl;
+// 	std::deque<int>::iterator it_beg = vec.begin();
+// 	std::deque<int>::iterator it_end = vec.end();
+// 	while (it_beg != it_end)
+// 	{
+// 		std::cout << " =" << *it_beg << "= ";
+// 	}
+// 	std::cout << std::endl;
+// }
 
 // Split in pairs 
 
 
-
+/*
 void PmergeMe::sortV(std::vector<int> &vec)
 {
 	if (vec.size() <= 1)
@@ -106,6 +191,7 @@ void PmergeMe::sortV(std::vector<int> &vec)
 	if (last >= 0) //remember last only use if not pair for last number alone;
 		std::cout << last << std::endl;
 	std::cout << "End" << std::endl;
+*/
 /*
 	// Store sorted
 	std::vector<int> sorted;
@@ -121,6 +207,6 @@ void PmergeMe::sortV(std::vector<int> &vec)
 		sorted.insert(pos, last);
 	}
 	vec = sorted;
-*/
 }
+*/
 
