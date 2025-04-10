@@ -6,107 +6,148 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 14:10:39 by gforns-s          #+#    #+#             */
-/*   Updated: 2025/03/14 14:26:03 by gforns-s         ###   ########.fr       */
+/*   Updated: 2025/04/10 11:32:55 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 
-PmergeMe::PmergeMe(){}
-PmergeMe::~PmergeMe(){}
-PmergeMe::PmergeMe(const PmergeMe &other) { *this = other;}
+PmergeMe::PmergeMe() {}
+
+PmergeMe::PmergeMe(char **av)
+{
+	parseArgs(av);
+}
+
+PmergeMe::PmergeMe(const PmergeMe &other) : vec(other.vec), deq(other.deq) {}
+
 PmergeMe &PmergeMe::operator=(const PmergeMe &other)
 {
 	if (this != &other)
 	{
-		*this = other;
+		vec = other.vec;
+		deq = other.deq;
 	}
-	return (*this);
+	return *this;
 }
 
+PmergeMe::~PmergeMe() {}
 
-
-//Algorithms
-
-// Manual binary search for lower bound (to replace std::lower_bound)
-std::vector<int>::iterator binarySearchInsert(std::vector<int>& vec, int value)
+void PmergeMe::parseArgs(char **av) //ok
 {
-	std::vector<int>::iterator low = vec.begin();
-	std::vector<int>::iterator high = vec.end();
-
-	while (low < high) {
-		std::vector<int>::iterator mid = low + (high - low) / 2;
-		if (*mid < value)
-			low = mid + 1;
-		else
-			high = mid;
+	for (int i = 1; av[i]; ++i)
+	{
+		std::string arg(av[i]);
+		validNum(arg);
+		int val = std::atoi(av[i]);
+		if (isDup(val))	//fixed 11/02/25
+			throw std::invalid_argument("Duplicated value found.");
+		vec.push_back(val);
+		deq.push_back(val);
 	}
-	return low;
 }
 
-// Generate Jacobsthal sequence indices for optimized insertion order
-std::vector<int> generateJacobsthalIndices(int n) {
-	std::vector<int> indices;
-	int a = 1, b = 1; // Jacobsthal numbers
-
-	while (a < n) {
-		indices.push_back(a);
-		int temp = a;
-		a = a + 2 * b;
-		b = temp;
+void PmergeMe::validNum(const std::string &str)	//ok
+{
+	for (size_t i = 0; i < str.length(); ++i)
+	{
+		if (!std::isdigit(str[i]))
+			throw std::invalid_argument("Invalid input: not a positive integer.");
 	}
-	return indices;
+	if (str.empty())
+		throw std::invalid_argument("Invalid input: empty string.");
 }
 
-// Ford-Johnson Sort (Merge-Insertion Sort)
-void fordJohnsonSort(std::vector<int>& vec) {
-	if (vec.size() <= 1)
-		return;
+bool PmergeMe::isDup(int val) const //now should work??
+{
+	for (size_t i = 0; i < vec.size(); ++i)
+	{
+		if (vec[i] == val)
+			return true;
+	}
+	return false;
+}
 
-	std::vector<int> mainSequence, pendSequence;
-	int last = -1; // To store an unpaired element if needed
+void PmergeMe::sortAndMeasure()	// need to double check
+{
+	std::cout << C_G "Before: " C_RESET;
+	printcont(vec, "");
 
-	// Step 1: Pair elements and sort within each pair
-	std::vector<int>::iterator it = vec.begin();
-	while (it != vec.end()) {
-		int first = *it;
-		++it;
-		if (it != vec.end()) {
-			int second = *it;
-			++it;
-			if (first > second) {
-				int temp = first;
-				first = second;
-				second = temp;
-			}
-			mainSequence.push_back(second); // Store the larger element
-			pendSequence.push_back(first);  // Store the smaller element
-		} else {
-			last = first; // Unpaired element
+	clock_t startVec = clock();
+	fordJohnsonSort(vec);
+	clock_t endVec = clock();
+
+	clock_t startDeq = clock();
+	fordJohnsonSort(deq);
+	clock_t endDeq = clock();
+
+	std::cout << C_Y "After:  " C_RESET;
+	printcont(vec, "");
+
+	// Add colors for contrast!!!
+	std::cout << "Time to process a range of " C_C << vec.size() << C_RESET " elements with std::vector : " C_R << static_cast<double>(endVec - startVec) * 1000000.0 / CLOCKS_PER_SEC << C_RESET " us" << std::endl;
+
+	std::cout << "Time to process a range of " C_C << deq.size() << C_RESET  " elements with std::deque  : " C_R << static_cast<double>(endDeq - startDeq) * 1000000.0 / CLOCKS_PER_SEC << C_RESET " us" << std::endl;
+}
+
+void PmergeMe::printcont(const std::vector<int> &v, const std::string &str) const // idealy const for standards
+{
+	if (!str.empty())
+		std::cout << str << ": ";
+	
+	for (size_t i = 0; i < v.size(); ++i)
+	{
+		std::cout << v[i] << " ";
+	}
+	std::cout << std::endl;
+}
+
+void PmergeMe::printcont(const std::deque<int> &d, const std::string &str) const // idealy const for standards
+{
+	if (!str.empty())
+		std::cout << str << ": ";
+	
+	for (size_t i = 0; i < d.size(); ++i)
+	{
+		std::cout << d[i] << " ";
+	}
+	std::cout << std::endl;
+}
+
+
+void PmergeMe::insertSort(std::vector<int> &cont, int left, int right) ////// FINALLYYYYY WORKIIINGGGG!!!! 07/03/25
+{
+	//Should work now
+	for (int i = left + 1; i <= right; ++i)
+	{
+		int key = cont[i];
+		int j = i - 1;
+	
+		while (j >= left && cont[j] > key)
+		{
+			cont[j + 1] = cont[j];
+			--j;
 		}
+		cont[j + 1] = key;
 	}
+}
 
-	// Step 2: Recursively sort the larger elements (main sequence)
-	fordJohnsonSort(mainSequence);
 
-	// Step 3: Construct sorted sequence starting with the first pair's smallest element
-	std::vector<int> sortedVec;
-	sortedVec.push_back(pendSequence[0]); // Smallest element first
-	sortedVec.insert(sortedVec.end(), mainSequence.begin(), mainSequence.end());
-
-	// Step 4: Add any leftover elements to the pend sequence
-	std::vector<int>::iterator pendIt = pendSequence.begin() + 1;
-	while (pendIt != pendSequence.end()) {
-		sortedVec.insert(binarySearchInsert(sortedVec, *pendIt), *pendIt);
-		++pendIt;
+////// If working for vec, will work for deque?
+void PmergeMe::insertSort(std::deque<int> &cont, int left, int right)
+{
+	for (int i = left + 1; i <= right; ++i)
+	{
+		int key = cont[i];
+		int j = i - 1;
+	
+		while (j >= left && cont[j] > key)
+		{
+			cont[j + 1] = cont[j];
+			--j;
+		}
+		cont[j + 1] = key;
 	}
-
-	if (last != -1) {
-		sortedVec.insert(binarySearchInsert(sortedVec, last), last);
-	}
-
-	// Step 5: Update the original vector with the sorted values
-	vec = sortedVec;
 }
 
 
@@ -114,32 +155,181 @@ void fordJohnsonSort(std::vector<int>& vec) {
 
 
 
-// void PmergeMe::printV(std::vector<int> &vec, std::string s)
-// {
-// 	std::cout << "Print Vector " << s << ": " << std::endl;
-// 	std::vector<int>::iterator it_beg = vec.begin();
-// 	std::vector<int>::iterator it_end = vec.end();
-// 	while (it_beg != it_end)
-// 	{
-// 		std::cout << " =" << *it_beg << "= ";
-// 		++it_beg;
-// 	}
-// 	std::cout << std::endl;
-// }
+//This should idealu merge from the figt to left -1 of the half?
+//then add the continuous to left?????
+//dividir bloques en 2 luego 4 8 etc... hasta no poder tener mas grupos de ese tamano, guardar sobrantes, desde el bloque grande, dividir en 2 hacia atras otra vez, bajando en la 1a iteracion b1 y todos los grupos a, usar los numeros de jacobstal para reindizar la secuencia e ir insertando en funcion de indice, seguir ese bucle hasta tener solo parejas y luego ir insertando en funcion de menor que desde la mitad del 2o bloque, y luego ya ir insertando en fucion de menor que, los numeros restantes
+	
+//NOT WORKING ....... 11/03/25
 
-// void PmergeMe::printD(std::deque<int> &vec, std::string s)
-// {
-// 	std::cout << "Print Deque " << s << ": " << std::endl;
-// 	std::deque<int>::iterator it_beg = vec.begin();
-// 	std::deque<int>::iterator it_end = vec.end();
-// 	while (it_beg != it_end)
-// 	{
-// 		std::cout << " =" << *it_beg << "= ";
-// 	}
-// 	std::cout << std::endl;
-// }
+void PmergeMe::merge(std::vector<int> &cont, int left, int mid, int right)
+{
+	std::vector<int> tmp(right - left + 1);
+	int i = left, j = mid + 1, k = 0;
+	
+	while (i <= mid && j <= right)
+	{
+		if (cont[i] < cont[j])
+			tmp[k++] = cont[i++];
+		else
+			tmp[k++] = cont[j++];
+		//std::cout << C_Y "i < mid??" << cont[j+1] C_RESET << std::endl;
+	}
 
-// Split in pairs 
+	while (i <= mid)
+	{
+		tmp[k++] = cont[i++];
+		//std::cout << C_M "i mid" << cont[i+1] C_RESET << std::endl;
+	}
+
+	while (j <= right)
+	{
+		tmp[k++] = cont[j++];
+		//std::cout << C_B "j right" << cont[j+1] C_RESET << std::endl;
+	}
+
+	for (int l = 0; l < k; ++l)
+	{
+		cont[left + l] = tmp[l];
+		//std::cout << ""
+	}
+}
+
+
+//Should have same logic??
+
+//################################################################
+//https://en.cppreference.com/w/cpp/container/deque
+//https://en.cppreference.com/w/cpp/container/deque/push_back
+//################################################################
+
+
+void PmergeMe::merge(std::deque<int> &cont, int left, int mid, int right)
+{
+	std::deque<int> tmp;
+	int i = left, j = mid + 1;
+	while (i <= mid && j <= right)
+	{
+		if (cont[i] < cont[j])
+			tmp.push_back(cont[i++]);
+		else
+			tmp.push_back(cont[j++]);
+	}
+	while (i <= mid)
+	{
+		//std::cout << C_Y "i < mid" << cont[i+1] <<  "####" C_RESET << std::endl;
+		tmp.push_back(cont[i++]);
+	}
+
+	while (j <= right) 
+	{
+		//std::cout << C_M "j <= mid" << cont[i+1] <<  "####" C_RESET << std::endl;
+		tmp.push_back(cont[j++]);
+	}
+
+	for (int l = 0; l < static_cast<int>(tmp.size()); ++l)
+	{
+		cont[left + l] = tmp[l];
+		//std::cout << C_R "aaaaaaaaaaa" << tmp[l] <<  "@@@@@@" C_RESET << std::endl;
+	}
+}
+
+
+void PmergeMe::fordJohnsonSort(std::vector<int> &cont)
+{
+// This is pure chaos... everything is broken ....
+	const int threshold = 10; //threshold for merge or insertion if under x elements
+	int n = static_cast<int>(cont.size());
+	if (n <= threshold)
+		insertSort(cont, 0, n - 1);
+	else
+	{
+		int mid = n / 2;
+		std::vector<int> left(cont.begin(), cont.begin() + mid);
+		std::vector<int> right(cont.begin() + mid, cont.end());
+		fordJohnsonSort(left);
+		fordJohnsonSort(right);
+		// Seems to work rn?
+		for (int i = 0; i < static_cast<int>(left.size()); ++i)
+		{
+			cont[i] = left[i];
+		}
+
+		for (int i = 0; i < static_cast<int>(right.size()); ++i)
+		{
+			cont[mid + i] = right[i];
+		}
+		
+		merge(cont, 0, mid - 1, n - 1);
+	}
+}
+
+
+
+// I have doubts, the print does not match...
+void PmergeMe::fordJohnsonSort(std::deque<int> &cont)
+{
+	const int threshold = 10;
+	int n = static_cast<int>(cont.size());
+	if (n <= threshold)
+		insertSort(cont, 0, n - 1);
+	else
+	{
+		int mid = n / 2;
+		std::deque<int> left(cont.begin(), cont.begin() + mid);
+		std::deque<int> right(cont.begin() + mid, cont.end());
+		fordJohnsonSort(left);
+		fordJohnsonSort(right);
+		for (int i = 0; i < static_cast<int>(left.size()); ++i)
+		{
+			cont[i] = left[i];
+			//std::cout << cont[i] << C_R "Here!!" C_RESET << std::endl;
+		}
+
+		for (int i = 0; i < static_cast<int>(right.size()); ++i)
+		{
+			cont[mid + i] = right[i];	
+			//std::cout << cont[mid + i] << C_G "Here!!" C_RESET << std::endl;
+		}
+		
+		merge(cont, 0, mid - 1, n - 1);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /*
@@ -178,6 +368,16 @@ void PmergeMe::sortV(std::vector<int> &vec)
 	//dividir bloques en 2 luego 4 8 etc... hasta no poder tener mas grupos de ese tamano, guardar sobrantes, desde el bloque grande, dividir en 2 hacia atras otra vez, bajando en la 1a iteracion b1 y todos los grupos a, usar los numeros de jacobstal para reindizar la secuencia e ir insertando en funcion de indice, seguir ese bucle hasta tener solo parejas y luego ir insertando en funcion de menor que desde la mitad del 2o bloque, y luego ya ir insertando en fucion de menor que, los numeros restantes
 
 	//jacobsthal
+	//
+
+
+
+
+
+
+
+
+
 	//PRINT PAIRS AND END
 	int i = 1;
 	std::vector<std::pair<int, int> >::iterator it_beg = pairs.begin();
@@ -209,4 +409,15 @@ void PmergeMe::sortV(std::vector<int> &vec)
 	vec = sorted;
 }
 */
+
+
+
+
+
+
+
+
+
+
+
 
