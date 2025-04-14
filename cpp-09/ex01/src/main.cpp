@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:05:40 by gforns-s          #+#    #+#             */
-/*   Updated: 2025/02/06 12:47:02 by gforns-s         ###   ########.fr       */
+/*   Updated: 2025/04/14 10:21:34 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 std::stack <int>val; //first in last out // 4 2 8 * + // 8*2 // 4 16 + // 20
 */
 
+//Used stack because is the most convinient for first in last out since push and pop are the way to go for this ex.
 
 int main(int ac, char **av)
 {

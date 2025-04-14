@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 14:10:36 by gforns-s          #+#    #+#             */
-/*   Updated: 2025/04/10 11:11:13 by gforns-s         ###   ########.fr       */
+/*   Updated: 2025/04/14 10:28:31 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 #include "PmergeMe.hpp"
 
+//Used vector and deque to show how optimal is vector vs deque since with vector the cpu can access the next elements faster due loading it on cache and deque uses memory blocks and needs to access which requires more time.
 int main(int ac, char **av)
 {
 	try

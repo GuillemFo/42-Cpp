@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 08:45:36 by gforns-s          #+#    #+#             */
-/*   Updated: 2025/02/06 12:54:36 by gforns-s         ###   ########.fr       */
+/*   Updated: 2025/04/14 09:53:33 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,29 +60,45 @@ void RPN::solve(const std::string &in)
 {
 	std::stringstream tool(in);
 	std::string block;
-	while (tool >> block)
+	if (!(in.length() == 1))
 	{
-		if (block.length() != 1)
-			throw std::logic_error("Parameter too long");
-		if (std::isdigit(block[0]))
-			stack.push(std::atoi(block.c_str()));
-		else if (isAllowed(block[0]))
+		while (tool >> block)
 		{
-			if (stack.empty())
-				throw std::logic_error("Error: Stack is empty");
-			int nb = stack.top();
-			stack.pop();
-			if (stack.empty())
-				throw std::logic_error("Error: Stack is empty");
-			int nb2 = stack.top();
-			stack.pop();
-			if (block[0] == '/' && nb == 0)
+			//std::cout << "Str:" << block <<":" << std::endl;
+			if (block.length() != 1)
+				throw std::logic_error("Parameter too long");
+			else if (std::isdigit(block[0]))
+				stack.push(std::atoi(block.c_str()));
+			else if (isAllowed(block[0]))
 			{
-				throw std::invalid_argument("Error: Invalid argument");
+				if (stack.empty())
+					throw std::logic_error("Error: Stack is empty");
+				int nb = stack.top();
+				stack.pop();
+				if (stack.empty())
+					throw std::logic_error("Error: Stack is empty");
+				int nb2 = stack.top();
+				stack.pop();
+				if (block[0] == '/' && nb == 0)
+				{
+					throw std::invalid_argument("Error: Invalid argument: val / 0");
+				}
+				//first in last out // 4 2 8 * + // 8*2 // 4 16 + // 20
+				
+				std::cout << "Math: " << nb2 << " " << block << " " << nb;	//print continues after math
+				
+				result = sendMath(block[0], nb, nb2);
+				
+				std::cout << " = " << result << std::endl;	//print continues here!!
+				
+				stack.push(result);
 			}
-			result = sendMath(block[0], nb, nb2);
-			stack.push(result);
 		}
+	}
+	else	//fixed only 1 number no math issue 14/04/25 09.16
+	{
+		result = std::atoi(in.c_str());
+		stack.push(result);
 	}
 }
 
@@ -107,5 +123,5 @@ void RPN::checkIfEnd()
 	stack.pop();
 	if (!stack.empty())
 		throw std::logic_error("Error: Invalid argument");
-	std::cout << getResult() << std::endl;
+	std::cout << "Result: " << getResult() << std::endl;
 }

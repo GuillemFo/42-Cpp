@@ -6,12 +6,14 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:18:19 by gforns-s          #+#    #+#             */
-/*   Updated: 2025/02/05 12:51:08 by gforns-s         ###   ########.fr       */
+/*   Updated: 2025/04/14 10:34:26 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
 
+
+//Used map because is the easiest way to insert manage and find data and use [] to work with them without iterating it entirely.
 int	main(int ac, char **av)
 {
 	if (av[1])
@@ -31,7 +33,15 @@ int	main(int ac, char **av)
 			}
 			btc.compInput(inFile);
 		}
-	}	
+		else
+		{
+			std::cout << "Error: Too may arguments" << std::endl;
+		}
+	}
+	else
+	{
+		std::cout << "Error: No arguments found" << std::endl;
+	}
 	return (0);
 }
 
