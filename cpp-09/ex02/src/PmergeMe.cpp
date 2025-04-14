@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 14:10:39 by gforns-s          #+#    #+#             */
-/*   Updated: 2025/04/10 11:32:55 by gforns-s         ###   ########.fr       */
+/*   Updated: 2025/04/14 10:52:24 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,12 @@ void PmergeMe::validNum(const std::string &str)	//ok
 		if (!std::isdigit(str[i]))
 			throw std::invalid_argument("Invalid input: not a positive integer.");
 	}
+	if (std::atol(str.c_str()) > 2147483647)
+		throw std::invalid_argument("Invalid input: Value too big for integer.");	//added protection for over int size!!
+
 	if (str.empty())
 		throw std::invalid_argument("Invalid input: empty string.");
+	
 }
 
 bool PmergeMe::isDup(int val) const //now should work??
